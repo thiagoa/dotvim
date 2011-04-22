@@ -2,6 +2,10 @@
 " CONFIGURAÇÃO DO EDITOR  "
 """"""""""""""""""""""""""" 
 
+" Configuração do Pathogen
+call pathogen#runtime_append_all_bundles()
+call pathogen#helptags()
+
 " Modo de não compatibilidade com vi original
 set nocompatible
 
