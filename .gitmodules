@@ -13,9 +13,6 @@
 [submodule "bundle/nerdtree"]
 	path = bundle/nerdtree
 	url = https://github.com/scrooloose/nerdtree.git
-[submodule "bundle/snipmate"]
-	path = bundle/snipmate
-	url = git://github.com/msanders/snipmate.vim.git
 [submodule "bundle/autoclose"]
 	path = bundle/autoclose
 	url = https://github.com/Townk/vim-autoclose.git
@@ -25,3 +22,15 @@
 [submodule "bundle/bufkill"]
 	path = bundle/bufkill
 	url = https://github.com/vim-scripts/bufkill.vim.git
+[submodule "bundle/command-t"]
+	path = bundle/command-t
+	url = https://github.com/vim-scripts/Command-T.git
+[submodule "bundle/perdirvimrc"]
+	path = bundle/perdirvimrc
+	url = https://github.com/vim-scripts/perdirvimrc--Autoload-vimrc-files-per-di.git
+[submodule "bundle/ultisnips"]
+	path = bundle/ultisnips
+	url = https://github.com/vim-scripts/UltiSnips.git
+[submodule "bundle/debugger"]
+	path = bundle/debugger
+	url = https://github.com/ornicar/vim-php-debugger.git
