@@ -34,3 +34,6 @@
 [submodule "bundle/debugger"]
 	path = bundle/debugger
 	url = https://github.com/ornicar/vim-php-debugger.git
+[submodule "bundle/matchit"]
+	path = bundle/matchit
+	url = https://github.com/vim-scripts/matchit.zip.git
