@@ -1,228 +1,236 @@
-"""""""""""""""""""""""""""
-" CONFIGURAÇÃO DO EDITOR  "
-""""""""""""""""""""""""""" 
+"""""""""""""""""""""
+" VIM CONFIGURATION "
+""""""""""""""""""""" 
 
-" Configuração do Pathogen
+" Pathogen configuration - Loads all modularized bundles (plugins, etc), and rebuilds help tags
+" Always place these lines above all others in .vimrc
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
 
-" Modo de não compatibilidade com vi original
+" Unset compatibility mode with original vi
 set nocompatible
 
-" Ativa sintaxe colorida, identação de acordo com tipo 
-" de arquivo e plugins de acordo com tipo de arquivo
-"syntax on
+" Enables syntax highlighting
+syntax on
+
+" Enables plugins and indenting per-filetype
 filetype plugin indent on
 
-" Desativa autocomplete em arquivos referenciados dentro do buffer
+" Disables autocomplete for files referenced inside the current buffer
 set complete-=i
 
-" Histórico de comandos
+" Command history limit
 set history=1000
 
-" Encodings padrão em ordem de preferência
+" Encodings in preference order
 set fileencodings=utf-8,iso-8859-1
 
 " Turn off needless toolbar on gvim/mvim
 set guioptions-=T
 
-" Numeração de linhas
+" Turns on line numbers in every file
 set number
 
-" Sempre mostra 3 linhas de contexto acima ou abaixo
+" Options for context referencing
 set scrolloff=3
 set sidescrolloff=7
 set sidescroll=1
 
-" Acende o outro lado do par {} para fácil identificação
+" Set visual bell instead of beeping
+set visualbell
+
+" Lights up the opposite bracket for easy finding. 
 set showmatch matchtime=3
 
-" Mostra comandos incompletos embaixo
-set showcmd
-
-" Mostra o modo atual (INSERT, REPLACE, etc) no status
-set showmode
-
+" These characters indicate the content is not enough for showing in one line
 set showbreak=...
 
-" Espaço entre as linhas
+" Number of pixel lines inserted between characters
 set linespace=4
 
-" Tabs
+" Default tabs configuration
 set expandtab
+set smarttab
 set tabstop=4
 set softtabstop=4
-set smarttab
 set shiftwidth=4
 
-" Indentação
+" Indenting configuration
 set smartindent
 set autoindent
-set cindent
+set nocindent
+
+" Disables backup while file is being written
 set nobackup
 
-" Autocomplete
+" Autocomplete configuration
 set wildmenu
 set wildmode=longest,full
 
-" Busca
+" Search configuration
 set incsearch
 set hlsearch
 set ignorecase
 set smartcase
 
-" Sempre mostrar barra de status
+" Always show status bar
 set laststatus=2
 
-" Sempre mostra abas no topo, independente de ter só um arquivo
-set showtabline=2
-
-" Relê um arquivo quando modificado
+" Updates buffer when modified outside vim
 set autoread
 
-" Configura para mostrar arquivos ocultos
+" Hide modified buffers when switching - doesn't warn for saving
 set hidden
 
-" Configuração da tecla backspace para agir como esperado no modo de inserção
+" Backspace key configuration in insert mode (makes it act as expected)
 set backspace=start,indent,eol
 
-" Centraliza todos os backups e temp files
-set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
-set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+" Sets directories for backups
+set backupdir=~/.vim/backup,~/.tmp,~/tmp,/var/tmp,/tmp
+set directory=~/.vim/backup,~/.tmp,~/tmp,/var/tmp,/tmp
 
-" Mostra caracteres não visíveis
+" Sets to Show non-visible characters (tabs, spaces, etc)
 set listchars=tab:>-,trail:·,eol:$
 
-" Configura mensagens de retorno. help shortmess
+" Messages configuration
 set shortmess=atI
 
-" Coloca codificação dos arquivos no barra de status
-"if has("statusline")
- "set statusline=%<%f\ \ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %h%m%r%=%{\"[\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\").\"]\ \"}%k\ %-14.(%l,%c%V%)\ %P
- "set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
-"endif
+" Status line configuration: shows git current branch, file encoding, etc
+if has("statusline")
+    set statusline=%<%f\ \ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %h%m%r%=%{\"[\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\").\"]\ \"}%k\ %-14.(%l,%c%V%)\ %P
+    set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
+endif
 
-" Configuração da tecla leader para mapeamentos personalizados (padrão: \)
+" Sets leader key (specific for user mappings, to avoid conflicting with vim's defaults)
 let mapleader = ","
 let g:mapleader = ","
 
-"""""""""""""""""
-"  MAPEAMENTOS  "
-"""""""""""""""""
+""""""""""""""
+"  MAPPINGS  "
+""""""""""""""
 
-" Usa <C-c> ao invés de <Esc> (mais perto das home rows)
-nnoremap <C-c> <Esc><Esc>
-vnoremap <C-c> <Esc><Esc>
-onoremap <C-c> <Esc><Esc>
-inoremap <C-c> <Esc><Esc>
+" NERDTree shortcut
+nnoremap <C-n> :NERDTreeToggle<CR>
 
-" Mapeamentos do NERDTree
-map <C-N> :NERDTree<CR>
-map <C-n> :NERDTreeToggle<CR>
+" Taglist shortcut
+nnoremap <C-p> :TlistToggle<CR>
 
-map <left> :bprevious<CR>
-map <right> :bnext<CR>
+" Resets snippets (UltiSnips)
+nnoremap <Leader>n :py UltiSnips_Manager.reset()<CR>
 
-" Mapeamento para desativar hlsearch
+" Command T shortcut (cmd-T is already working for "open new tab")
+noremap <D-r> :CommandT<CR>
+
+" Mapping to disable hlsearch
 nnoremap <C-l> :nohls<CR><C-L>
 inoremap <C-l> <C-O>:nohls<CR>
 
+" Centers content when navigating search results
+nmap n nzz
+nmap N Nzz
+
 " Fast saving
 "nmap <Leader>w :w!<cr>
-nmap <Leader>q :wq!<cr>
 
-" Mapeamento para ir na metade do comprimento da linha atual
-nmap <expr> gM (strlen(getline('.')) / 2) . '<bar>'
+" Fast quit
+nnoremap <Leader>q :wq!<cr>
 
-" Abre marcadores em janelas separadas
+" Goes to middle of the line, considering its contents. Native command "gm" doesn't consider line contents
+nnoremap <expr> gM (strlen(getline('.')) / 2) . '<bar>'
+
+" Counterpart of <C-w> } to open tag with ptselect (select from list)
 nnoremap <C-w>{ <Esc>:exe "ptselect " . expand("<cword>")<Esc>
+
+" Even faster :tag and :stag commands
+nnoremap <D-d> :tag 
+nnoremap <D-e> :stag 
+
+" Open tag in new tab
 nnoremap <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
 
-" Adiciona ; ou , no final das linhas facilmente
-nmap <Leader>; :call <SID>appendEOL(';')<CR>
-nmap <S-CR> :call <SID>appendEOL(';')<CR>
-nmap <Leader>, :call <SID>appendEOL(',')<CR>
-nmap \; :call <SID>appendEOL(';')<CR>
-nmap \, :call <SID>appendEOL(',')<CR>
+" Map Command-# to switch tabs
+noremap  <D-0> 0gt
+inoremap <D-0> <Esc>0gt
+noremap  <D-1> 1gt
+inoremap <D-1> <Esc>1gt
+noremap  <D-2> 2gt
+inoremap <D-2> <Esc>2gt
+noremap  <D-3> 3gt
+inoremap <D-3> <Esc>3gt
+noremap  <D-4> 4gt
+inoremap <D-4> <Esc>4gt
+noremap  <D-5> 5gt
+inoremap <D-5> <Esc>5gt
+noremap  <D-6> 6gt
+inoremap <D-6> <Esc>6gt
+noremap  <D-7> 7gt
+inoremap <D-7> <Esc>7gt
+noremap  <D-8> 8gt
+inoremap <D-8> <Esc>8gt
+noremap  <D-9> 9gt
+inoremap <D-9> <Esc>9gt
+
+" Mappings to add ; at the end of lines
+nnoremap <Leader>; :call <SID>appendEOL(';')<CR>
+nnoremap <S-CR> :call <SID>appendEOL(';')<CR>
+nnoremap <Leader>, :call <SID>appendEOL(',')<CR>
+nnoremap \; :call <SID>appendEOL(';')<CR>
+nnoremap \, :call <SID>appendEOL(',')<CR>
+inoremap <D-S-CR> <Esc> :call <SID>appendEOL(';')<CR>o
+inoremap <S-CR> <Esc> :call <SID>appendEOL(';')<CR>
+
+" Mapping to quickly execute make command
 nmap <Leader>m :make<CR>
-nmap <Leader>o 2s<C-v>[<C-v>'<Esc>ea<C-v>'<C-v>]<Esc>
 
-" Abre linhas para cima ou para baixo em modo de inserção
-"inoremap <C-D-o> <Esc>O
-"inoremap <C-i>   <Esc>o
+" Opens lines above of below in insert mode
+inoremap <D-CR> <C-O>o
+inoremap <D-S-CR> <C-O>O
 
-" Movimentos na nas teclas hjkl em modo de inserção (+ CTRL)
-inoremap <D-j>   <Down>
-inoremap <D-k>   <Up>
-inoremap <D-l>   <Right>
-inoremap <D-h>   <Left>
+" Opens a new line in insert mode
 
-" Scroll mais rápido
+" Movement in insert mode without leaving home keys
+inoremap <C-j> <Down>
+inoremap <C-k> <Up>
+inoremap <C-l> <Right>
+inoremap <C-h> <Left>
+
+" Moves lines up and above in command or visual mode
+nnoremap <C-j> :m+<CR>==
+nnoremap <C-k> :m-2<CR>==
+vnoremap <C-j> :m'>+<CR>gv=gv
+vnoremap <C-k> :m-2<CR>gv=gv
+
+" Faster scrolling
 nnoremap <C-e> 3<C-e>
 nnoremap <C-y> 3<C-y>
 vnoremap <C-e> 3<C-e>
 vnoremap <C-y> 3<C-y>
 
-" Move linhas para cima e para baixo
-nnoremap <C-S-j> :m+<CR>==
-nnoremap <C-S-k> :m-2<CR>==
-vnoremap <C-S-j> :m'>+<CR>gv=gv
-vnoremap <C-S-k> :m-2<CR>gv=gv
-
+" Keeps visual selection when indenting in visual mode
 vnoremap < <gv
 vnoremap > >gv
 
-nnoremap <D-d> :tag 
-nnoremap <D-e> :stag 
-
-inoremap <D-S-CR> <Esc> :call <SID>appendEOL(';')<CR>o
-inoremap <S-CR> <Esc> :call <SID>appendEOL(';')<CR>
-
-nmap <D-j> gj
-nmap <D-h> gh
-nmap <D-l> gl
-nmap <D-k> gk
-
-map <C-p> :TlistToggle<CR>
-
+" Shows hidden characters
 nmap <silent> <leader>s :set nolist!<CR>
 
-" Aplica mapeamento para mover tabs
-"nnoremap <silent> <A-S-h> :call <SID>DragLeft()<CR>
-"nnoremap <silent> <A-S-l> :call <SID>DragRight()<CR>
+" Shortcuts to create new split buffers
+nmap <Leader>svh :topleft  vnew<CR>
+nmap <Leader>svl :botright vnew<CR>
+nmap <Leader>sh  :topleft  new<CR>
+nmap <Leader>sl  :botright new<CR>
+nmap <Leader>svk :leftabove  vnew<CR>
+nmap <Leader>svj :rightbelow vnew<CR>
+nmap <Leader>sk  :leftabove  new<CR>
+nmap <Leader>sj  :rightbelow new<CR>
 
-" Recarrega snippets
-map ,n :call ReloadSnippets(snippets_dir, &ft)<CR>
-
-" Ao navegar pelos resultados da busca, centraliza-os na tela
-nmap n nzz
-nmap N Nzz
-
-" Muda de janelas maximizando a nova
-" map <C-J> <C-W>j<C-W>_
-" map <C-K> <C-W>k<C-W>_
-
-" window
-nmap <Leader>svh  :topleft  vnew<CR>
-nmap <Leader>svl  :botright vnew<CR>
-nmap <Leader>sh   :topleft  new<CR>
-nmap <Leader>sl   :botright new<CR>
-
-" buffer
-nmap <Leader>svk   :leftabove  vnew<CR>
-nmap <Leader>svj   :rightbelow vnew<CR>
-nmap <Leader>sk    :leftabove  new<CR>
-nmap <Leader>sj    :rightbelow new<CR>
-
+" Shortcut to remove blocks of code (e.g. delete function)
 nnoremap <silent> <Leader>df dV]M
 
-let g:buftabs_only_basename=0
+""""""""""""""""""""""""
+" PLUGIN CONFIGURATION "
+""""""""""""""""""""""""
 
-"""""""""""""""""""""""""""
-" CONFIGURAÇÃO DE PLUGINS "
-"""""""""""""""""""""""""""
-
-" Configuração da Taglist
+" Taglist
 let Tlist_Use_Horiz_Window=0
 let Tlist_Use_Right_Window = 1
 let Tlist_Compact_Format = 1
@@ -234,24 +242,27 @@ let Tlist_Close_On_Select = 1
 let Tlist_Process_File_Always = 1
 let Tlist_Sql_Settings = 'sql;P:package;t:table'
 let Tlist_Ant_Settings = 'ant;p:Project;r:Property;t:Target'
+let tlist_php_settings = 'php;c:class;d:constant;f:function'
 
-"Command-T configuration
+" UltiSnips
+let g:UltiSnipsEditSplit='horizontal'
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+let g:UltiSnipsListSnippets="<Leader>l"
+
+" Command-T
 let g:CommandTMaxHeight=10
 let g:CommandTMatchWindowAtTop=1
 
-" Configuração do plugin PHPDOC
+" PDV
 abbr atas @author Thiago A. Silva
-cabbr cpp !cp /Volumes/public_html/
-cabbr <expr> %% expand('%:p:h')
 
-" Variável autor do snipmate
-let g:snips_author='Thiago A. Silva'
+"""""""""""""
+" FUNCTIONS "
+"""""""""""""
 
-"""""""""""
-" FUNÇÕES "
-"""""""""""
-
-" Função para adicionar um caracter no final da linha em modo de comando
+" Adds a character in the end of the line
 function! s:appendEOL(param)
     if getline('.') !~ a:param.'$'
         let original_cursor_position = getpos('.')
@@ -261,7 +272,7 @@ function! s:appendEOL(param)
 endfunction
 
 " Função que leva tabs para esquerda 
-function! s:DragLeft()
+function! s:DragTabLeft()
     let n = tabpagenr()
     let move = n - 2
     execute 'tabmove' (n == 0 ? tabpagenr('$') : move)
@@ -269,94 +280,117 @@ function! s:DragLeft()
 endfunction
 
 " Função que leva tabs para a direita
-function! s:DragRight()
+function! s:DragTabRight()
     let n = tabpagenr()
     execute 'tabmove' (n == tabpagenr('$') ? 0 : n)
     let &showtabline = &showtabline
 endfunction
 
-" Recarrega snippets facilmente
-fun! ReloadSnippets(snippets_dir, ft)
-	call ResetSnippets()
-	call GetSnippets(a:snippets_dir, a:ft)
-endfun
+" NERDTree utility function
+function! s:UpdateNERDTree(...)
+    let stay = 0
+    if(exists("a:1"))
+        let stay = a:1
+    end
+    if exists("t:NERDTreeBufName")
+        let nr = bufwinnr(t:NERDTreeBufName)
+        if nr != -1
+            exe nr . "wincmd w"
+            exe substitute(mapcheck("R"), "<CR>", "", "")
+            if !stay
+                wincmd p
+            end
+        endif
+    endif
+    if exists(":CommandTFlush") == 2
+        CommandTFlush
+    endif
+endfunction
 
-"if has("gui_running")
-  "" GUI is running or is about to start.
-  "" Maximize gvim window.
-  "set lines=999 columns=999
-"else
-  "" This is console Vim.
-  "if exists("+lines")
-    "set lines=50
-  "endif
-  "if exists("+columns")
-    "set columns=100
-  "endif
-"endif
+" Close all open buffers on entering a window if the only
+" buffer that's left is the NERDTree buffer
+function! s:CloseIfOnlyNerdTreeLeft()
+    if exists("t:NERDTreeBufName")
+        if bufwinnr(t:NERDTreeBufName) != -1
+            if winnr("$") == 1
+                q
+            endif
+        endif
+    endif
+endfunction
 
-"""""""""""""""
-" ABREVIAÇÕES "
-"""""""""""""""
+" If the parameter is a directory, cd into it (ex: mvim ~/Sites)
+function! s:CdIfDirectory(directory)
+    let explicitDirectory = isdirectory(a:directory)
+    let directory = explicitDirectory || empty(a:directory)
+    if explicitDirectory
+        exe "cd " . fnameescape(a:directory)
+    endif
+    " Allows reading from stdin
+    " ex: git diff | mvim -R -
+    if strlen(a:directory) == 0 
+        return
+    endif
+    if directory
+        NERDTree
+        wincmd p
+        bd
+    endif
+    if explicitDirectory
+        wincmd p
+    endif
+endfunction
 
-" Evita erros ao salvar
+"""""""""""""""""
+" ABBREVIATIONS "
+""""""""""""""""
+
+" Avoids typing errors in the command line
 cab W w
 cab WQ wq
 cab Cd cd
 cab CD cd
 cab E e
+cab B b
 cab Sb sb
 cab Sp sp
 cab Stag stag
 
-" Abrevia para chamar o vimgrep sem executar os comandos 
-" automáticos, ao abrir os arquivos achados
+" Speeds up vimgrep
 cab vimgrep noautocmd vimgrep
-cab B b
 
-""""""""""""""""""""""""
-" COMANDOS AUTOMÁTICOS "
-""""""""""""""""""""""""
+cabbr <expr> %% expand('%:p:h')
 
-" Recarrega arquivos do vim automaticamente após alteração
+"""""""""""""""""
+" AUTO COMMANDS "
+"""""""""""""""""
+
+" Reloads vim config files and apply changes automatically
 autocmd! bufwritepost .gvimrc source %
 autocmd! bufwritepost .vimrc source %
 
-" Ao salvar arquivos PHP verifica erros automaticamente
-"autocmd! bufwritepost *.php make %
-
-" Adiciona cabeçalho da mix em arquivos PHP
-autocmd BufNewFile *.php source ~/.vim/ftplugin/phpmixhead.vim
-
-" Quado visualizar o preview de um arquivo fonte, 
-" abra-o com folds totalmente expandidos
+" Tag preview fix, when using folds and/or fold plugins. The tag preview
+" always opens unfolded, regardless of current configuration
 autocmd BufWinEnter * if &previewwindow | setlocal foldlevel=999 | endif
 
-"// Entra automaticamente na pasta de sites
-set vb
+" Some files and directories to ignore. See :help wildignore. Set this in your .vimrc.local file
+" set wildignore+=*.jpg,*.gif,*.png,application/logs/**,assets/imgs/**,application/cache/**
 
-map <D-r> :CommandT<CR>
-
-set wildignore+=*.jpg,*.gif,*.png,application/logs/**,assets/imgs/**,application/cache/**
+" Can't remember the reason why this is here. Will discover later.
 autocmd QuickFixCmdPre make w
 
-inoremap <D-CR> <C-O>o
+" NERD Tree specific
+autocmd FocusGained * call s:UpdateNERDTree()
+autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
 
-if has("gui_running")
-    "color jellybeans
-    "color blackdust
-    "color kellys
-    "color twilight
-    "color koehler
-    "color candy
-    "color ps_color
-    "color ir_black
-    "color bclear
-    "color wombat
-    "color habilight
-    "color mayansmoke
-    "color clean
-    "color bclear
-    color mac_classic
-    set gfn=Monaco:h12
+" Setup vim when opening
+autocmd VimEnter * call s:CdIfDirectory(expand("<amatch>"))
+
+""""""""""""""""""""""""""""""""""""
+" LOCAL CONFIGURATION (OUT OF SCM) "
+""""""""""""""""""""""""""""""""""""
+
+" Include user's local vim config
+if filereadable(expand("~/.vimrc.local"))
+  source ~/.vimrc.local
 endif
