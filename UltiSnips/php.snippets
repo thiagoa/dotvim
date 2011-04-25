@@ -360,3 +360,17 @@ interface ${1:Interface_Name}
     
 } // End $1
 endsnippet
+
+snippet erron "Turn errors on"
+error_reporting(E_ALL);
+ini_set('display_errors', 'On')
+endsnippet
+
+snippet erroff "Turn errors off"
+error_reporting(0);
+ini_set('display_errors', '0');
+endsnippet
+
+snippet issv "Sets variable if another one isset"
+\$${1:var} = isset(\$${2:_${3:POST}}[${4:'${5:key}'}]) ? $6\$$2[$4] : ${7:NULL};
+endsnippet
