@@ -61,3 +61,6 @@
 [submodule "bundle/tabular"]
 	path = bundle/tabular
 	url = https://github.com/godlygeek/tabular.git
+[submodule "bundle/grep"]
+	path = bundle/grep
+	url = https://github.com/vim-scripts/grep.vim.git
