@@ -31,9 +31,33 @@
 [submodule "bundle/ultisnips"]
 	path = bundle/ultisnips
 	url = https://github.com/vim-scripts/UltiSnips.git
-[submodule "bundle/debugger"]
-	path = bundle/debugger
-	url = https://github.com/ornicar/vim-php-debugger.git
 [submodule "bundle/matchit"]
 	path = bundle/matchit
 	url = https://github.com/vim-scripts/matchit.zip.git
+[submodule "bundle/debugger"]
+	path = bundle/debugger
+	url = https://github.com/ornicar/vim-php-debugger.git
+[submodule "bundle/taglist"]
+	path = bundle/taglist
+	url = https://github.com/vim-scripts/taglist.vim.git
+[submodule "bundle/php-documentor"]
+	path = bundle/php-documentor
+	url = https://github.com/vim-scripts/PDV-revised.git
+[submodule "bundle/easymotion"]
+	path = bundle/easymotion
+	url = https://github.com/vim-scripts/EasyMotion.git
+[submodule "bundle/nerdcommenter"]
+	path = bundle/nerdcommenter
+	url = https://github.com/scrooloose/nerdcommenter.git
+[submodule "bundle/phpfolding"]
+	path = bundle/phpfolding
+	url = https://github.com/vim-scripts/phpfolding.vim.git
+[submodule "bundle/detectindent"]
+	path = bundle/detectindent
+	url = https://github.com/ciaranm/detectindent.git
+[submodule "bundle/cmdline-completion"]
+	path = bundle/cmdline-completion
+	url = https://github.com/vim-scripts/cmdline-completion.git
+[submodule "bundle/php-indenting"]
+	path = bundle/php-indenting
+	url = https://github.com/2072/PHP-Indenting-for-VIm.git
