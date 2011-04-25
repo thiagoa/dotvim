@@ -125,6 +125,16 @@ noremap <D-r> :CommandT<CR>
 nnoremap <C-l> :nohls<CR><C-L>
 inoremap <C-l> <C-O>:nohls<CR>
 
+" Tabularize mappings
+if exists(":Tabularize")
+  nmap <Leader>a = :Tabularize / = <CR>
+  vmap <Leader>a = :Tabularize / = <CR>
+  nmap <Leader>a: :Tabularize /:\zs<CR>
+  vmap <Leader>a: :Tabularize /:\zs<CR>
+  nmap <Leader>a> :Tabularize /=><CR>
+  vmap <Leader>a> :Tabularize /=><CR>
+endif
+
 " Centers content when navigating search results
 nmap n nzz
 nmap N Nzz

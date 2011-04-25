@@ -55,9 +55,9 @@
 [submodule "bundle/detectindent"]
 	path = bundle/detectindent
 	url = https://github.com/ciaranm/detectindent.git
-[submodule "bundle/cmdline-completion"]
-	path = bundle/cmdline-completion
-	url = https://github.com/vim-scripts/cmdline-completion.git
 [submodule "bundle/php-indenting"]
 	path = bundle/php-indenting
 	url = https://github.com/2072/PHP-Indenting-for-VIm.git
+[submodule "bundle/tabular"]
+	path = bundle/tabular
+	url = https://github.com/godlygeek/tabular.git
