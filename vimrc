@@ -116,7 +116,7 @@ nnoremap <C-n> :NERDTreeToggle<CR>
 nnoremap <C-p> :TlistToggle<CR>
 
 " Resets snippets (UltiSnips)
-nnoremap <Leader>n :py UltiSnips_Manager.reset()<CR>
+nnoremap <Leader>n :w<CR>:py UltiSnips_Manager.reset()<CR>
 
 " Command T shortcut (cmd-T is already working for "open new tab")
 noremap <D-r> :CommandT<CR>
