@@ -2,13 +2,19 @@ clearsnippets
 
 extends html
 
-snippet php "PHP inline block"
+snippet php "PHP inline block" i
 <?php $0 ?>
 endsnippet
 
 snippet phpb "PHP block"
 <?php
 $0${1:
+?>}
+endsnippet
+
+snippet phpd "PHP block with defined check"
+<?php if ( ! defined('${1:BASEPATH}')) exit('No direct script access allowed');
+$0${2:
 ?>}
 endsnippet
 
@@ -25,7 +31,7 @@ var_dump(${1:\$${2:variable}});${3:
 exit;}$0
 endsnippet
 
-snippet th "Outputs $this-> variable"
+snippet th "Outputs $this-> variable" i
 $this->${1:${2:variable} = ${3:'${4:value}'};}
 endsnippet
 
@@ -252,8 +258,7 @@ snippet class "Class statement"
  * @copyright ${5:`!v g:pdv_cfg_Copyright`}
  * @author ${6:`!v g:pdv_cfg_Author`}
  **/
-$1class $2
-{
+$1class $2 {
     
     $0
 
@@ -269,8 +274,7 @@ snippet class "Extends Class statement"
  * @copyright ${6:`!v g:pdv_cfg_Copyright`}
  * @author ${7:`!v g:pdv_cfg_Author`}
  **/
-$1class ${2:My_Class} extends ${3:Parent_Class}
-{
+$1class ${2:My_Class} extends ${3:Parent_Class} {
     
     $0
 
@@ -286,8 +290,7 @@ snippet class "Implements Class statement"
  * @copyright ${6:`!v g:pdv_cfg_Copyright`}
  * @author ${7:`!v g:pdv_cfg_Author`}
  **/
-$1class ${2:My_Class} implements ${3:Interface}
-{
+$1class ${2:My_Class} implements ${3:Interface} {
     
     $0
 
@@ -305,8 +308,7 @@ snippet class "Extends and Implements Class statement"
  * @copyright ${7:`!v g:pdv_cfg_Copyright`}
  * @author ${8:`!v g:pdv_cfg_Author`}
  **/
-$1class ${2:My_Class} extends ${3:Parent_Class} implements ${4:Interface}
-{
+$1class ${2:My_Class} extends ${3:Parent_Class} implements ${4:Interface} {
     
     $0
 
