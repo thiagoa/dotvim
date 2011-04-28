@@ -135,6 +135,14 @@ if exists(":Tabularize")
   vmap <Leader>a> :Tabularize /=><CR>
 endif
 
+" Auto close pairs simple mappings
+inoremap ( ()<Left>
+inoremap <expr> ' g:InsertPair("'")
+inoremap <expr> " g:InsertPair('"')
+inoremap {<CR> {<CR>}<Esc>O
+inoremap <expr> ) strpart(getline('.'), col('.') - 1, 1) == ")" ? "\<Right>" : ")"
+inoremap <expr> <backspace> g:ClosePairs()
+
 " Centers content when navigating search results
 nmap n nzz
 nmap N Nzz
@@ -272,6 +280,26 @@ abbr atas @author Thiago A. Silva
 " FUNCTIONS "
 """""""""""""
 
+function! g:InsertPair(char)
+   let next_char = strpart(getline('.'), col('.') - 1, 1)
+   let char_is_rightside = next_char == a:char
+   if char_is_rightside
+       return "\<Right>"
+   else
+       return a:char . a:char . "\<Left>"
+   endif
+endfunction
+
+function! g:ClosePairs()
+    let pair = strpart(getline('.'), col('.') - 2, 2)
+    let pair_is_closed = pair == '()' || pair == "''" || pair == '""'
+    if pair_is_closed
+        return "\<Right>\<BS>\<BS>"
+    else
+        return "\<BS>"
+    endif
+endfunction
+
 " Adds a character in the end of the line
 function! s:appendEOL(param)
     if getline('.') !~ a:param.'$'
@@ -392,6 +420,7 @@ autocmd QuickFixCmdPre make w
 " NERD Tree specific
 autocmd FocusGained * call s:UpdateNERDTree()
 autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
+
 
 " Setup vim when opening
 autocmd VimEnter * call s:CdIfDirectory(expand("<amatch>"))
