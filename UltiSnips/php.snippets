@@ -1,5 +1,4 @@
 clearsnippets
-
 extends html
 
 snippet php "PHP inline block" i
@@ -24,6 +23,10 @@ endsnippet
 
 snippet e "echo function" 
 echo ${1:'${2:string}'};
+endsnippet
+
+snippet var "Variable assignment" i
+\$${1:var} = ${2:'${3:value}}'${4:;}$0
 endsnippet
 
 snippet vard "var_dump function" 
@@ -296,7 +299,6 @@ $1class ${2:My_Class} implements ${3:Interface} {
 
 } // End $2
 endsnippet
-
 
 snippet class "Extends and Implements Class statement"
 /**

@@ -37,9 +37,6 @@
 [submodule "bundle/taglist"]
 	path = bundle/taglist
 	url = https://github.com/vim-scripts/taglist.vim.git
-[submodule "bundle/php-documentor"]
-	path = bundle/php-documentor
-	url = https://github.com/vim-scripts/PDV-revised.git
 [submodule "bundle/easymotion"]
 	path = bundle/easymotion
 	url = https://github.com/vim-scripts/EasyMotion.git
@@ -61,3 +58,9 @@
 [submodule "bundle/grep"]
 	path = bundle/grep
 	url = https://github.com/vim-scripts/grep.vim.git
+[submodule "bundle/php-documentor"]
+	path = bundle/php-documentor
+	url = https://github.com/vim-scripts/PDV--phpDocumentor-for-Vim.git
+[submodule "bundle/delimitmate"]
+	path = bundle/delimitmate
+	url = https://github.com/Raimondi/delimitMate.git
