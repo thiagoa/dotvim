@@ -2,7 +2,7 @@
 " VIM CONFIGURATION "
 """"""""""""""""""""" 
 
-" Pathogen configuration - Loads all modularized bundles (plugins, etc), and rebuilds help tags
+" Pathogen config - Loads all modularized bundles (plugins, etc), and rebuilds help tags
 " Always place these lines above all others in .vimrc
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
@@ -10,8 +10,13 @@ call pathogen#helptags()
 " Unset compatibility mode with original vi
 set nocompatible
 
-" Enables syntax highlighting
-syntax on
+" Checks if gui is running to fix a NERDTree bug which
+" makes it loose syntax highlighting in some color schemes,
+" after opening a file. Macvim turns on syntax highlighting 
+" automatically, so there's only need to run this in the shell vim
+if !has("gui_running")
+    syntax on
+endif
 
 " Enables plugins and indenting per-filetype
 filetype plugin indent on
@@ -110,7 +115,8 @@ let g:mapleader = ","
 """"""""""""""
 
 " NERDTree shortcut
-nnoremap <C-n> :NERDTreeToggle<CR>
+nnoremap <D-1> :NERDTree %<CR> :echo 'Current file directory...'<CR>
+nnoremap <C-n> :NERDTreeToggle<CR> :echo 'Toggle NERDTree'<CR>
 
 " Taglist shortcut
 nnoremap <C-p> :TlistToggle<CR>
@@ -135,19 +141,26 @@ if exists(":Tabularize")
   vmap <Leader>a> :Tabularize /=><CR>
 endif
 
-" Auto close pairs simple mappings
-inoremap ( ()<Left>
+" Auto close pairs simple mappings - DEPRECATED
+" As UltiSnips doesn't allow these mappings in the placeholders,
+" now the pairs itself are snippets. Type (<Tab> to close the pair and insert
+" the cursor in the middle. With an added bonus of more control.
+"inoremap ( ()<Left>
 inoremap <expr> ' g:InsertPair("'")
 inoremap <expr> " g:InsertPair('"')
+
+" These mappings are still useful for smart out-of-pair behaviour, or to
+" quickly delete pairs, by deleting only one of them
 inoremap {<CR> {<CR>}<Esc>O
 inoremap <expr> ) strpart(getline('.'), col('.') - 1, 1) == ")" ? "\<Right>" : ")"
+inoremap <expr> } strpart(getline('.'), col('.') - 1, 1) == "}" ? "\<Right>" : "}"
 inoremap <expr> <backspace> g:ClosePairs()
 
 " Centers content when navigating search results
 nmap n nzz
 nmap N Nzz
 
-" Fast saving
+" Fast saving - DEPRECATED in favour of easymotion plugin
 "nmap <Leader>w :w!<cr>
 
 " Fast quit
@@ -166,36 +179,12 @@ nnoremap <D-e> :stag
 " Open tag in new tab
 nnoremap <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
 
-" Map Command-# to switch tabs
-noremap  <D-0> 0gt
-inoremap <D-0> <Esc>0gt
-noremap  <D-1> 1gt
-inoremap <D-1> <Esc>1gt
-noremap  <D-2> 2gt
-inoremap <D-2> <Esc>2gt
-noremap  <D-3> 3gt
-inoremap <D-3> <Esc>3gt
-noremap  <D-4> 4gt
-inoremap <D-4> <Esc>4gt
-noremap  <D-5> 5gt
-inoremap <D-5> <Esc>5gt
-noremap  <D-6> 6gt
-inoremap <D-6> <Esc>6gt
-noremap  <D-7> 7gt
-inoremap <D-7> <Esc>7gt
-noremap  <D-8> 8gt
-inoremap <D-8> <Esc>8gt
-noremap  <D-9> 9gt
-inoremap <D-9> <Esc>9gt
-
 " Mappings to add ; at the end of lines
-nnoremap <Leader>; :call <SID>appendEOL(';')<CR>
-nnoremap <S-CR> :call <SID>appendEOL(';')<CR>
-nnoremap <Leader>, :call <SID>appendEOL(',')<CR>
-nnoremap \; :call <SID>appendEOL(';')<CR>
-nnoremap \, :call <SID>appendEOL(',')<CR>
-inoremap <D-S-CR> <Esc> :call <SID>appendEOL(';')<CR>o
-inoremap <S-CR> <Esc> :call <SID>appendEOL(';')<CR>
+nnoremap <Leader>; :call <SID>AppendEOL(';')<CR>
+nnoremap <S-CR> :call <SID>AppendEOL(';')<CR>
+nnoremap <Leader>, :call <SID>AppendEOL(',')<CR>
+inoremap <D-S-CR> <Esc> :call <SID>AppendEOL(';')<CR>o
+inoremap <S-CR> <Esc> :call <SID>AppendEOL(';')<CR>
 
 " Mapping to quickly execute make command
 nmap <Leader>m :make<CR>
@@ -244,9 +233,11 @@ nmap <Leader>sj  :rightbelow new<CR>
 " Shortcut to remove blocks of code (e.g. delete function)
 nnoremap <silent> <Leader>df dV]M
 
+
 """"""""""""""""""""""""
 " PLUGIN CONFIGURATION "
 """"""""""""""""""""""""
+
 
 " Taglist
 let Tlist_Use_Horiz_Window=0
@@ -267,29 +258,32 @@ let g:UltiSnipsEditSplit='horizontal'
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-let g:UltiSnipsListSnippets="<Leader>l"
+let g:UltiSnipsListSnippets="<D-0>"
 
 " Command-T
 let g:CommandTMaxHeight=10
 let g:CommandTMatchWindowAtTop=1
 
-" PDV
-abbr atas @author Thiago A. Silva
 
-"""""""""""""
-" FUNCTIONS "
-"""""""""""""
+"""""""""""""""""""""""""""""
+" CUSTOM UTILITY FUNCTIONS "
+""""""""""""""""""""""""""""
 
+
+" Inserts a closing pair when typing a character
+" Map your auto close stuff with 'char' parameter
 function! g:InsertPair(char)
    let next_char = strpart(getline('.'), col('.') - 1, 1)
    let char_is_rightside = next_char == a:char
    if char_is_rightside
        return "\<Right>"
    else
-       return a:char . a:char . "\<Left>"
+       "return a:char . a:char . "\<Left>"
+       return a:char
    endif
 endfunction
 
+" Automatically delete pairs
 function! g:ClosePairs()
     let pair = strpart(getline('.'), col('.') - 2, 2)
     let pair_is_closed = pair == '()' || pair == "''" || pair == '""'
@@ -300,8 +294,8 @@ function! g:ClosePairs()
     endif
 endfunction
 
-" Adds a character in the end of the line
-function! s:appendEOL(param)
+" Appends a character at the end of the line
+function! s:AppendEOL(param)
     if getline('.') !~ a:param.'$'
         let original_cursor_position = getpos('.')
         exec("s/$/".a:param."/")
@@ -309,7 +303,7 @@ function! s:appendEOL(param)
     endif
 endfunction
 
-" Função que leva tabs para esquerda 
+" Drag tabs to the left... pick up a mapping to use it
 function! s:DragTabLeft()
     let n = tabpagenr()
     let move = n - 2
@@ -317,7 +311,7 @@ function! s:DragTabLeft()
     let &showtabline = &showtabline
 endfunction
 
-" Função que leva tabs para a direita
+" Drag tabs to the right... pick up a mapping to use it
 function! s:DragTabRight()
     let n = tabpagenr()
     execute 'tabmove' (n == tabpagenr('$') ? 0 : n)
@@ -379,11 +373,13 @@ function! s:CdIfDirectory(directory)
     endif
 endfunction
 
+
 """""""""""""""""
 " ABBREVIATIONS "
 """"""""""""""""
 
-" Avoids typing errors in the command line
+
+" Avoid typing errors in the command line
 cab W w
 cab WQ wq
 cab Cd cd
@@ -397,11 +393,14 @@ cab Stag stag
 " Speeds up vimgrep
 cab vimgrep noautocmd vimgrep
 
+" Expand to current path
 cabbr <expr> %% expand('%:p:h')
+
 
 """""""""""""""""
 " AUTO COMMANDS "
 """""""""""""""""
+
 
 " Reloads vim config files and apply changes automatically
 autocmd! bufwritepost .gvimrc source %
@@ -421,13 +420,13 @@ autocmd QuickFixCmdPre make w
 autocmd FocusGained * call s:UpdateNERDTree()
 autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
 
-
 " Setup vim when opening
 autocmd VimEnter * call s:CdIfDirectory(expand("<amatch>"))
 
-""""""""""""""""""""""""""""""""""""
-" LOCAL CONFIGURATION (OUT OF SCM) "
-""""""""""""""""""""""""""""""""""""
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" LOCAL CONFIGURATION (LOAD CUSTOM CONFIG FILE OUT OF SCM) "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Include user's local vim config
 if filereadable(expand("~/.vimrc.local"))
