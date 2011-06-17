@@ -5,6 +5,10 @@ snippet php "PHP inline block" i
 <?php $0 ?>
 endsnippet
 
+snippet ap "This is a variable attribute" 
+\$${1:variable} = ${2:'${3:value}'};
+endsnippet
+
 snippet phpb "PHP block"
 <?php
 $0${1:
@@ -17,12 +21,26 @@ $0${2:
 ?>}
 endsnippet
 
-snippet phpe "PHP echo inline"
+snippet phpe "PHP echo inline" i
 <?php echo $0 ?>
 endsnippet
 
 snippet e "echo function" 
 echo ${1:'${2:string}'};
+endsnippet
+
+snippet ee "echo function with exit" !b
+echo ${1:'${2:string}'};
+exit;$0
+endsnippet
+
+snippet ev "echo variable" !b
+echo \$${1:string};
+endsnippet
+
+snippet eve "echo variable with exit" !b
+echo \$${1:string};
+exit;
 endsnippet
 
 snippet var "Variable assignment" i
@@ -42,40 +60,40 @@ snippet globals "GLOBALS variable use or assignment"
 \$GLOBALS['${1:variable}']${2: = }${3:something}${4:;}$0
 endsnippet
 
-snippet $_ "COOKIE global variable"
+snippet $_ "COOKIE global variable" i
 \$_COOKIE['${1:variable}']
 endsnippet
 
-snippet $_ "ENV Global variable"
+snippet $_ "ENV Global variable" i
 \$_ENV['${1:variable}']
 endsnippet
 
-snippet $_ "FILES global variable"
+snippet $_ "FILES global variable" i
 \$_FILES['${1:variable}']
 endsnippet
 
-snippet $_ "GET global variable"
+snippet $_ "GET global variable" i
 \$_GET['${1:variable}']
 endsnippet
 
-snippet $_ "POST global variable"
+snippet $_ "POST global variable" i
 \$_POST['${1:variable}']
 endsnippet
 
-snippet $_ "REQUEST global variable"
+snippet $_ "REQUEST global variable" i
 \$_REQUEST['${1:variable}']
 endsnippet
 
-snippet $_ "SERVER global variable"
+snippet $_ "SERVER global variable" i
 \$_SERVER['${1:variable}']
 endsnippet
-
-snippet $_ "SESSION global variable"
+ 
+snippet $_ "SESSION global variable" i
 \$_SESSION['${1:variable}']
 endsnippet
 
 snippet fore "foreach loop"
-foreach (\$${1:variable} as \$${2:key}${3: => \$${4:value}})
+foreach (${1:$variable} as \$${2:key}${3: => \$${4:value}})
 {
     $5
 }
@@ -277,7 +295,7 @@ snippet class "Extends Class statement"
  * @copyright ${6:`!v g:pdv_cfg_Copyright`}
  * @author ${7:`!v g:pdv_cfg_Author`}
  **/
-$1class ${2:My_Class} extends ${3:Parent_Class} {
+${1}class ${2:My_Class} extends ${3:Parent_Class} {
     
     $0
 
@@ -377,4 +395,8 @@ endsnippet
 
 snippet issv "Sets variable if another one isset"
 \$${1:var} = isset(\$${2:_${3:POST}}[${4:'${5:key}'}]) ? $6\$$2[$4] : ${7:NULL};
+endsnippet
+
+snippet isset "Sets variable if another one isset" i
+isset(\$${2:var}) ? \$$2 : ${3:NULL};
 endsnippet
