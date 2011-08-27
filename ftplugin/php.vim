@@ -36,6 +36,8 @@ let php_sql_query=1
 " Highlighti SQL inside PHP strings
 let php_htmlInStrings=1
 
+let g:PHP_outdentphpescape = 0
+
 " Use PHP syntax check when doing :make
 set makeprg=/Applications/MAMP/bin/php5.2/bin/php\ -d\ display_errors=1\ -l\ %
 
@@ -130,5 +132,5 @@ let g:pdv_cfg_Type = "mixed"
 let g:pdv_cfg_Package = "Mix"
 let g:pdv_cfg_Version = ""
 let g:pdv_cfg_Author = "Thiago A. Silva"
-let g:pdv_cfg_Copyright = "(C) 2010 Mix Internet Ltda."
+let g:pdv_cfg_Copyright = "(C) 2011 Mix Internet Ltda."
 let g:pdv_cfg_License = ""

@@ -152,13 +152,14 @@ inoremap <expr> " g:InsertPair('"')
 " These mappings are still useful for smart out-of-pair behaviour, or to
 " quickly delete pairs, by deleting only one of them
 inoremap {<CR> {<CR>}<Esc>O
-inoremap <expr> ) strpart(getline('.'), col('.') - 1, 1) == ")" ? "\<Right>" : ")"
-inoremap <expr> } strpart(getline('.'), col('.') - 1, 1) == "}" ? "\<Right>" : "}"
-inoremap <expr> <backspace> g:ClosePairs()
+"inoremap <expr> ) strpart(getline('.'), col('.') - 1, 1) == ")" ? "\<Right>" : ")"
+"inoremap <expr> } strpart(getline('.'), col('.') - 1, 1) == "}" ? "\<Right>" : "}"
+"inoremap <expr> ] strpart(getline('.'), col('.') - 1, 1) == "]" ? "\<Right>" : "]"
+"inoremap <expr> <backspace> g:ClosePairs()
 
 " Centers content when navigating search results
-nmap n nzz
-nmap N Nzz
+"nmap n nzz
+"nmap N Nzz
 
 " Fast saving - DEPRECATED in favour of easymotion plugin
 "nmap <Leader>w :w!<cr>
@@ -232,6 +233,10 @@ nmap <Leader>sj  :rightbelow new<CR>
 
 " Shortcut to remove blocks of code (e.g. delete function)
 nnoremap <silent> <Leader>df dV]M
+
+" Map historic navigation in home arrows to something more useful (get the latest command beginning with ...)
+cnoremap <C-p> <Up>
+cnoremap <C-n> <Down>
 
 
 """"""""""""""""""""""""
@@ -401,7 +406,6 @@ cabbr <expr> %% expand('%:p:h')
 " AUTO COMMANDS "
 """""""""""""""""
 
-
 " Reloads vim config files and apply changes automatically
 autocmd! bufwritepost .gvimrc source %
 autocmd! bufwritepost .vimrc source %
@@ -417,7 +421,7 @@ autocmd BufWinEnter * if &previewwindow | setlocal foldlevel=999 | endif
 autocmd QuickFixCmdPre make w
 
 " NERD Tree specific
-autocmd FocusGained * call s:UpdateNERDTree()
+"autocmd FocusGained * call s:UpdateNERDTree()
 autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
 
 " Setup vim when opening
