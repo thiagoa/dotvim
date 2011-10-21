@@ -19,7 +19,7 @@ if !has("gui_running")
 endif
 
 " Enables plugins and indenting per-filetype
-filetype plugin indent on
+filetype plugin on
 
 " Disables autocomplete for files referenced inside the current buffer
 set complete-=i
@@ -37,7 +37,7 @@ set guioptions-=T
 set number
 
 " Options for context referencing
-set scrolloff=3
+set scrolloff=4
 set sidescrolloff=7
 set sidescroll=1
 
@@ -63,7 +63,7 @@ set shiftwidth=4
 " Indenting configuration
 set smartindent
 set autoindent
-set nocindent
+"set nocindent
 
 " Disables backup while file is being written
 set nobackup
@@ -100,10 +100,12 @@ set listchars=tab:>-,trail:·,eol:$
 " Messages configuration
 set shortmess=atI
 
+" Default file format
+set fileformat=unix
+
 " Status line configuration: shows git current branch, file encoding, etc
 if has("statusline")
     set statusline=%<%f\ \ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %h%m%r%=%{\"[\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\").\"]\ \"}%k\ %-14.(%l,%c%V%)\ %P
-    set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 endif
 
 " Sets leader key (specific for user mappings, to avoid conflicting with vim's defaults)
@@ -378,11 +380,20 @@ function! s:CdIfDirectory(directory)
     endif
 endfunction
 
+function! DisableIndent()
+        set autoindent&
+        set cindent&
+        set smartindent&
+        set indentexpr&
+endfunction
+
+filetype plugin indent on
+au filetype php call DisableIndent()
+
 
 """""""""""""""""
 " ABBREVIATIONS "
 """"""""""""""""
-
 
 " Avoid typing errors in the command line
 cab W w

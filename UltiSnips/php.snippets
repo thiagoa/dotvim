@@ -94,7 +94,7 @@ snippet $_ "SESSION global variable" i
 endsnippet
 
 snippet fore "foreach loop"
-foreach (${1:$variable} as \$${2:key}${3: => \$${4:value}})
+foreach (${1:\$variable} as ${2:\$key}${3: => ${4:\$value}})
 {
     $5
 }
@@ -175,6 +175,28 @@ ${1:${2:public} }function ${3:FunctionName}(${4:\$${5:value}${6: = ''}})
     ${0:// code...}
 }
 endsnippet
+
+snippet pfun "Public function"
+public function ${3:FunctionName}(${4:${5:\$value}${6: = ${7:''}}})
+{
+    ${0:// code...}
+}
+endsnippet
+
+snippet prfun "Private function"
+private function ${3:FunctionName}(${4:${5:\$value}${6: = ${7:''}}})
+{
+    ${0:// code...}
+}
+endsnippet
+
+snippet pofun "Protected function"
+protected function ${3:FunctionName}(${4:${5:\$value}${6: = ${7:''}}})
+{
+    ${0:// code...}
+}
+endsnippet
+
 
 snippet heredoc "Heredoc string"
 <<<${1:HTML}
@@ -272,7 +294,24 @@ snippet classc "Class constant"
 const ${1:CONSTANT}${2: = ${2:'${3:value}'}};$0
 endsnippet
 
-snippet class "Class statement"
+snippet cl "Class statement"
+/**
+ * ${3:$2}
+ *
+ * @package ${4:`!v g:pdv_cfg_Package`}
+ * @copyright ${5:`!v g:pdv_cfg_Copyright`}
+ * @author ${6:`!v g:pdv_cfg_Author`}
+ **/
+$1class $2 {
+    
+    $0
+
+} // End $2
+endsnippet
+
+snippet pcl "Class statement with php tag"
+<?php
+
 /**
  * ${3:$2}
  *

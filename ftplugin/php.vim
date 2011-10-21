@@ -9,6 +9,13 @@ set keywordprg=pman
 " Set up automatic formatting
 set formatoptions+=tcqlro
 
+setlocal autoindent
+setlocal cindent
+setlocal cinwords=if,else,elseif,do,while,foreach,for,case,default,function,class,interface,abstract,private,public,protected,final
+setlocal cinkeys=0{,0},0),!^F,o,O,e
+
+"setlocal nosmartindent " don't use smart indent option
+
 " Ao salvar arquivos PHP verifica erros automaticamente
 "autocmd! bufwritepost *.php make %
 
@@ -39,7 +46,7 @@ let php_htmlInStrings=1
 let g:PHP_outdentphpescape = 0
 
 " Use PHP syntax check when doing :make
-set makeprg=/Applications/MAMP/bin/php5.2/bin/php\ -d\ display_errors=1\ -l\ %
+set makeprg=/Applications/MAMP/bin/php/php5.2.17/bin/php\ -d\ display_errors=1\ -l\ %
 
 " Parse PHP error outpu
 set errorformat=%m\ in\ %f\ on\ line\ %l
