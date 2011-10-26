@@ -176,6 +176,20 @@ ${1:${2:public} }function ${3:FunctionName}(${4:\$${5:value}${6: = ''}})
 }
 endsnippet
 
+snippet psfun "Public static method"
+public static function ${1:FunctionName}(${2:\$${3:value}${4: = ''}})
+{
+    ${0:// code...}
+}
+endsnippet
+
+snippet prsfun "Private static method"
+private static function ${1:FunctionName}(${2:\$${3:value}${4: = ''}})
+{
+    ${0:// code...}
+}
+endsnippet
+
 snippet pfun "Public function"
 public function ${3:FunctionName}(${4:${5:\$value}${6: = ${7:''}}})
 {
@@ -274,6 +288,15 @@ endsnippet
 
 snippet pri "private word"
 private
+endsnippet
+
+snippet sclassv "Static class variable"
+/**
+ * ${6:$2}
+ *
+ * @var ${7:string}
+ **/
+${1:public} static \$${2:variable}${3: = ${4:'${5:value}'}};$0
 endsnippet
 
 snippet classv "Class variable"
