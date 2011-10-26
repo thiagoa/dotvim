@@ -67,3 +67,6 @@
 [submodule "colors"]
 	path = colors
 	url = https://github.com/squil/vim_colors.git
+[submodule "bundle/zencoding"]
+	path = bundle/zencoding
+	url = https://github.com/mattn/zencoding-vim.git
