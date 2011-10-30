@@ -6,6 +6,14 @@ snippet php "PHP inline block" i
 <?php $0 ?>
 endsnippet
 
+snippet lemp "Inline check if empty block" i
+<?php if ( ! empty($0)): ?>
+endsnippet
+
+snippet endif "Close if" i
+<?php endif ?>
+endsnippet
+
 snippet ap "This is a variable attribute" 
 \$${1:variable} = ${2:'${3:value}'};
 endsnippet
@@ -411,10 +419,14 @@ snippet def? "Defined function" i
 $1defined('$2')$0
 endsnippet
 
-snippet ar "Array declaration"
+snippet ar "Array declaration" i
 array(${1:
     ${2:// content}
 });
+endsnippet
+
+snippet arr "Inline Array declaration" i
+array($0)
 endsnippet
 
 snippet ari "Array item"
@@ -462,4 +474,12 @@ endsnippet
 
 snippet isset "Sets variable if another one isset" i
 isset(\$${2:var}) ? \$$2 : ${3:NULL};
+endsnippet
+
+snippet lurl "Kohana URL::site" i
+<?php echo URL::site($0) ?>
+endsnippet
+
+snippet routeuri "Kohana Route::get(ROUTE)->uri" i
+Route::get(${1})->uri(${2})
 endsnippet
