@@ -10,9 +10,7 @@ set keywordprg=pman
 set formatoptions+=tcqlro
 
 setlocal autoindent
-setlocal cindent
 setlocal cinwords=if,else,elseif,do,while,foreach,for,case,default,function,class,interface,abstract,private,public,protected,final
-setlocal cinkeys=0{,0},0),!^F,o,O,e
 
 "setlocal nosmartindent " don't use smart indent option
 

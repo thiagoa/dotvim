@@ -248,7 +248,6 @@ cnoremap <C-n> <Down>
 
 " Taglist
 let Tlist_Use_Horiz_Window=0
-let Tlist_Use_Right_Window = 1
 let Tlist_Compact_Format = 1
 let Tlist_Exit_OnlyWindow = 1
 let Tlist_GainFocus_On_ToggleOpen = 1
@@ -256,6 +255,7 @@ let Tlist_File_Fold_Auto_Close = 1
 let Tlist_Inc_Winwidth = 0
 let Tlist_Close_On_Select = 1
 let Tlist_Process_File_Always = 1
+let Tlist_Use_Right_Window = 0
 let Tlist_Sql_Settings = 'sql;P:package;t:table'
 let Tlist_Ant_Settings = 'ant;p:Project;r:Property;t:Target'
 let tlist_php_settings = 'php;c:class;d:constant;f:function'
@@ -266,6 +266,9 @@ let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:UltiSnipsListSnippets="<D-0>"
+
+" NERDTree
+let g:NERDTreeWinPos = "right"
 
 " Command-T
 let g:CommandTMaxHeight=10
@@ -381,10 +384,10 @@ function! s:CdIfDirectory(directory)
 endfunction
 
 function! DisableIndent()
-        set autoindent&
-        set cindent&
-        set smartindent&
-        set indentexpr&
+    set autoindent&
+    set cindent&
+    set smartindent&
+    set indentexpr&
 endfunction
 
 filetype plugin indent on
