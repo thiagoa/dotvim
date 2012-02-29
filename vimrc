@@ -424,6 +424,9 @@ cabbr <expr> %% expand('%:p:h')
 autocmd! bufwritepost .gvimrc source %
 autocmd! bufwritepost .vimrc source %
 
+" Autosave on focus lost
+autocmd! FocusLost * silent! wa
+
 " Tag preview fix, when using folds and/or fold plugins. The tag preview
 " always opens unfolded, regardless of current configuration
 autocmd BufWinEnter * if &previewwindow | setlocal foldlevel=999 | endif
