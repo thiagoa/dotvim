@@ -14,8 +14,8 @@ setlocal cinwords=if,else,elseif,do,while,foreach,for,case,default,function,clas
 
 "setlocal nosmartindent " don't use smart indent option
 
-" Ao salvar arquivos PHP verifica erros automaticamente
-"autocmd! bufwritepost *.php make %
+" Generates ctags when saving PHP files
+autocmd! bufwritepost *.php silent !/Users/thiago/Scripts/generate_php_tags.sh &
 
 " Jump to matching bracket for 3/10th of a second (works with showmatch)
 set matchtime=3
@@ -101,9 +101,6 @@ vnoremap <buffer> <C-S> :call PhpDocRange()<CR>
 " Generate @uses tag based on inheritance info
 let g:pdv_cfg_Uses = 1
 
-" Set default Copyright
-"let g:pdv_cfg_Copyright = "Copyright (C) 2006 Andrei Zmievski"
-
 " Exuberant Ctags
 nmap <silent> <D-]> :!$HOME/Scripts/generate_php_tags.sh <CR>
 
@@ -137,5 +134,5 @@ let g:pdv_cfg_Type = "mixed"
 let g:pdv_cfg_Package = "Mix"
 let g:pdv_cfg_Version = ""
 let g:pdv_cfg_Author = "Thiago A. Silva"
-let g:pdv_cfg_Copyright = "(C) 2011 Mix Internet Ltda."
+let g:pdv_cfg_Copyright = "(C) 2012 Mix Internet Ltda."
 let g:pdv_cfg_License = ""
