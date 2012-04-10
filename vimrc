@@ -129,6 +129,9 @@ nnoremap <Leader>n :w<CR>:py UltiSnips_Manager.reset()<CR>
 " Command T shortcut (cmd-T is already working for "open new tab")
 noremap <D-r> :CommandT<CR>
 
+" Command T shortcut (force flush)
+noremap <D-R> :CommandTFlush<CR> :CommandT<CR>
+
 " Mapping to disable hlsearch
 nnoremap <C-l> :nohls<CR><C-L>
 inoremap <C-l> <C-O>:nohls<CR>
