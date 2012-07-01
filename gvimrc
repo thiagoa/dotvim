@@ -18,7 +18,6 @@
     "color clean
     "color bclear
     "color xoria256
-    "color xoria256
     "color mac_classic
 "endif
 

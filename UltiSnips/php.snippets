@@ -56,10 +56,17 @@ snippet var "Variable assignment" i
 \$${1:var} = ${2:'${3:value}'}${4:;}$0
 endsnippet
 
-snippet vard "var_dump function" 
+snippet vard "var_dump something" 
+echo '<pre>';
 var_dump(${1:\$${2:variable}});${3:
+echo '</pre>';
 exit;}$0
 endsnippet
+
+snippet dies "die with a string" 
+die('debug');
+endsnippet
+
 
 snippet th "Outputs $this-> variable" i
 $this->${1:${2:variable} = ${3:'${4:value}'};}

@@ -9,7 +9,6 @@ set keywordprg=pman
 " Set up automatic formatting
 set formatoptions+=tcqlro
 
-setlocal autoindent
 setlocal cinwords=if,else,elseif,do,while,foreach,for,case,default,function,class,interface,abstract,private,public,protected,final
 
 "setlocal nosmartindent " don't use smart indent option
