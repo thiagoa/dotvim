@@ -64,3 +64,9 @@
 [submodule "bundle/zencoding"]
 	path = bundle/zencoding
 	url = https://github.com/mattn/zencoding-vim.git
+[submodule "bundle/dbgp"]
+	path = bundle/dbgp
+	url = https://github.com/vim-scripts/DBGp-client.git
+[submodule "bundle/vim-dbgp"]
+	path = bundle/vim-dbgp
+	url = https://github.com/vim-scripts/DBGp-client.git
