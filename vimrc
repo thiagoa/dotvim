@@ -1,6 +1,6 @@
 """""""""""""""""""""
 " VIM CONFIGURATION "
-""""""""""""""""""""" 
+"""""""""""""""""""""
 
 " Pathogen config - Loads all modularized bundles (plugins, etc), and rebuilds help tags
 " Always place these lines above all others in .vimrc
@@ -12,7 +12,7 @@ set nocompatible
 
 " Checks if gui is running to fix a NERDTree bug which
 " makes it loose syntax highlighting in some color schemes,
-" after opening a file. Macvim turns on syntax highlighting 
+" after opening a file. Macvim turns on syntax highlighting
 " automatically, so there's only need to run this in the shell vim
 if !has("gui_running")
     syntax on
@@ -37,14 +37,14 @@ set guioptions-=T
 set number
 
 " Options for context referencing
-set scrolloff=4
-set sidescrolloff=7
-set sidescroll=1
+set scrolloff=8
+"set sidescrolloff=7
+"set sidescroll=1
 
 " Set visual bell instead of beeping
 set visualbell
 
-" Lights up the opposite bracket for easy finding. 
+" Lights up the opposite bracket for easy finding.
 set showmatch matchtime=3
 
 " These characters indicate the content is not enough for showing in one line
@@ -102,6 +102,8 @@ set shortmess=atI
 
 " Default file format
 set fileformat=unix
+
+set nowrap
 
 " Status line configuration: shows git current branch, file encoding, etc
 if has("statusline")
@@ -179,8 +181,8 @@ nnoremap <expr> gM (strlen(getline('.')) / 2) . '<bar>'
 nnoremap <C-w>{ <Esc>:exe "ptselect " . expand("<cword>")<Esc>
 
 " Even faster :tag and :stag commands
-nnoremap <D-d> :tag 
-nnoremap <D-e> :stag 
+nnoremap <D-d> :tag
+nnoremap <D-e> :stag
 
 " Open tag in new tab
 nnoremap <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
@@ -299,7 +301,7 @@ endfunction
 " Automatically delete pairs
 function! g:ClosePairs()
     let pair = strpart(getline('.'), col('.') - 2, 2)
-    let pair_is_closed = pair == '()' || pair == "''" || pair == '""'
+    let pair_is_closed = pair == '()' || pair == "''" || pair == '""' || pair == '[]'
     if pair_is_closed
         return "\<Right>\<BS>\<BS>"
     else
@@ -373,7 +375,7 @@ function! s:CdIfDirectory(directory)
     endif
     " Allows reading from stdin
     " ex: git diff | mvim -R -
-    if strlen(a:directory) == 0 
+    if strlen(a:directory) == 0
         return
     endif
     if directory
@@ -447,6 +449,8 @@ autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
 " Setup vim when opening
 autocmd VimEnter * call s:CdIfDirectory(expand("<amatch>"))
 
+" Strip white spaces
+autocmd BufWritePre * :%s/\s\+$//e
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " LOCAL CONFIGURATION (LOAD CUSTOM CONFIG FILE OUT OF SCM) "
@@ -456,3 +460,16 @@ autocmd VimEnter * call s:CdIfDirectory(expand("<amatch>"))
 if filereadable(expand("~/.vimrc.local"))
   source ~/.vimrc.local
 endif
+function! Bufnames(A, L, P)
+    redir => bufnames
+    silent ls
+    redir END
+    let list = []
+    for name in split(bufnames, "\n")
+        let buf = fnamemodify(split(name, '"')[-2], ":t")
+        if match(buf, "No Name") == -1
+            call add(list, buf)
+        endif
+    endfor
+    return filter(sort(list), 'v:val =~ "^".a:A')
+endfunction

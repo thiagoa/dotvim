@@ -15,7 +15,7 @@ snippet endif "Close if" i
 endsnippet
 
 snippet ap "This is a variable attribute" 
-\$${1:variable} = ${2:'${3:value}'};
+\$${1:variable} = ${2:'${3:val}'};
 endsnippet
 
 snippet phpb "PHP block"
@@ -53,16 +53,23 @@ exit;
 endsnippet
 
 snippet var "Variable assignment" i
-\$${1:var} = ${2:'${3:value}'}${4:;}$0
+\$${1:var} = ${2:'${3:val}'}${4:;}$0
 endsnippet
 
-snippet vard "var_dump function" 
+snippet vard "var_dump something" 
+echo '<pre>';
 var_dump(${1:\$${2:variable}});${3:
+echo '</pre>';
 exit;}$0
 endsnippet
 
+snippet dies "die with a string" 
+die('debug');
+endsnippet
+
+
 snippet th "Outputs $this-> variable" i
-$this->${1:${2:variable} = ${3:'${4:value}'};}
+$this->${1:${2:variable} = ${3:'${4:val}'};}
 endsnippet
 
 snippet globals "GLOBALS variable use or assignment"
@@ -102,7 +109,7 @@ snippet $_ "SESSION global variable" i
 endsnippet
 
 snippet fore "foreach loop"
-foreach (${1:\$variable} as ${2:\$key}${3: => ${4:\$value}})
+foreach (${1:\$variable} as ${2:\$key}${3: => ${4:\$val}})
 {
     $5
 }
@@ -174,7 +181,7 @@ else
 endsnippet
 
 snippet if? "Conditional with ternary operator"
-\$${1:value} = ${2:(${3:condition})} ? ${4:a} : ${5:b};
+\$${1:val} = ${2:(${3:condition})} ? ${4:a} : ${5:b};
 endsnippet
 
 snippet fun "Function (class or standalone)"
@@ -192,28 +199,28 @@ public static function ${1:FunctionName}(${2:\$${3:value}${4: = ''}})
 endsnippet
 
 snippet prsfun "Private static method"
-private static function ${1:FunctionName}(${2:\$${3:value}${4: = ''}})
+private static function ${1:FunctionName}(${2:\$${3:val}${4: = ''}})
 {
     ${0:// code...}
 }
 endsnippet
 
 snippet pfun "Public function"
-public function ${3:FunctionName}(${4:${5:\$value}${6: = ${7:''}}})
+public function ${3:FunctionName}(${4:${5:\$val}${6: = ${7:''}}})
 {
     ${0:// code...}
 }
 endsnippet
 
 snippet prfun "Private function"
-private function ${3:FunctionName}(${4:${5:\$value}${6: = ${7:''}}})
+private function ${3:FunctionName}(${4:${5:\$val}${6: = ${7:''}}})
 {
     ${0:// code...}
 }
 endsnippet
 
 snippet pofun "Protected function"
-protected function ${3:FunctionName}(${4:${5:\$value}${6: = ${7:''}}})
+protected function ${3:FunctionName}(${4:${5:\$val}${6: = ${7:''}}})
 {
     ${0:// code...}
 }
@@ -261,7 +268,7 @@ endsnippet
 snippet switch "Switch statement"
 switch (${1:variable}) 
 {
-    case ${4:'value'}:
+    case ${4:'val'}:
         ${5:// code...}${6:
         break;${7:
     $8}${2:
@@ -272,7 +279,7 @@ switch (${1:variable})
 endsnippet
 
 snippet case "Case statement"
-case ${1:'value'}:
+case ${1:'val'}:
     ${2:// code...}${3:
     break;${4:
 $5}}$0
@@ -304,7 +311,7 @@ snippet sclassv "Static class variable"
  *
  * @var ${7:string}
  **/
-${1:public} static \$${2:variable}${3: = ${4:'${5:value}'}};$0
+${1:public} static \$${2:variable}${3: = ${4:'${5:val}'}};$0
 endsnippet
 
 snippet classv "Class variable"
@@ -313,7 +320,7 @@ snippet classv "Class variable"
  *
  * @var ${7:string}
  **/
-${1:public} \$${2:variable}${3: = ${4:'${5:value}'}};$0
+${1:public} \$${2:variable}${3: = ${4:'${5:val}'}};$0
 endsnippet
 
 snippet classc "Class constant"
@@ -322,7 +329,7 @@ snippet classc "Class constant"
  *
  * @const
  **/
-const ${1:CONSTANT}${2: = ${2:'${3:value}'}};$0
+const ${1:CONSTANT}${2: = ${2:'${3:val}'}};$0
 endsnippet
 
 snippet cl "Class statement"
