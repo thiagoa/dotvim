@@ -10,8 +10,7 @@ set keywordprg=pman
 set formatoptions+=tcqlro
 
 setlocal autoindent
-setlocal cinwords=if,else,elseif,do,while,foreach,for,case,default,function,class,interface,abstract,private,public,protected,final
-
+"setlocal cinwords=if,else,elseif,do,while,foreach,for,case,default,function,class,interface,abstract,private,public,protected,final
 "setlocal nosmartindent " don't use smart indent option
 
 " Generates ctags when saving PHP files
