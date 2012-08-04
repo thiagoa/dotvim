@@ -129,7 +129,7 @@ nnoremap <C-p> :TlistToggle<CR>
 nnoremap <Leader>n :w<CR>:py UltiSnips_Manager.reset()<CR>
 
 " Command T shortcut (cmd-T is already working for "open new tab")
-noremap <D-r> :CommandT<CR>
+noremap <C-x> :CommandT<CR>
 
 " Command T shortcut (force flush)
 noremap <D-R> :CommandTFlush<CR> :CommandT<CR>
