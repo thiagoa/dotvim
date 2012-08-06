@@ -13,7 +13,7 @@ setlocal autoindent
 setlocal cinwords=if,else,elseif,do,while,foreach,for,case,default,function,class,interface,abstract,private,public,protected,final
 
 " Generates ctags when saving PHP files
-autocmd! bufwritepost *.php silent !/Users/thiago/Scripts/generate_php_tags.sh &
+" autocmd! bufwritepost *.php silent !/Users/thiago/Scripts/generate_php_tags.sh &
 
 " Jump to matching bracket for 3/10th of a second (works with showmatch)
 set matchtime=3
