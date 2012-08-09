@@ -25,9 +25,6 @@
 [submodule "bundle/perdirvimrc"]
 	path = bundle/perdirvimrc
 	url = https://github.com/vim-scripts/perdirvimrc--Autoload-vimrc-files-per-di.git
-[submodule "bundle/ultisnips"]
-	path = bundle/ultisnips
-	url = https://github.com/vim-scripts/UltiSnips.git
 [submodule "bundle/matchit"]
 	path = bundle/matchit
 	url = https://github.com/vim-scripts/matchit.zip.git
@@ -46,9 +43,6 @@
 [submodule "bundle/phpfolding"]
 	path = bundle/phpfolding
 	url = https://github.com/vim-scripts/phpfolding.vim.git
-[submodule "bundle/detectindent"]
-	path = bundle/detectindent
-	url = https://github.com/ciaranm/detectindent.git
 [submodule "bundle/tabular"]
 	path = bundle/tabular
 	url = https://github.com/godlygeek/tabular.git

@@ -20,6 +20,7 @@ endif
 
 " Enables plugins and indenting per-filetype
 filetype plugin on
+filetype plugin indent on
 
 " Disables autocomplete for files referenced inside the current buffer
 set complete-=i
@@ -100,9 +101,6 @@ set listchars=tab:>-,trail:·,eol:$
 " Messages configuration
 set shortmess=atI
 
-" Default file format
-set fileformat=unix
-
 set nowrap
 
 " Status line configuration: shows git current branch, file encoding, etc
@@ -119,7 +117,6 @@ let g:mapleader = ","
 """"""""""""""
 
 " NERDTree shortcut
-nnoremap <D-1> :NERDTree %<CR> :echo 'Current file directory...'<CR>
 nnoremap <C-n> :NERDTreeToggle<CR> :echo 'Toggle NERDTree'<CR>
 
 " Taglist shortcut
@@ -132,7 +129,7 @@ nnoremap <Leader>n :w<CR>:py UltiSnips_Manager.reset()<CR>
 noremap <C-x> :CommandT<CR>
 
 " Command T shortcut (force flush)
-noremap <D-R> :CommandTFlush<CR> :CommandT<CR>
+noremap <C-h> :CommandTFlush<CR> :CommandT<CR>
 
 " Mapping to disable hlsearch
 nnoremap <C-l> :nohls<CR><C-L>
@@ -159,17 +156,6 @@ inoremap <expr> " g:InsertPair('"')
 " These mappings are still useful for smart out-of-pair behaviour, or to
 " quickly delete pairs, by deleting only one of them
 inoremap {<CR> {<CR>}<Esc>O
-"inoremap <expr> ) strpart(getline('.'), col('.') - 1, 1) == ")" ? "\<Right>" : ")"
-"inoremap <expr> } strpart(getline('.'), col('.') - 1, 1) == "}" ? "\<Right>" : "}"
-"inoremap <expr> ] strpart(getline('.'), col('.') - 1, 1) == "]" ? "\<Right>" : "]"
-"inoremap <expr> <backspace> g:ClosePairs()
-
-" Centers content when navigating search results
-"nmap n nzz
-"nmap N Nzz
-
-" Fast saving - DEPRECATED in favour of easymotion plugin
-"nmap <Leader>w :w!<cr>
 
 " Fast quit
 nnoremap <Leader>q :wq!<cr>
@@ -275,6 +261,7 @@ let g:UltiSnipsListSnippets="<D-0>"
 
 " NERDTree
 let g:NERDTreeWinPos = "right"
+let g:nerdtree_tabs_smart_startup_focus = 0
 
 " Command-T
 let g:CommandTMaxHeight=10
@@ -317,21 +304,6 @@ function! s:AppendEOL(param)
         exec("s/$/".a:param."/")
         call setpos('.', original_cursor_position)
     endif
-endfunction
-
-" Drag tabs to the left... pick up a mapping to use it
-function! s:DragTabLeft()
-    let n = tabpagenr()
-    let move = n - 2
-    execute 'tabmove' (n == 0 ? tabpagenr('$') : move)
-    let &showtabline = &showtabline
-endfunction
-
-" Drag tabs to the right... pick up a mapping to use it
-function! s:DragTabRight()
-    let n = tabpagenr()
-    execute 'tabmove' (n == tabpagenr('$') ? 0 : n)
-    let &showtabline = &showtabline
 endfunction
 
 " NERDTree utility function
@@ -389,16 +361,6 @@ function! s:CdIfDirectory(directory)
     endif
 endfunction
 
-function! DisableIndent()
-    set autoindent&
-    set cindent&
-    set smartindent&
-    set indentexpr&
-endfunction
-
-filetype plugin indent on
-au filetype php call DisableIndent()
-
 
 """""""""""""""""
 " ABBREVIATIONS "
@@ -414,11 +376,7 @@ cab B b
 cab Sb sb
 cab Sp sp
 cab Stag stag
-
-" Speeds up vimgrep
 cab vimgrep noautocmd vimgrep
-
-" Expand to current path
 cabbr <expr> %% expand('%:p:h')
 
 
