@@ -238,7 +238,6 @@ cnoremap <C-n> <Down>
 
 
 " Taglist
-let Tlist_Ctags_Cmd = '/usr/local/bin/ctags'
 let Tlist_Use_Horiz_Window=0
 let Tlist_Compact_Format = 1
 let Tlist_Exit_OnlyWindow = 1
