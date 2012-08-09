@@ -411,6 +411,8 @@ autocmd VimEnter * call s:CdIfDirectory(expand("<amatch>"))
 " Strip white spaces
 autocmd BufWritePre * :%s/\s\+$//e
 
+autocmd VimEnter * wincmd h
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " LOCAL CONFIGURATION (LOAD CUSTOM CONFIG FILE OUT OF SCM) "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
