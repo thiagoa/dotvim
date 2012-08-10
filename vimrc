@@ -39,8 +39,6 @@ set number
 
 " Options for context referencing
 set scrolloff=8
-"set sidescrolloff=7
-"set sidescroll=1
 
 " Set visual bell instead of beeping
 set visualbell
@@ -101,7 +99,11 @@ set listchars=tab:>-,trail:·,eol:$
 " Messages configuration
 set shortmess=atI
 
+" Do not wrap long lines by default
 set nowrap
+
+" Where to look for tag files
+set tags=tags;/
 
 " Status line configuration: shows git current branch, file encoding, etc
 if has("statusline")
@@ -137,12 +139,12 @@ inoremap <C-l> <C-O>:nohls<CR>
 
 " Tabularize mappings
 if exists(":Tabularize")
-  nmap <Leader>a = :Tabularize / = <CR>
-  vmap <Leader>a = :Tabularize / = <CR>
-  nmap <Leader>a: :Tabularize /:\zs<CR>
-  vmap <Leader>a: :Tabularize /:\zs<CR>
-  nmap <Leader>a> :Tabularize /=><CR>
-  vmap <Leader>a> :Tabularize /=><CR>
+    nmap <Leader>a = :Tabularize / = <CR>
+    vmap <Leader>a = :Tabularize / = <CR>
+    nmap <Leader>a: :Tabularize /:\zs<CR>
+    vmap <Leader>a: :Tabularize /:\zs<CR>
+    nmap <Leader>a> :Tabularize /=><CR>
+    vmap <Leader>a> :Tabularize /=><CR>
 endif
 
 " Auto close pairs simple mappings - DEPRECATED
@@ -231,11 +233,9 @@ nnoremap <silent> <Leader>df dV]M
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
 
-
 """"""""""""""""""""""""
 " PLUGIN CONFIGURATION "
 """"""""""""""""""""""""
-
 
 " Taglist
 let Tlist_Use_Horiz_Window=0
@@ -266,23 +266,21 @@ let g:nerdtree_tabs_smart_startup_focus = 0
 let g:CommandTMaxHeight=10
 let g:CommandTMatchWindowAtTop=1
 
-
 """""""""""""""""""""""""""""
 " CUSTOM UTILITY FUNCTIONS "
 """"""""""""""""""""""""""""
 
-
 " Inserts a closing pair when typing a character
 " Map your auto close stuff with 'char' parameter
 function! g:InsertPair(char)
-   let next_char = strpart(getline('.'), col('.') - 1, 1)
-   let char_is_rightside = next_char == a:char
-   if char_is_rightside
-       return "\<Right>"
-   else
-       "return a:char . a:char . "\<Left>"
-       return a:char
-   endif
+    let next_char = strpart(getline('.'), col('.') - 1, 1)
+    let char_is_rightside = next_char == a:char
+    if char_is_rightside
+        return "\<Right>"
+    else
+        "return a:char . a:char . "\<Left>"
+        return a:char
+    endif
 endfunction
 
 " Automatically delete pairs
@@ -360,7 +358,6 @@ function! s:CdIfDirectory(directory)
     endif
 endfunction
 
-
 """""""""""""""""
 " ABBREVIATIONS "
 """"""""""""""""
@@ -377,7 +374,6 @@ cab Sp sp
 cab Stag stag
 cab vimgrep noautocmd vimgrep
 cabbr <expr> %% expand('%:p:h')
-
 
 """""""""""""""""
 " AUTO COMMANDS "
@@ -418,7 +414,7 @@ autocmd VimEnter * wincmd h
 
 " Include user's local vim config
 if filereadable(expand("~/.vimrc.local"))
-  source ~/.vimrc.local
+    source ~/.vimrc.local
 endif
 function! Bufnames(A, L, P)
     redir => bufnames
