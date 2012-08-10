@@ -1,21 +1,15 @@
 clearsnippets
+
+# Use HTML and js snippets in PHP files
 extends html
 extends js
 
+##############
+# PHP BLOCKS #
+##############
+
 snippet php "PHP inline block" i
 <?php $0 ?>
-endsnippet
-
-snippet lemp "Inline check if empty block" i
-<?php if ( ! empty($0)): ?>
-endsnippet
-
-snippet endif "Close if" i
-<?php endif ?>
-endsnippet
-
-snippet ap "This is a variable attribute" 
-\$${1:variable} = ${2:'${3:val}'};
 endsnippet
 
 snippet phpb "PHP block"
@@ -24,52 +18,203 @@ $0${1:
 ?>}
 endsnippet
 
-snippet phpd "PHP block with defined check"
+snippet phpd "PHP block with access protection"
 <?php if ( ! defined('${1:BASEPATH}')) exit('No direct script access allowed');
 $0${2:
 ?>}
 endsnippet
 
+################################
+# HTML SNIPPETS (FOR VIEW USE) #
+################################
+
 snippet phpe "PHP echo inline" i
 <?php echo $0 ?>
 endsnippet
 
-snippet e "echo function" 
+snippet ifnotempty "Inline check if empty block" i
+<?php if ( ! empty($0)): ?>
+endsnippet
+
+snippet endif "Close if" i
+<?php endif ?>
+endsnippet
+
+#######################
+# LANGUAGE CONSTRUCTS #
+#######################
+
+snippet fore "foreach loop"
+foreach (${1:\$variable} as ${2:\$key}${3: => ${4:\$val}})
+{
+    $5
+}
+endsnippet
+
+snippet for "for loop"
+for (\$${1:i} = ${2:0}; \$$1 < ${3:$var}; \$$1${4:++})
+{
+    ${0:// code...}
+}
+endsnippet
+
+snippet while "while statement"
+while (${1:$a <= 10})
+{
+	${0:// code...}
+}
+
+endsnippet
+
+snippet if "if condition"
+if (${1:condition})
+{
+    ${2:// code...}
+}
+$0
+endsnippet
+
+snippet elif "elseif condition"
+elseif (${1:condition})
+{
+    ${2:// code...}
+}
+$0
+endsnippet
+
+snippet el "else condition"
+else
+{
+    ${0:// code...}
+}
+endsnippet
+
+snippet ifelif "if with elseif condition"
+if (${1:condition})
+{
+    ${2:// code...}
+}
+elseif (${3:condition})
+{
+    ${4:// code...}
+}
+$0
+endsnippet
+
+snippet ifelife "if, elseif and else condition"
+if (${1:condition})
+{
+    ${2:// code...}
+}
+elseif (${3:condition})
+{
+    ${4:// code...}
+}
+else
+{
+    ${0:// code...}
+}
+endsnippet
+
+snippet if? "Conditional with ternary operator"
+\$${1:val} = ${2:(${3:condition})} ? ${4:a} : ${5:b};
+endsnippet
+
+snippet switch "Switch statement"
+switch (${1:variable})
+{
+    case ${4:'val'}:
+        ${5:// code...}${6:
+        break;${7:
+    $8}${2:
+    default:
+        ${3:// code...}
+        break;}}
+}$0
+endsnippet
+
+snippet case "Case statement"
+case ${1:'val'}:
+    ${2:// code...}${3:
+    break;${4:
+$5}}$0
+endsnippet
+
+snippet do "do...while statement"
+do
+{
+	${0:// code...}
+
+} while (${1:$a <= 10});
+endsnippet
+
+snippet try "try...catch block"
+try
+{
+    ${3:// code...}
+}
+catch ($1Exception \$${2:e})
+{
+    ${4:// code...}
+}
+endsnippet
+
+snippet throw "throw statement"
+throw new $1Exception(${2:'${3:Error Processing Request}'}${4:, ${5:1}});$0
+endsnippet
+
+snippet incl "include statement"
+include ${1:dirname(${2:__FILE__}).}'${3:/${4:file}}';$0
+endsnippet
+
+snippet incl1 "include once statement"
+include_once ${1:dirname(${2:__FILE__}).}'${3:/${4:file}}';$0
+endsnippet
+
+snippet req "require statement"
+require ${1:dirname(${2:__FILE__}).}'${3:/${4:file}}';$0
+endsnippet
+
+snippet req1 "require once statement"
+require_once ${1:dirname(${2:__FILE__}).}'${3:/${4:file}}';$0
+endsnippet
+
+snippet def? "Defined function" i
+$1defined('$2')$0
+endsnippet
+
+#######################
+# ECHOS AND VARIABLES #
+#######################
+
+snippet e "echo function"
 echo ${1:'${2:string}'};
 endsnippet
 
-snippet ee "echo function with exit" !b
-echo ${1:'${2:string}'};
-exit;$0
+snippet str "Create string variable"
+\$${1:variable} = ${2:'${3:val}'};
 endsnippet
 
 snippet ev "echo variable" !b
 echo \$${1:string};
 endsnippet
 
-snippet eve "echo variable with exit" !b
-echo \$${1:string};
-exit;
-endsnippet
-
 snippet var "Variable assignment" i
 \$${1:var} = ${2:'${3:val}'}${4:;}$0
 endsnippet
 
-snippet vard "var_dump something" 
-echo '<pre>';
-var_dump(${1:\$${2:variable}});${3:
-echo '</pre>';
-exit;}$0
+snippet heredoc "Heredoc string"
+<<<${1:HTML}
+${2:content here}
+$1;
 endsnippet
 
-snippet dies "die with a string" 
-die('debug');
+snippet isset "Sets variable if another one isset" i
+isset(\$${2:var}) ? \$$2 : ${3:NULL};
 endsnippet
 
-
-snippet th "Outputs $this-> variable" i
-$this->${1:${2:variable} = ${3:'${4:val}'};}
+snippet issv "Sets variable if another one isset"
+\$${1:var} = isset(\$${2:_${3:POST}}[${4:'${5:key}'}]) ? $6\$$2[$4] : ${7:NULL};
 endsnippet
 
 snippet globals "GLOBALS variable use or assignment"
@@ -103,85 +248,35 @@ endsnippet
 snippet $_ "SERVER global variable" i
 \$_SERVER['${1:variable}']
 endsnippet
- 
+
 snippet $_ "SESSION global variable" i
 \$_SESSION['${1:variable}']
 endsnippet
 
-snippet fore "foreach loop"
-foreach (${1:\$variable} as ${2:\$key}${3: => ${4:\$val}})
-{
-    $5
-}
+#############
+# FUNCTIONS #
+#############
+
+snippet dn "dirname function" i
+dirname(${1:__FILE__})
 endsnippet
 
-snippet for "for loop"
-for (\$${1:i} = ${2:0}; \$$1 < ${3:$var}; \$$1${4:++}) 
-{
-    ${0:// code...}
-}
+snippet erron "Turn errors on"
+error_reporting(E_ALL);
+ini_set('display_errors', 'On')
 endsnippet
 
-snippet while "while statement" 
-while (${1:$a <= 10}) 
-{
-	${0:// code...}
-}
-
+snippet erroff "Turn errors off"
+error_reporting(0);
+ini_set('display_errors', '0');
 endsnippet
 
-snippet if "if condition"
-if (${1:condition}) 
-{
-    ${2:// code...}
-}
-$0
-endsnippet
+##################
+# CLASS SPECIFIC #
+##################
 
-snippet elif "elseif condition"
-elseif (${1:condition}) 
-{
-    ${2:// code...}
-}
-$0
-endsnippet
-
-snippet el "else condition"
-else
-{
-    ${0:// code...}
-}
-endsnippet
-
-snippet ifelif "if with elseif condition"
-if (${1:condition}) 
-{
-    ${2:// code...}
-}
-elseif (${3:condition}) 
-{
-    ${4:// code...}
-}
-$0
-endsnippet
-
-snippet ifelife "if, elseif and else condition"
-if (${1:condition}) 
-{
-    ${2:// code...}
-}
-elseif (${3:condition}) 
-{
-    ${4:// code...}
-}
-else
-{
-    ${0:// code...}
-}
-endsnippet
-
-snippet if? "Conditional with ternary operator"
-\$${1:val} = ${2:(${3:condition})} ? ${4:a} : ${5:b};
+snippet th "Outputs $this-> variable" i
+$this->${1:${2:variable} = ${3:'${4:val}'};}
 endsnippet
 
 snippet fun "Function (class or standalone)"
@@ -226,73 +321,6 @@ protected function ${3:FunctionName}(${4:${5:\$val}${6: = ${7:''}}})
 }
 endsnippet
 
-
-snippet heredoc "Heredoc string"
-<<<${1:HTML}
-${2:content here}
-$1;
-endsnippet
-
-snippet incl "include statement"
-include ${1:dirname(${2:__FILE__}).}'${3:/${4:file}}';$0
-endsnippet
-
-snippet incl1 "include once statement"
-include_once ${1:dirname(${2:__FILE__}).}'${3:/${4:file}}';$0
-endsnippet
-
-snippet req "require statement"
-require ${1:dirname(${2:__FILE__}).}'${3:/${4:file}}';$0
-endsnippet
-
-snippet req1 "require once statement"
-require_once ${1:dirname(${2:__FILE__}).}'${3:/${4:file}}';$0
-endsnippet
-
-snippet dn "dirname function" i
-dirname(${1:__FILE__})
-endsnippet
-
-snippet ret "return"
-return$1;$0
-endsnippet
-
-snippet ret0 "return FALSE"
-return FALSE;
-endsnippet
-
-snippet ret1 "return TRUE"
-return TRUE;
-endsnippet
-
-snippet switch "Switch statement"
-switch (${1:variable}) 
-{
-    case ${4:'val'}:
-        ${5:// code...}${6:
-        break;${7:
-    $8}${2:
-    default:
-        ${3:// code...}
-        break;}}
-}$0
-endsnippet
-
-snippet case "Case statement"
-case ${1:'val'}:
-    ${2:// code...}${3:
-    break;${4:
-$5}}$0
-endsnippet
-
-snippet do "do...while statement"
-do 
-{
-	${0:// code...}
-
-} while (${1:$a <= 10});
-endsnippet
-
 snippet pub "public word"
 public
 endsnippet
@@ -332,22 +360,22 @@ snippet classc "Class constant"
 const ${1:CONSTANT}${2: = ${2:'${3:val}'}};$0
 endsnippet
 
-snippet cl "Class statement"
+snippet class "Class statement"
 /**
  * ${3:$2}
  *
  * @package ${4:`!v g:pdv_cfg_Package`}
- * @copyright ${5:`!v g:pdv_cfg_Copyright`}
- * @author ${6:`!v g:pdv_cfg_Author`}
+ * @copyright `!v g:pdv_cfg_Copyright`
+ * @author `!v g:pdv_cfg_Author`
  **/
-$1class $2 {
-    
+${1}class ${2:My_Class} {
+
     $0
 
 } // End $2
 endsnippet
 
-snippet pcl "Class statement with php tag"
+snippet pclass "Class statement with php tag"
 <?php
 
 /**
@@ -358,13 +386,13 @@ snippet pcl "Class statement with php tag"
  * @author ${6:`!v g:pdv_cfg_Author`}
  **/
 $1class $2 {
-    
+
     $0
 
 } // End $2
 endsnippet
 
-snippet class "Extends Class statement"
+snippet classe "Extends Class statement"
 /**
  * ${4:$2}
  *
@@ -374,13 +402,13 @@ snippet class "Extends Class statement"
  * @author ${7:`!v g:pdv_cfg_Author`}
  **/
 ${1}class ${2:My_Class} extends ${3:Parent_Class} {
-    
+
     $0
 
 } // End $2
 endsnippet
 
-snippet class "Implements Class statement"
+snippet classi "Implements Class statement"
 /**
  * ${4:$2}
  *
@@ -390,13 +418,13 @@ snippet class "Implements Class statement"
  * @author ${7:`!v g:pdv_cfg_Author`}
  **/
 $1class ${2:My_Class} implements ${3:Interface} {
-    
+
     $0
 
 } // End $2
 endsnippet
 
-snippet class "Extends and Implements Class statement"
+snippet classei "Extends and Implements Class statement"
 /**
  * ${5:$2}
  *
@@ -407,7 +435,7 @@ snippet class "Extends and Implements Class statement"
  * @author ${8:`!v g:pdv_cfg_Author`}
  **/
 $1class ${2:My_Class} extends ${3:Parent_Class} implements ${4:Interface} {
-    
+
     $0
 
 } // End $2
@@ -422,71 +450,60 @@ snippet const "Constant"
 define('${1:MY_CONSTANT}', ${2:'${3}'});$0
 endsnippet
 
-snippet def? "Defined function" i
-$1defined('$2')$0
+snippet ret "return"
+return$1;$0
 endsnippet
 
-snippet ar "Array declaration" i
-array(${1:
-    ${2:// content}
-});
+snippet ret0 "return FALSE"
+return FALSE;
 endsnippet
 
-snippet arr "Inline Array declaration" i
-array($0)
+snippet ret1 "return TRUE"
+return TRUE;
 endsnippet
 
-snippet ari "Array item"
-${1:'${2:key}' => }${3:'${4}'}${5:,
-$6}
-endsnippet
-
-snippet try "try...catch block"
-try
-{
-    ${3:// code...}
-}
-catch ($1Exception \$${2:e})
-{
-    ${4:// code...}
-}
-endsnippet
-
-snippet throw "throw statement"
-throw new $1Exception(${2:'${3:Error Processing Request}'}${4:, ${5:1}});$0
-endsnippet
-
-snippet interf "Interface statement" 
+snippet interf "Interface statement"
 interface ${1:Interface_Name}
 {
 
     $0
-    
+
 } // End $1
 endsnippet
 
-snippet erron "Turn errors on"
-error_reporting(E_ALL);
-ini_set('display_errors', 'On')
+#############
+# DEBUGGING #
+#############
+
+snippet ee "echo function with exit" !b
+echo ${1:'${2:string}'};
+exit;$0
 endsnippet
 
-snippet erroff "Turn errors off"
-error_reporting(0);
-ini_set('display_errors', '0');
+snippet eve "echo variable with exit" !b
+echo \$${1:string};
+exit;
 endsnippet
 
-snippet issv "Sets variable if another one isset"
-\$${1:var} = isset(\$${2:_${3:POST}}[${4:'${5:key}'}]) ? $6\$$2[$4] : ${7:NULL};
+snippet vard "var_dump something"
+echo '<pre>';
+var_dump(${1:\$${2:variable}});${3:
+echo '</pre>';
+exit;}$0
 endsnippet
 
-snippet isset "Sets variable if another one isset" i
-isset(\$${2:var}) ? \$$2 : ${3:NULL};
+snippet dies "die with a debug string"
+die('debug');
 endsnippet
 
-snippet lurl "Kohana URL::site" i
+##########
+# KOHANA #
+##########
+
+snippet kurl "Kohana URL::site" i
 <?php echo URL::site($0) ?>
 endsnippet
 
-snippet routeuri "Kohana Route::get(ROUTE)->uri" i
+snippet kroute "Kohana Route::get(ROUTE)->uri" i
 Route::get(${1})->uri(${2})
 endsnippet
