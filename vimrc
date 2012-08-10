@@ -111,7 +111,6 @@ if has("statusline")
 endif
 
 " Sets leader key (specific for user mappings, to avoid conflicting with vim's defaults)
-let mapleader = ","
 let g:mapleader = ","
 
 """"""""""""""
@@ -147,14 +146,6 @@ if exists(":Tabularize")
     vmap <Leader>a> :Tabularize /=><CR>
 endif
 
-" Auto close pairs simple mappings - DEPRECATED
-" As UltiSnips doesn't allow these mappings in the placeholders,
-" now the pairs itself are snippets. Type (<Tab> to close the pair and insert
-" the cursor in the middle. With an added bonus of more control.
-"inoremap ( ()<Left>
-inoremap <expr> ' g:InsertPair("'")
-inoremap <expr> " g:InsertPair('"')
-
 " These mappings are still useful for smart out-of-pair behaviour, or to
 " quickly delete pairs, by deleting only one of them
 inoremap {<CR> {<CR>}<Esc>O
@@ -184,12 +175,6 @@ inoremap <S-CR> <Esc> :call <SID>AppendEOL(';')<CR>
 
 " Mapping to quickly execute make command
 nmap <Leader>m :make<CR>
-
-" Opens lines above of below in insert mode
-inoremap <D-CR> <C-O>o
-inoremap <D-S-CR> <C-O>O
-
-" Opens a new line in insert mode
 
 " Movement in insert mode without leaving home keys
 inoremap <C-j> <Down>
@@ -266,22 +251,61 @@ let g:nerdtree_tabs_smart_startup_focus = 0
 let g:CommandTMaxHeight=10
 let g:CommandTMatchWindowAtTop=1
 
+"""""""""""""""""
+" ABBREVIATIONS "
+""""""""""""""""
+
+" Avoid typing errors in the command line
+cab W w
+cab WQ wq
+cab Cd cd
+cab CD cd
+cab E e
+cab B b
+cab Sb sb
+cab Sp sp
+cab Stag stag
+
+" Speeds up vimgrep command
+cab vimgrep noautocmd vimgrep
+
+" Expand to current directory
+cabbr <expr> %% expand('%:p:h')
+
+"""""""""""""""""
+" AUTO COMMANDS "
+"""""""""""""""""
+
+" Reloads vim config files and apply changes automatically
+autocmd! bufwritepost .gvimrc source %
+autocmd! bufwritepost .vimrc source %
+
+" Autosave on focus lost
+autocmd! FocusLost * silent! wa
+
+" Tag preview fix, when using folds and/or fold plugins. The tag preview
+" always opens unfolded, regardless of current configuration
+autocmd BufWinEnter * if &previewwindow | setlocal foldlevel=999 | endif
+
+" Can't remember the reason why this is here. Will discover later.
+autocmd QuickFixCmdPre make w
+
+" NERD Tree specific
+"autocmd FocusGained * call s:UpdateNERDTree()
+autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
+
+" Setup vim when opening
+autocmd VimEnter * call s:CdIfDirectory(expand("<amatch>"))
+
+" Strip white spaces
+autocmd BufWritePre * :%s/\s\+$//e
+
+" Start vim with focus in the text buffer instead of in NERDTree
+autocmd VimEnter * wincmd h
+
 """""""""""""""""""""""""""""
 " CUSTOM UTILITY FUNCTIONS "
 """"""""""""""""""""""""""""
-
-" Inserts a closing pair when typing a character
-" Map your auto close stuff with 'char' parameter
-function! g:InsertPair(char)
-    let next_char = strpart(getline('.'), col('.') - 1, 1)
-    let char_is_rightside = next_char == a:char
-    if char_is_rightside
-        return "\<Right>"
-    else
-        "return a:char . a:char . "\<Left>"
-        return a:char
-    endif
-endfunction
 
 " Automatically delete pairs
 function! g:ClosePairs()
@@ -358,55 +382,6 @@ function! s:CdIfDirectory(directory)
     endif
 endfunction
 
-"""""""""""""""""
-" ABBREVIATIONS "
-""""""""""""""""
-
-" Avoid typing errors in the command line
-cab W w
-cab WQ wq
-cab Cd cd
-cab CD cd
-cab E e
-cab B b
-cab Sb sb
-cab Sp sp
-cab Stag stag
-cab vimgrep noautocmd vimgrep
-cabbr <expr> %% expand('%:p:h')
-
-"""""""""""""""""
-" AUTO COMMANDS "
-"""""""""""""""""
-
-" Reloads vim config files and apply changes automatically
-autocmd! bufwritepost .gvimrc source %
-autocmd! bufwritepost .vimrc source %
-
-" Autosave on focus lost
-autocmd! FocusLost * silent! wa
-
-" Tag preview fix, when using folds and/or fold plugins. The tag preview
-" always opens unfolded, regardless of current configuration
-autocmd BufWinEnter * if &previewwindow | setlocal foldlevel=999 | endif
-
-" Some files and directories to ignore. See :help wildignore. Set this in your .vimrc.local file
-" set wildignore+=*.jpg,*.gif,*.png,application/logs/**,assets/imgs/**,application/cache/**
-
-" Can't remember the reason why this is here. Will discover later.
-autocmd QuickFixCmdPre make w
-
-" NERD Tree specific
-"autocmd FocusGained * call s:UpdateNERDTree()
-autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
-
-" Setup vim when opening
-autocmd VimEnter * call s:CdIfDirectory(expand("<amatch>"))
-
-" Strip white spaces
-autocmd BufWritePre * :%s/\s\+$//e
-
-autocmd VimEnter * wincmd h
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " LOCAL CONFIGURATION (LOAD CUSTOM CONFIG FILE OUT OF SCM) "

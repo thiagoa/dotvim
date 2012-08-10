@@ -2,9 +2,6 @@
 " Settings for PHP filetype "
 """""""""""""""""""""""""""""
 
-" C-indent-style words
-setlocal cinwords=if,else,elseif,do,while,foreach,for,case,default,function,class,interface,abstract,private,public,protected,final
-
 " Fold method
 setlocal foldmethod=manual
 
