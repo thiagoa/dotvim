@@ -4,10 +4,14 @@ Installation:
 
 Create symlinks:
 
+    ~/.vim/setup.sh
+
+    Or:
+
     ln -s ~/.vim/vimrc ~/.vimrc
     ln -s ~/.vim/gvimrc ~/.gvimrc
 
 Create per machine configuration (optional):
 
-    vim ~/.vimrc.local
-    vim ~/.gvimrc.local
+    touch ~/.vimrc.local
+    touch ~/.gvimrc.local
