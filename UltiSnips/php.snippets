@@ -19,7 +19,7 @@ $0${1:
 endsnippet
 
 snippet phpd "PHP block with access protection"
-<?php if ( ! defined('${1:BASEPATH}')) exit('No direct script access allowed');
+<?php if ( ! defined('${1:SYSPATH}')) exit('No direct script access allowed');
 $0${2:
 ?>}
 endsnippet
@@ -27,6 +27,10 @@ endsnippet
 ################################
 # HTML SNIPPETS (FOR VIEW USE) #
 ################################
+
+snippet tfore "inline foreach loop"
+<?php foreach (${1:\$variable} as ${2:\$key}${3: => ${4:\$val}}):$0 ?>
+endsnippet
 
 snippet phpe "PHP echo inline" i
 <?php echo $0 ?>

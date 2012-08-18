@@ -298,7 +298,7 @@ autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
 autocmd VimEnter * call s:CdIfDirectory(expand("<amatch>"))
 
 " Strip white spaces
-autocmd BufWritePre * :%s/\s\+$//e
+"autocmd BufWritePre * :%s/\s\+$//e
 
 " Start vim with focus in the text buffer instead of in NERDTree
 autocmd VimEnter * wincmd h
@@ -404,3 +404,17 @@ function! Bufnames(A, L, P)
     endfor
     return filter(sort(list), 'v:val =~ "^".a:A')
 endfunction
+
+"""""""""""""""""""""""""""""""""""""""""""""""""
+" LOCAL CONFIGURATION BASED ON OPERATING SYSTEM "
+"""""""""""""""""""""""""""""""""""""""""""""""""
+
+let os = substitute(system('uname'), "\n", "", "")
+
+if os == "Linux"
+    source ~/.vim/vimrc.linux
+elseif os == "Darwin"
+    source ~/.vim/vimrc.darwin
+else
+    source ~/.vim/vimrc.windows
+endif

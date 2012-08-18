@@ -62,14 +62,14 @@ endsnippet
 snippet bbox "A nice box over the full width" b
 `!p
 c = cs(snip)
-bar = 75*c 
+bar = 75*c
 
 snip.rv = bar
 snip += c + " " + (71-len(t[1]))/2*' '
 `${1:content}`!p
 
 a = 71-len(t[1])
-snip.rv = (a/2 + a%2) * " " + " " + c 
+snip.rv = (a/2 + a%2) * " " + " " + c
 snip += bar`
 $0
 endsnippet
@@ -88,5 +88,3 @@ endsnippet
 snippet cust "Lorem Ipsum - 50 Words" b
 Custom snip
 endsnippet
-
-

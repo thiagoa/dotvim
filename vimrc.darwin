@@ -1,0 +1,3 @@
+" Copy and paste for the Mac
+vnoremap <Leader>y :w !pbcopy<CR><CR>
+nnoremap <Leader>p :r !pbpaste<CR>

@@ -25,3 +25,5 @@
 if filereadable(expand("~/.gvimrc.local"))
   source ~/.gvimrc.local
 endif
+
+set linespace=0

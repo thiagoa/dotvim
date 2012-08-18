@@ -199,12 +199,12 @@ snippet meta "XHTML <meta>"
 <meta name="${1:name}" content="${2:content}"`!p x(snip)`>
 endsnippet
 
-snippet scriptsrc "XHTML <script src...>"
-<script src="$1" type="text/javascript" charset="${3:utf-8}"></script>
+snippet scriptsrc "HTML 5 <script src...>"
+<script src="$1"></script>
 endsnippet
 
-snippet script "XHTML <script>"
-<script type="text/javascript" charset="utf-8">
+snippet script "HTML 5 <script>"
+<script>
 $0
 </script>
 endsnippet
@@ -229,7 +229,7 @@ endsnippet
 snippet fieldset "Fieldset"
 <fieldset id="${1/[\w\d]+|( )/(?1:_:\L$0\E)/g}" ${2:class="${3:}"}>
 	<legend>$1</legend>
-	
+
 	$0
 </fieldset>
 endsnippet
