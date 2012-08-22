@@ -1,3 +1,6 @@
 " Copy and paste for the Mac
 vnoremap <Leader>y :w !pbcopy<CR><CR>
 nnoremap <Leader>p :r !pbpaste<CR>
+
+" Set ctags location to homebrew's
+let Ctags_Tlist_Cmd='/usr/local/bin/ctags'
