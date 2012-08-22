@@ -103,7 +103,7 @@ set shortmess=atI
 set nowrap
 
 " Where to look for tag files
-set tags=tags;/
+set tags=.tags;/
 
 " Status line configuration: shows git current branch, file encoding, etc
 if has("statusline")
