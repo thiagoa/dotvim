@@ -146,8 +146,7 @@ if exists(":Tabularize")
     vmap <Leader>a> :Tabularize /=><CR>
 endif
 
-" These mappings are still useful for smart out-of-pair behaviour, or to
-" quickly delete pairs, by deleting only one of them
+" Automatically close brackets and place cursor in the middle with {<CR>
 inoremap {<CR> {<CR>}<Esc>O
 
 " Fast quit
