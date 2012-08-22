@@ -296,9 +296,6 @@ autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
 " Setup vim when opening
 autocmd VimEnter * call s:CdIfDirectory(expand("<amatch>"))
 
-" Strip white spaces
-"autocmd BufWritePre * :%s/\s\+$//e
-
 " Start vim with focus in the text buffer instead of in NERDTree
 autocmd VimEnter * wincmd h
 
