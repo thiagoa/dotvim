@@ -279,8 +279,12 @@ endsnippet
 # CLASS SPECIFIC #
 ##################
 
-snippet th "Outputs $this-> variable" i
+snippet thv "Outputs $this-> variable" i
 $this->${1:${2:variable} = ${3:'${4:val}'};}
+endsnippet
+
+snippet th "$this variable" i
+$this$0
 endsnippet
 
 snippet fun "Function (class or standalone)"
@@ -366,13 +370,13 @@ endsnippet
 
 snippet class "Class statement"
 /**
- * ${3:$2}
+ * ${5:$2}
  *
- * @package ${4:`!v g:pdv_cfg_Package`}
+ * @package ${6:`!v g:pdv_cfg_Package`}
  * @copyright `!v g:pdv_cfg_Copyright`
  * @author `!v g:pdv_cfg_Author`
  **/
-${1}class ${2:My_Class} {
+${1}class ${2:My_Class}${3: extends ${4:Extension_Class}} {
 
     $0
 
