@@ -128,6 +128,7 @@ nnoremap <Leader>n :w<CR>:py UltiSnips_Manager.reset()<CR>
 
 " Command T shortcut (cmd-T is already working for "open new tab")
 noremap <C-x> :CommandT<CR>
+noremap <D-r> :CommandT<CR>
 
 " Command T shortcut (force flush)
 noremap <C-h> :CommandTFlush<CR> :CommandT<CR>
@@ -216,6 +217,9 @@ nnoremap <silent> <Leader>df dV]M
 " Map historic navigation in home arrows to something more useful (get the latest command beginning with ...)
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
+
+" Uppercase word in insert mode
+inoremap <C-u> <esc>mzgUiw`za
 
 """"""""""""""""""""""""
 " PLUGIN CONFIGURATION "

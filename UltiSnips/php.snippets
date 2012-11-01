@@ -29,7 +29,15 @@ endsnippet
 ################################
 
 snippet tfore "inline foreach loop"
-<?php foreach (${1:\$variable} as ${2:\$key}${3: => ${4:\$val}}):$0 ?>
+<?php foreach (${1:\$variable} as ${2:\$key}${3: => ${4:\$val}}): ?>$0
+endsnippet
+
+snippet endforeach "endforeach"
+<?php endforeach ?>$0
+endsnippet
+
+snippet endfore "endforeach"
+<?php endforeach ?>$0
 endsnippet
 
 snippet phpe "PHP echo inline" i
@@ -37,7 +45,15 @@ snippet phpe "PHP echo inline" i
 endsnippet
 
 snippet ifnotempty "Inline check if empty block" i
-<?php if ( ! empty($0)): ?>
+<?php if ( ! empty($1)): ?>$0
+endsnippet
+
+snippet tif "" i
+<?php if ($1): ?>$0
+endsnippet
+
+snippet elsei "" i
+<?php else: ?>
 endsnippet
 
 snippet endif "Close if" i
@@ -504,6 +520,11 @@ snippet dies "die with a debug string"
 die('debug');
 endsnippet
 
+snippet debuge "debug an exception"
+echo $e->getMessage();
+exit;
+endsnippet
+
 ##########
 # KOHANA #
 ##########
@@ -514,4 +535,24 @@ endsnippet
 
 snippet kroute "Kohana Route::get(ROUTE)->uri" i
 Route::get(${1})->uri(${2})
+endsnippet
+
+#################
+# MIX FRAMEWORK #
+#################
+
+snippet startc "Assets start capture js"
+<?php $assets->start_capture_js() ?>
+endsnippet
+
+snippet endc "Assets end capture js"
+<?php $assets->end_capture_js() ?>
+endsnippet
+
+snippet formot "Form open tag"
+<?php $form->open_tag() ?>
+endsnippet
+
+snippet formct "Form close tag"
+<?php $form->close_tag() ?>
 endsnippet
