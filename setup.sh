@@ -36,10 +36,10 @@ do
     ln -s "$DIR/$file" ~/.$file
 done
 
-echo "initializing submodules..."
+echo "initializing git submodules, this can take some time..."
 
 cd $DIR
-git submodule update --init
+git submodule update --init > /dev/null
 
 if [ $? -eq 1 ]; then
     die "!!! died with git error !!!"
@@ -51,7 +51,7 @@ RUBY="`which ruby`" 2> /dev/null
 
 # Confiure command-t if ruby is available
 if [ ! $RUBY == '' ]; then
-    $COMMANDT=$DIR/bundle/command-t/ruby/command-t
+    COMMANDT="$DIR/bundle/command-t/ruby/command-t"
 
     # Try to compile command-t
     if [ -d $COMMANDT ]; then
@@ -66,5 +66,4 @@ else
     echo "** ruby not available, could not install command-t **"
 fi
 
-echo ""
 echo "done"
