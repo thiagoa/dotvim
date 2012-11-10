@@ -39,7 +39,7 @@ done
 echo "initializing git submodules, this can take some time..."
 
 cd $DIR
-git submodule update --init > /dev/null
+git submodule update --init --quiet
 
 if [ $? -eq 1 ]; then
     die "!!! died with git error !!!"
@@ -66,4 +66,5 @@ else
     echo "** ruby not available, could not install command-t **"
 fi
 
+echo ""
 echo "done"
