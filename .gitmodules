@@ -76,3 +76,9 @@
 [submodule "bundle/vim-web-indent"]
 	path = bundle/vim-web-indent
 	url = git://github.com/lukaszb/vim-web-indent.git
+[submodule "bundle/ackmore"]
+	path = bundle/ackmore
+	url = git://github.com/jordansissel/vim-ackmore.git
+[submodule "bundle/vim-rails"]
+	path = bundle/vim-rails
+	url = git://github.com/tpope/vim-rails.git
