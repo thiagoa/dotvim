@@ -279,6 +279,13 @@ cabbr <expr> %% expand('%:p:h')
 " AUTO COMMANDS "
 """""""""""""""""
 
+" insert into the .vimrc file.
+augroup CommandTExtension
+  autocmd!
+  autocmd FocusGained * CommandTFlush
+  autocmd BufWritePost * CommandTFlush
+augroup END
+
 " Reloads vim config files and apply changes automatically
 autocmd! bufwritepost .gvimrc source %
 autocmd! bufwritepost .vimrc source %
