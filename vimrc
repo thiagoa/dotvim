@@ -117,6 +117,10 @@ let g:mapleader = ","
 "  MAPPINGS  "
 """"""""""""""
 
+" Check syntax shortcut
+map <silent> <Leader>o :AsyncMake<CR>
+map <silent> <Leader>z :cclose<CR>
+
 " NERDTree shortcut
 nnoremap <C-n> :NERDTreeToggle<CR> :echo 'Toggle NERDTree'<CR>
 
