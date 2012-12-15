@@ -37,9 +37,6 @@ set guioptions-=T
 " Turns on line numbers in every file
 set number
 
-" Options for context referencing
-set scrolloff=8
-
 " Set visual bell instead of beeping
 set visualbell
 
@@ -47,8 +44,7 @@ set visualbell
 set showmatch matchtime=3
 
 " These characters indicate the content is not enough for showing in one line
-set showbreak=...
-
+set showbreak=...  
 " Number of pixel lines inserted between characters
 set linespace=4
 
