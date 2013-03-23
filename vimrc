@@ -279,7 +279,7 @@ cabbr <expr> %% expand('%:p:h')
 " AUTO COMMANDS "
 """""""""""""""""
 
-" insert into the .vimrc file.
+" Automatic CommandTFlush
 augroup CommandTExtension
   autocmd!
   autocmd FocusGained * CommandTFlush
@@ -411,6 +411,17 @@ function! Bufnames(A, L, P)
     endfor
     return filter(sort(list), 'v:val =~ "^".a:A')
 endfunction
+
+" Search Dash for word under cursor
+function! SearchDash()
+  let s:browser = "/usr/bin/open"
+  let s:wordUnderCursor = expand("<cword>")
+  let s:url = "dash://".s:wordUnderCursor
+  let s:cmd ="silent ! " . s:browser . " " . s:url
+  execute s:cmd
+  redraw!
+endfunction
+map <leader>d :call SearchDash()<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""
 " LOCAL CONFIGURATION BASED ON OPERATING SYSTEM "
