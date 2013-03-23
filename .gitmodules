@@ -85,3 +85,6 @@
 [submodule "bundle/asynccommand"]
 	path = bundle/asynccommand
 	url = git@github.com:vim-scripts/AsyncCommand
+[submodule "bundle/vim-coffee-script"]
+	path = bundle/vim-coffee-script
+	url = git://github.com/kchmck/vim-coffee-script.git
