@@ -176,12 +176,6 @@ inoremap <S-CR> <Esc> :call <SID>AppendEOL(';')<CR>
 " Mapping to quickly execute make command
 nmap <Leader>m :make<CR>
 
-" Movement in insert mode without leaving home keys
-inoremap <C-j> <Down>
-inoremap <C-k> <Up>
-inoremap <C-l> <Right>
-inoremap <C-h> <Left>
-
 " Moves lines up and above in command or visual mode
 nnoremap <C-j> :m+<CR>==
 nnoremap <C-k> :m-2<CR>==
@@ -219,7 +213,7 @@ cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
 
 " Uppercase word in insert mode
-inoremap <C-u> <esc>mzgUiw`za
+inoremap <C-k> <esc>mzgUiw`za
 
 """"""""""""""""""""""""
 " PLUGIN CONFIGURATION "
