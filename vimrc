@@ -46,7 +46,7 @@ set showmatch matchtime=3
 " These characters indicate the content is not enough for showing in one line
 set showbreak=...  
 " Number of pixel lines inserted between characters
-set linespace=4
+set linespace=2
 
 " Default tabs configuration
 set expandtab
