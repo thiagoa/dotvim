@@ -37,6 +37,9 @@ set guioptions-=T
 " Turns on line numbers in every file
 set number
 
+" Always consider numbers as decimal
+set nrformats=
+
 " Set visual bell instead of beeping
 set visualbell
 
