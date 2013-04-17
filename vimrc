@@ -142,9 +142,11 @@ inoremap <C-l> <C-O>:nohls<CR>
 
 " Tabularize mappings
 nmap <Leader>a :Tabularize /=<CR>
+nmap <Leader>a? :Tabularize /?<CR>
 vmap <Leader>a = :Tabularize /= <CR>
-nmap <Leader>a: :Tabularize /:\zs<CR>
-vmap <Leader>a: :Tabularize /:\zs<CR>
+nmap <Leader>a: :Tabularize /:<CR>
+nmap <Leader>a; :Tabularize /:\zs<CR>
+vmap <Leader>a; :Tabularize /:\zs<CR>
 nmap <Leader>a> :Tabularize /=><CR>
 vmap <Leader>a> :Tabularize /=><CR>
 
@@ -215,6 +217,28 @@ cnoremap <C-n> <Down>
 
 " Uppercase word in insert mode
 inoremap <C-k> <esc>mzgUiw`za
+
+map <D-1> 1gt
+map <D-2> 2gt
+map <D-3> 3gt
+map <D-4> 4gt
+map <D-5> 5gt
+map <D-6> 6gt
+map <D-7> 7gt
+map <D-8> 8gt
+map <D-9> 9gt
+map <D-0> 10gt
+
+inoremap <D-1> <Esc>1gt
+inoremap <D-2> <Esc>2gt
+inoremap <D-3> <Esc>3gt
+inoremap <D-4> <Esc>4gt
+inoremap <D-5> <Esc>5gt
+inoremap <D-6> <Esc>6gt
+inoremap <D-7> <Esc>7gt
+inoremap <D-8> <Esc>8gt
+inoremap <D-9> <Esc>9gt
+inoremap <D-0> <Esc>10gt
 
 """"""""""""""""""""""""
 " PLUGIN CONFIGURATION "
