@@ -117,7 +117,7 @@ let g:mapleader = ","
 """"""""""""""
 
 " This mapping preserves the cursor position when yanking in visual mode
-vnoremap gy y`>
+vnoremap gy ygv<Esc>
 
 " Check syntax shortcut
 map <silent> <Leader>o :AsyncMake<CR>
