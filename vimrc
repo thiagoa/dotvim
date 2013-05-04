@@ -332,6 +332,14 @@ autocmd VimEnter * call s:CdIfDirectory(expand("<amatch>"))
 " Start vim with focus in the text buffer instead of in NERDTree
 autocmd VimEnter * wincmd h
 
+" Restore cursor position
+if has("autocmd")
+  autocmd BufReadPost *
+    \ if line("'\"") > 1 && line("'\"") <= line("$") |
+    \   exe "normal! g`\"" |
+    \ endif
+endif
+
 """""""""""""""""""""""""""""
 " CUSTOM UTILITY FUNCTIONS "
 """"""""""""""""""""""""""""
