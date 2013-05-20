@@ -127,17 +127,10 @@ map <silent> <Leader>z :cclose<CR>
 nnoremap <C-n> :NERDTreeToggle<CR> :echo 'Toggle NERDTree'<CR>
 
 " Taglist shortcut
-nnoremap <C-p> :TlistToggle<CR>
+nnoremap <C-x> :TlistToggle<CR>
 
 " Resets snippets (UltiSnips)
 nnoremap <Leader>n :w<CR>:py UltiSnips_Manager.reset()<CR>
-
-" Command T shortcut (cmd-T is already working for "open new tab")
-noremap <C-x> :CommandT<CR>
-noremap <D-r> :CommandT<CR>
-
-" Command T shortcut (force flush)
-noremap <C-h> :CommandTFlush<CR> :CommandT<CR>
 
 " Mapping to disable hlsearch
 nnoremap <C-l> :nohls<CR><C-L>
@@ -301,13 +294,6 @@ cabbr <expr> %% expand('%:p:h')
 " AUTO COMMANDS "
 """""""""""""""""
 
-" Automatic CommandTFlush
-augroup CommandTExtension
-  autocmd!
-  autocmd FocusGained * CommandTFlush
-  autocmd BufWritePost * CommandTFlush
-augroup END
-
 " Reloads vim config files and apply changes automatically
 autocmd! bufwritepost .gvimrc source %
 autocmd! bufwritepost .vimrc source %
@@ -379,9 +365,6 @@ function! s:UpdateNERDTree(...)
                 wincmd p
             end
         endif
-    endif
-    if exists(":CommandTFlush") == 2
-        CommandTFlush
     endif
 endfunction
 
