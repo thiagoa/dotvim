@@ -48,6 +48,7 @@ set showmatch matchtime=3
 
 " These characters indicate the content is not enough for showing in one line
 set showbreak=...  
+
 " Number of pixel lines inserted between characters
 set linespace=2
 
@@ -127,14 +128,20 @@ map <silent> <Leader>z :cclose<CR>
 nnoremap <C-n> :NERDTreeToggle<CR> :echo 'Toggle NERDTree'<CR>
 
 " Taglist shortcut
-nnoremap <C-x> :TlistToggle<CR>
+nnoremap <Leader>t :TlistToggle<CR>
+
+" Gundo shortcut
+nnoremap <Leader>u :GundoToggle<CR>
 
 " Resets snippets (UltiSnips)
-nnoremap <Leader>n :w<CR>:py UltiSnips_Manager.reset()<CR>
+nnoremap <silent> <Leader>r :w<CR>:py UltiSnips_Manager.reset()<CR>
 
 " Mapping to disable hlsearch
-nnoremap <C-l> :nohls<CR><C-L>
+nnoremap <silent> <Leader>/ :nohlsearch<CR>
 inoremap <C-l> <C-O>:nohls<CR>
+
+" No backwards Ex mode
+nnoremap Q <nop>
 
 " Tabularize mappings
 nmap <Leader>a :Tabularize /=<CR>

@@ -100,3 +100,6 @@
 [submodule "bundle/jk-jumps"]
 	path = bundle/jk-jumps
 	url = https://github.com/vim-scripts/jk-jumps.git
+[submodule "bundle/gundo"]
+	path = bundle/gundo
+	url = https://github.com/sjl/gundo.vim.git
