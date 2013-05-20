@@ -390,6 +390,7 @@ function! s:CdIfDirectory(directory)
     " Allows reading from stdin
     " ex: git diff | mvim -R -
     if strlen(a:directory) == 0
+        NERDTree
         return
     endif
     if explicitDirectory
