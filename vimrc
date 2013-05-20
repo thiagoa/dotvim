@@ -392,11 +392,6 @@ function! s:CdIfDirectory(directory)
     if strlen(a:directory) == 0
         return
     endif
-    if directory
-        NERDTree
-        wincmd p
-        bd
-    endif
     if explicitDirectory
         wincmd p
     endif
