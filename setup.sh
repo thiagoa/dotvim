@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Thiago's Vim dotfiles
+# Thiago's Vim setup
 #
 # Non-destructive-do-everything install tool
 

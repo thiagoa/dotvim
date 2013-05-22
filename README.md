@@ -1,4 +1,4 @@
-# Thiago's Vim dotfiles
+# Thiago's Vim Setup
 
 Highly suited for general-heavy editing, specially with PHP, Ruby and Javascript.
 
@@ -16,5 +16,5 @@ Usable right off the bat, just clone the repo and fire setup.sh.
 
 ## Take a look at the built-in features
 
-Check out my well commented vimrc and the "bundle" dir, to see which plugins
+Check out my well commented vimrc file and the "bundle" dir, to see which plugins
 are installed.
