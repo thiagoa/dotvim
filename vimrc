@@ -338,6 +338,9 @@ if has("autocmd")
     \ endif
 endif
 
+" Syntax highlighting for json files, not available by default
+autocmd BufRead,BufNewFile *.json set filetype=javascript
+
 """""""""""""""""""""""""""""
 " CUSTOM UTILITY FUNCTIONS "
 """"""""""""""""""""""""""""
