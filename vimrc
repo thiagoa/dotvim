@@ -203,10 +203,6 @@ nnoremap <C-y> 3<C-y>
 vnoremap <C-e> 3<C-e>
 vnoremap <C-y> 3<C-y>
 
-" Keeps visual selection when indenting in visual mode
-vnoremap < <gv
-vnoremap > >gv
-
 " Shows hidden characters
 nmap <silent> <leader>s :set nolist!<CR>
 
