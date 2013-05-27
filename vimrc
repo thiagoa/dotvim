@@ -119,6 +119,9 @@ endif
 " Sets leader key (specific for user mappings, to avoid conflicting with vim's defaults)
 let g:mapleader = ","
 
+" Always current directory with CtrlP (no guesses)
+let g:ctrlp_working_directory_mode = ''
+
 """"""""""""""
 "  MAPPINGS  "
 """"""""""""""
