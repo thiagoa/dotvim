@@ -77,6 +77,12 @@ set hlsearch
 set ignorecase
 set smartcase
 
+" Faster Esc in insert mode
+set noesckeys
+
+" Mapping delays configuration
+set timeoutlen=1000 ttimeoutlen=0
+
 " Always show status bar
 set laststatus=2
 
