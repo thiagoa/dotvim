@@ -120,7 +120,7 @@ endif
 let g:mapleader = ","
 
 " Always current directory with CtrlP (no guesses)
-let g:ctrlp_working_directory_mode = ''
+let g:ctrlp_working_path_mode = '0'
 
 """"""""""""""
 "  MAPPINGS  "
