@@ -126,6 +126,14 @@ let g:ctrlp_working_path_mode = '0'
 "  MAPPINGS  "
 """"""""""""""
 
+" Ben Orenstein's mappings to edit files in the same directory
+map <Leader>e :e <C-R>=expand("%:p:h") . '/'<CR>
+map <Leader>s :split <C-R>=expand("%:p:h") . '/'<CR>
+map <Leader>v :vnew <C-R>=expand("%:p:h") . '/'<CR>
+
+" Ben Orenstein's mapping to select somes lines and see the blame log
+vmap <Leader>b :<C-U>!git blame <C-R>=expand("%:p") <CR> \| sed -n <C-R>=line("'<") <CR>,<C-R>=line("'>") <CR>p <CR>
+
 " This mapping preserves the cursor position when yanking in visual mode
 vnoremap gy ygv<Esc>
 
