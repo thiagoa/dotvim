@@ -28,9 +28,6 @@
 [submodule "bundle/matchit"]
 	path = bundle/matchit
 	url = https://github.com/vim-scripts/matchit.zip.git
-[submodule "bundle/debugger"]
-	path = bundle/debugger
-	url = https://github.com/ornicar/vim-php-debugger.git
 [submodule "bundle/taglist"]
 	path = bundle/taglist
 	url = https://github.com/vim-scripts/taglist.vim.git
@@ -103,3 +100,9 @@
 [submodule "bundle/gundo"]
 	path = bundle/gundo
 	url = https://github.com/sjl/gundo.vim.git
+[submodule "bundle/vim-unimpaired"]
+	path = bundle/vim-unimpaired
+	url = https://github.com/tpope/vim-unimpaired.git
+[submodule "bundle/vim-ruby-run"]
+	path = bundle/vim-ruby-run
+	url = git://github.com/stjernstrom/vim-ruby-run.git
