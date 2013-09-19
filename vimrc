@@ -482,3 +482,8 @@ elseif os == "Darwin"
 else
     source ~/.vim/vimrc.windows
 endif
+
+augroup rubypath
+  autocmd!
+  autocmd FileType ruby setlocal suffixesadd+=.rb
+augroup END
