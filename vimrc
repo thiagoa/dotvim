@@ -234,6 +234,8 @@ cnoremap <C-n> <Down>
 " Uppercase word in insert mode
 inoremap <C-k> <esc>mzgUiw`za
 
+
+" In MacVim use Cmd + Letter to change tab viewports
 map <D-1> 1gt
 map <D-2> 2gt
 map <D-3> 3gt
@@ -255,6 +257,9 @@ inoremap <D-7> <Esc>7gt
 inoremap <D-8> <Esc>8gt
 inoremap <D-9> <Esc>9gt
 inoremap <D-0> <Esc>10gt
+
+" Save with sudo
+cmap w!! %!sudo tee > /dev/null %
 
 """"""""""""""""""""""""
 " PLUGIN CONFIGURATION "
