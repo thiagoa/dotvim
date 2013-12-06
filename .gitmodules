@@ -124,3 +124,9 @@
 [submodule "bundle/vim-rspec"]
 	path = bundle/vim-rspec
 	url = git@github.com:thoughtbot/vim-rspec
+[submodule "bundle/funcoo"]
+	path = bundle/funcoo
+	url = git@github.com:rizzatti/funcoo.vim.git
+[submodule "bundle/dash"]
+	path = bundle/dash
+	url = git@github.com:rizzatti/dash.vim.git
