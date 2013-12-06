@@ -144,6 +144,9 @@ map <silent> <Leader>z :cclose<CR>
 " NERDTree shortcut
 nnoremap <C-n> :NERDTreeToggle<CR> :echo 'Toggle NERDTree'<CR>
 
+" Reveal file in NERDTree
+nmap <Leader>n :NERDTreeFind<CR>
+
 " Taglist shortcut
 nnoremap <Leader>t :TlistToggle<CR>
 
