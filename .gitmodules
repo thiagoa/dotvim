@@ -10,9 +10,6 @@
 [submodule "bundle/repeat"]
 	path = bundle/repeat
 	url = https://github.com/tpope/vim-repeat.git
-[submodule "bundle/command-t"]
-	path = bundle/command-t
-	url = https://github.com/vim-scripts/Command-T.git
 [submodule "bundle/perdirvimrc"]
 	path = bundle/perdirvimrc
 	url = https://github.com/vim-scripts/perdirvimrc--Autoload-vimrc-files-per-di.git
