@@ -106,9 +106,6 @@
 [submodule "bundle/gitv"]
 	path = bundle/gitv
 	url = git@github.com:gregsexton/gitv.git
-[submodule "bundle/Command-T"]
-	path = bundle/Command-T
-	url = git@github.com:wincent/Command-T.git
 [submodule "bundle/ag"]
 	path = bundle/ag
 	url = git@github.com:rking/ag.vim.git
