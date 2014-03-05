@@ -10,15 +10,6 @@
 [submodule "bundle/repeat"]
 	path = bundle/repeat
 	url = https://github.com/tpope/vim-repeat.git
-[submodule "bundle/nerdtree"]
-	path = bundle/nerdtree
-	url = https://github.com/scrooloose/nerdtree.git
-[submodule "bundle/ack"]
-	path = bundle/ack
-	url = https://github.com/mileszs/ack.vim.git
-[submodule "bundle/bufkill"]
-	path = bundle/bufkill
-	url = https://github.com/vim-scripts/bufkill.vim.git
 [submodule "bundle/command-t"]
 	path = bundle/command-t
 	url = https://github.com/vim-scripts/Command-T.git
@@ -37,18 +28,9 @@
 [submodule "bundle/nerdcommenter"]
 	path = bundle/nerdcommenter
 	url = https://github.com/scrooloose/nerdcommenter.git
-[submodule "bundle/phpfolding"]
-	path = bundle/phpfolding
-	url = https://github.com/vim-scripts/phpfolding.vim.git
 [submodule "bundle/tabular"]
 	path = bundle/tabular
 	url = https://github.com/godlygeek/tabular.git
-[submodule "bundle/grep"]
-	path = bundle/grep
-	url = https://github.com/vim-scripts/grep.vim.git
-[submodule "bundle/php-documentor"]
-	path = bundle/php-documentor
-	url = https://github.com/vim-scripts/PDV--phpDocumentor-for-Vim.git
 [submodule "bundle/delimitmate"]
 	path = bundle/delimitmate
 	url = https://github.com/Raimondi/delimitMate.git
@@ -73,9 +55,6 @@
 [submodule "bundle/vim-web-indent"]
 	path = bundle/vim-web-indent
 	url = git://github.com/lukaszb/vim-web-indent.git
-[submodule "bundle/ackmore"]
-	path = bundle/ackmore
-	url = git://github.com/jordansissel/vim-ackmore.git
 [submodule "bundle/vim-rails"]
 	path = bundle/vim-rails
 	url = git://github.com/tpope/vim-rails.git
@@ -94,12 +73,6 @@
 [submodule "bundle/ctrlp.vim"]
 	path = bundle/ctrlp.vim
 	url = https://github.com/kien/ctrlp.vim.git
-[submodule "bundle/jk-jumps"]
-	path = bundle/jk-jumps
-	url = https://github.com/vim-scripts/jk-jumps.git
-[submodule "bundle/gundo"]
-	path = bundle/gundo
-	url = https://github.com/sjl/gundo.vim.git
 [submodule "bundle/vim-unimpaired"]
 	path = bundle/vim-unimpaired
 	url = https://github.com/tpope/vim-unimpaired.git
@@ -130,3 +103,21 @@
 [submodule "bundle/dash"]
 	path = bundle/dash
 	url = git@github.com:rizzatti/dash.vim.git
+[submodule "bundle/gitv"]
+	path = bundle/gitv
+	url = git@github.com:gregsexton/gitv.git
+[submodule "bundle/Command-T"]
+	path = bundle/Command-T
+	url = git@github.com:wincent/Command-T.git
+[submodule "bundle/ag"]
+	path = bundle/ag
+	url = git@github.com:rking/ag.vim.git
+[submodule "bundle/vim-dispatch"]
+	path = bundle/vim-dispatch
+	url = git@github.com:tpope/vim-dispatch.git
+[submodule "bundle/syntastic"]
+	path = bundle/syntastic
+	url = https://github.com/scrooloose/syntastic.git
+[submodule "bundle/tslime"]
+	path = bundle/tslime
+	url = git@github.com:xaviershay/tslime.vim.git
