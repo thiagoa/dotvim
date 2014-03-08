@@ -295,6 +295,11 @@ function! QuickfixFilenames()
   return join(map(values(buffer_numbers), 'fnameescape(v:val)'))
 endfunction
 
+" Reload snippets. Call with ":call ReloadSnips()".
+function! ReloadSnips()
+    py UltiSnips_Manager.reset()
+endfunction
+
 " Search Dash for word under cursor
 function! SearchDash()
   let s:browser = "/usr/bin/open"
