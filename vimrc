@@ -127,9 +127,6 @@ vmap <Leader>b :<C-U>!git blame <C-R>=expand("%:p") <CR> \| sed -n <C-R>=line("'
 " PLUGINS CONFIG "
 """"""""""""""""""
 
-" NetRW - Hides the info banner
-let g:netrw_banner=0
-
 " Command-T
 nnoremap <silent><C-p> :CommandT<CR>
 nnoremap  <Leader>' :CommandTFlush<CR>:CommandT<CR>
