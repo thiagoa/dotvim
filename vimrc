@@ -132,8 +132,8 @@ nnoremap  <Leader>' :CommandTFlush<CR>:CommandT<CR>
 let g:CommandTMaxHeight=10
 let g:CommandTMatchWindowAtTop=1
 
-" Taglist
-nnoremap <Leader>t :TlistToggle<CR>
+" Tagbar
+nnoremap <Leader>t :TagbarToggle<CR>
 
 let Tlist_Use_Horiz_Window=0
 let Tlist_Compact_Format = 1
