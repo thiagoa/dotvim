@@ -111,11 +111,6 @@ set nowrap
 " Where to look for tag files
 set tags=tags;/
 
-" Status line config: git current branch, file encoding, etc
-if has("statusline")
-    set statusline=%<%f\ \ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %h%m%r%=%{\"[\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\").\"]\ \"}%k\ %-14.(%l,%c%V%)\ %P
-endif
-
 """""""""
 "  GIT  "
 """""""""
@@ -126,6 +121,9 @@ vmap <Leader>b :<C-U>!git blame <C-R>=expand("%:p") <CR> \| sed -n <C-R>=line("'
 """"""""""""""""""
 " PLUGINS CONFIG "
 """"""""""""""""""
+
+" Airline
+let g:airline#extensions#tabline#enabled = 1
 
 " Command-T
 nnoremap <silent><C-p> :CommandT<CR>
