@@ -112,3 +112,9 @@
 [submodule "bundle/vim-vinegar"]
 	path = bundle/vim-vinegar
 	url = git@github.com:tpope/vim-vinegar.git
+[submodule "bundle/vim-obsession"]
+	path = bundle/vim-obsession
+	url = git://github.com/tpope/vim-obsession.git
+[submodule "bundle/vim-rvm"]
+	path = bundle/vim-rvm
+	url = git@github.com:tpope/vim-rvm.git
