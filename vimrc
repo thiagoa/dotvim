@@ -249,9 +249,6 @@ cab Sb sb
 cab Sp sp
 cab Stag stag
 
-" Speed up vimgrep
-cab vimgrep noautocmd vimgrep
-
 """""""""""""""""
 " AUTO COMMANDS "
 """""""""""""""""
