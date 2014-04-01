@@ -103,9 +103,6 @@
 [submodule "bundle/tslime"]
 	path = bundle/tslime
 	url = git@github.com:xaviershay/tslime.vim.git
-[submodule "bundle/Command-T"]
-	path = bundle/Command-T
-	url = git@github.com:wincent/Command-T.git
 [submodule "bundle/vim-vinegar"]
 	path = bundle/vim-vinegar
 	url = git@github.com:tpope/vim-vinegar.git
@@ -121,3 +118,6 @@
 [submodule "bundle/tagbar"]
 	path = bundle/tagbar
 	url = git@github.com:majutsushi/tagbar.git
+[submodule "bundle/ctrlp"]
+	path = bundle/ctrlp
+	url = git@github.com:kien/ctrlp.vim.git
