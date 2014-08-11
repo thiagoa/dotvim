@@ -79,9 +79,6 @@
 [submodule "bundle/vim-rake"]
 	path = bundle/vim-rake
 	url = git@github.com:tpope/vim-rake
-[submodule "bundle/vim-rspec"]
-	path = bundle/vim-rspec
-	url = git@github.com:thoughtbot/vim-rspec
 [submodule "bundle/funcoo"]
 	path = bundle/funcoo
 	url = git@github.com:rizzatti/funcoo.vim.git
@@ -121,3 +118,6 @@
 [submodule "bundle/ctrlp"]
 	path = bundle/ctrlp
 	url = git@github.com:kien/ctrlp.vim.git
+[submodule "bundle/vim-vroom"]
+	path = bundle/vim-vroom
+	url = https://github.com/skalnik/vim-vroom.git
