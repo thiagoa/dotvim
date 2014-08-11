@@ -130,3 +130,15 @@
 [submodule "bundle/vim-vroom"]
 	path = bundle/vim-vroom
 	url = https://github.com/skalnik/vim-vroom.git
+[submodule "bundle/vim-gitgutter"]
+	path = bundle/vim-gitgutter
+	url = https://github.com/airblade/vim-gitgutter.git
+[submodule "bundle/vim-exchange"]
+	path = bundle/vim-exchange
+	url = git://github.com/tommcdo/vim-exchange.git
+[submodule "bundle/switch"]
+	path = bundle/switch
+	url = git@github.com:AndrewRadev/switch.vim.git
+[submodule "bundle/splitjoin"]
+	path = bundle/splitjoin
+	url = git@github.com:AndrewRadev/splitjoin.vim.git
