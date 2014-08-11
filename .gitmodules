@@ -121,6 +121,9 @@
 [submodule "bundle/vim-go"]
 	path = bundle/vim-go
 	url = git@github.com:fatih/vim-go.git
+[submodule "bundle/vim-ruby-minitest"]
+	path = bundle/vim-ruby-minitest
+	url = git@github.com:sunaku/vim-ruby-minitest.git
 [submodule "bundle/vim-vroom"]
 	path = bundle/vim-vroom
 	url = https://github.com/skalnik/vim-vroom.git
