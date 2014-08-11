@@ -347,3 +347,5 @@ let g:ctrlp_use_caching = 0
 nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
 command! -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
+
+map <C-w>[ :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
