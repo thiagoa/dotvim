@@ -254,7 +254,7 @@ if has("autocmd")
     \ endif
 
   " Strip whitespaces on certain filetypes
-  autocmd BufWritePre *.py,*.rb,*.erb,*.js,*.php,*.css,*.scss,*.haml :call <SID>StripTrailingWhitespaces()
+  autocmd BufWritePre *.py,*.rb,*.erb,*.xml,*.js,*.php,*.css,*.scss,*.haml :call <SID>StripTrailingWhitespaces()
 
   " Pandoc format with gq command
   let pandoc_pipeline  = "pandoc --from=html --to=markdown"
