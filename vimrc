@@ -127,13 +127,6 @@ map <Leader>T :Rake test<CR>
 " Airline
 let g:airline#extensions#tabline#enabled = 1
 
-" Command-T
-nnoremap <silent><C-p> :CommandT<CR>
-nnoremap  <Leader>' :CommandTFlush<CR>:CommandT<CR>
-
-let g:CommandTMaxHeight=10
-let g:CommandTMatchWindowAtTop=1
-
 " Tagbar
 nnoremap <Leader>t :TagbarToggle<CR>
 
@@ -197,12 +190,6 @@ inoremap {<CR> {<CR>}<Esc>O
 
 " Place cursor at the middle of a line
 nnoremap <expr> gM (strlen(getline('.')) / 2) . '<bar>'
-
-" Moves lines up and down
-nnoremap <C-j> :m+<CR>==
-nnoremap <C-k> :m-2<CR>==
-vnoremap <C-j> :m'>+<CR>gv=gv
-vnoremap <C-k> :m-2<CR>gv=gv
 
 " Faster scrolling
 nnoremap <C-e> 3<C-e>
