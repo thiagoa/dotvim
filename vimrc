@@ -348,4 +348,17 @@ nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
 command! -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
 
+function! ListLeaders()
+     silent! redir @a
+     silent! nmap <LEADER>
+     silent! redir END
+     silent! new
+     silent! put! a
+     silent! g/^s*$/d
+     silent! %s/^.*,//
+     silent! normal ggVg
+     silent! sort
+     silent! let lines = getline(1,"$")
+endfunction
+
 map <C-w>[ :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
