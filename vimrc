@@ -174,12 +174,17 @@ map <leader>d :call SearchDash()<CR>
 "  GENERAL MAPPINGS  "
 """"""""""""""""""""""
 
+" Save and run last shell command
+nnoremap @! :w<CR>:!!<CR>
+
 let g:tmux_navigator_no_mappings = 1
 
 nnoremap <Esc>k :TmuxNavigateUp<cr>
 nnoremap <Esc>j :TmuxNavigateDown<cr>
 nnoremap <Esc>l :TmuxNavigateRight<cr>
 nnoremap <Esc>h :TmuxNavigateLeft<cr>
+
+nnoremap <Leader>w :w<CR>
 
 " Preserves the cursor position when yanking in visual mode
 vnoremap gy ygv<Esc>
