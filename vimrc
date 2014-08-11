@@ -170,15 +170,16 @@ let g:UltiSnipsListSnippets="<D-0>"
 " Search Dash
 map <leader>d :call SearchDash()<CR>
 
-" Vim RSpec
-nnoremap <Leader>r :call RunAllSpecs()<CR>
-nnoremap <Leader>i :call RunCurrentSpecFile()<CR>
-nnoremap <Leader>o :call RunNearestSpec()<CR>
-nnoremap <Leader>m :call RunLastSpec()<CR>
-
 """"""""""""""""""""""
 "  GENERAL MAPPINGS  "
 """"""""""""""""""""""
+
+let g:tmux_navigator_no_mappings = 1
+
+nnoremap <Esc>k :TmuxNavigateUp<cr>
+nnoremap <Esc>j :TmuxNavigateDown<cr>
+nnoremap <Esc>l :TmuxNavigateRight<cr>
+nnoremap <Esc>h :TmuxNavigateLeft<cr>
 
 " Preserves the cursor position when yanking in visual mode
 vnoremap gy ygv<Esc>
