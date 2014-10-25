@@ -142,3 +142,18 @@
 [submodule "bundle/splitjoin"]
 	path = bundle/splitjoin
 	url = git@github.com:AndrewRadev/splitjoin.vim.git
+[submodule "bundle/molokai"]
+	path = bundle/molokai
+	url = https://github.com/tomasr/molokai.git
+[submodule "bundle/vim-polyglot"]
+	path = bundle/vim-polyglot
+	url = https://github.com/sheerun/vim-polyglot.git
+[submodule "bundle/groovy.vim"]
+	path = bundle/groovy.vim
+	url = git@github.com:Reder/groovy.vim.git
+[submodule "bundle/groovy.syntax.vim"]
+	path = bundle/groovy.syntax.vim
+	url = git@github.com:rdolgushin/groovy.vim.git
+[submodule "bundle/vim-startify"]
+	path = bundle/vim-startify
+	url = git@github.com:mhinz/vim-startify.git
