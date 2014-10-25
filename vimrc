@@ -10,6 +10,9 @@ call pathogen#incubate()
 call pathogen#helptags()
 execute pathogen#infect()
 
+" Config shell
+set shell=/bin/bash
+
 " Set syntax on
 syntax on
 
@@ -253,6 +256,14 @@ if has("autocmd")
     \   exe "normal! g`\"" |
     \ endif
 
+  augroup gitCommitEditMsg
+    autocmd!
+    autocmd BufReadPost *
+      \ if @% == '.git/COMMIT_EDITMSG' |
+      \   exe "normal gg" |
+      \ endif
+  augroup END
+
   " Strip whitespaces on certain filetypes
   autocmd BufWritePre *.py,*.rb,*.erb,*.xml,*.js,*.php,*.css,*.scss,*.haml :call <SID>StripTrailingWhitespaces()
 
@@ -270,6 +281,8 @@ if has("autocmd")
     autocmd FileType ruby setlocal suffixesadd+=.rb
   augroup END
 endif
+
+autocmd Filetype groovy setlocal noexpandtab
 
 """""""""""""
 " FUNCTIONS "
@@ -310,11 +323,6 @@ function! <SID>StripTrailingWhitespaces()
     call cursor(l, c)
 endfunction
 
-" Save with sudo (no mapping; use "call g:save()")
-function! g:save()
-  %!sudo tee > /dev/null %
-endfunction
-
 """""""""""""""""""""""""""""""""""""""
 " AUTOLOAD LOCAL CONFIG (OUTSIDE VCS) "
 """""""""""""""""""""""""""""""""""""""
@@ -340,13 +348,19 @@ let &t_SI = "\<Esc>]50;CursorShape=2\x7"
 " Change back to a block in normal mode
 let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 
-set grepprg=ag\ --nogroup\ --nocolor
-let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-let g:ctrlp_use_caching = 0
+if executable('ag')
+    set grepprg=ag\ --nogroup\ --nocolor
+    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+    let g:ctrlp_use_caching = 0
+endif
+
+command! -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
+command! -bar -nargs=1 OpenURL :!open <args>
 
 nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
-command! -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
+let g:molokai_original = 1
+let g:rehash256 = 1
 
 function! ListLeaders()
      silent! redir @a
