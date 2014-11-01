@@ -49,9 +49,6 @@
 [submodule "bundle/asynccommand"]
 	path = bundle/asynccommand
 	url = git@github.com:vim-scripts/AsyncCommand
-[submodule "bundle/vim-coffee-script"]
-	path = bundle/vim-coffee-script
-	url = git://github.com/kchmck/vim-coffee-script.git
 [submodule "bundle/vim-visual-star-search"]
 	path = bundle/vim-visual-star-search
 	url = https://github.com/nelstrom/vim-visual-star-search
@@ -70,9 +67,6 @@
 [submodule "bundle/vim-textobj-user"]
 	path = bundle/vim-textobj-user
 	url = git@github.com:kana/vim-textobj-user
-[submodule "bundle/vim-ruby"]
-	path = bundle/vim-ruby
-	url = git@github.com:vim-ruby/vim-ruby
 [submodule "bundle/vim-bundler"]
 	path = bundle/vim-bundler
 	url = git@github.com:tpope/vim-bundler
@@ -136,9 +130,6 @@
 [submodule "bundle/vim-exchange"]
 	path = bundle/vim-exchange
 	url = git://github.com/tommcdo/vim-exchange.git
-[submodule "bundle/switch"]
-	path = bundle/switch
-	url = git@github.com:AndrewRadev/switch.vim.git
 [submodule "bundle/splitjoin"]
 	path = bundle/splitjoin
 	url = git@github.com:AndrewRadev/splitjoin.vim.git
