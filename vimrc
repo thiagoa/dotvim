@@ -125,7 +125,8 @@ vmap <Leader>b :<C-U>!git blame <C-R>=expand("%:p") <CR> \| sed -n <C-R>=line("'
 " PLUGINS CONFIG "
 """"""""""""""""""
 let g:vroom_test_unit_command="testrbl -Itest:lib -rminitest/autorun"
-map <Leader>T :Rake test<CR>
+let g:vroom_use_dispatch=1
+map <Leader>T :Dispatch rake test<CR>
 
 " Airline
 let g:airline#extensions#tabline#enabled = 1
