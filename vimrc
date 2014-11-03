@@ -114,16 +114,31 @@ set nowrap
 " Where to look for tag files
 set tags=tags;/
 
-"""""""""
-"  GIT  "
-"""""""""
+" Configure :grep command to use Ag (The Silver Searcher)
+if executable('ag')
+    set grepprg=ag\ --nogroup\ --nocolor
 
-" Select lines and git blame
-vmap <Leader>b :<C-U>!git blame <C-R>=expand("%:p") <CR> \| sed -n <C-R>=line("'<") <CR>,<C-R>=line("'>") <CR>p <CR>
+    " Aso configure a custom Ag command using :grep
+    command! -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
+endif
 
-""""""""""""""""""
-" PLUGINS CONFIG "
-""""""""""""""""""
+" Change cursor shape to an underscore  when in insert mode
+let &t_SI = "\<Esc>]50;CursorShape=2\x7"
+
+" Change back to a block in normal mode
+let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+
+"""""""""""""""""""""""""""""""
+" PLUGINS CONFIG AND MAPPINGS "
+"""""""""""""""""""""""""""""""
+
+" Configure CtrlP to use Ag (The Silver Searcher)
+if executable('ag')
+    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+    let g:ctrlp_use_caching = 0
+endif
+
+" Vroom (ruby test runner) and general ruby testing config
 let g:vroom_test_unit_command="testrbl -Itest:lib -rminitest/autorun"
 let g:vroom_use_dispatch=1
 map <Leader>T :Dispatch rake test<CR>
@@ -133,7 +148,6 @@ let g:airline#extensions#tabline#enabled = 1
 
 " Tagbar
 nnoremap <Leader>t :TagbarToggle<CR>
-
 let Tlist_Use_Horiz_Window=0
 let Tlist_Compact_Format = 1
 let Tlist_Exit_OnlyWindow = 1
@@ -164,23 +178,33 @@ let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:UltiSnipsListSnippets="<D-0>"
 
-" Search Dash
-map <leader>d :call SearchDash()<CR>
+" Startify settings
+" Don't change cwd when opening a file
+let g:startify_change_to_dir=0
 
-""""""""""""""""""""""
-"  GENERAL MAPPINGS  "
-""""""""""""""""""""""
+" Molokai settings
+let g:molokai_original = 1
+let g:rehash256 = 1
 
-" Save and run last shell command
-nnoremap @! :w<CR>:!!<CR>
-
+" tmux navigator
+" Override default mappings
 let g:tmux_navigator_no_mappings = 1
-
 nnoremap <Esc>k :TmuxNavigateUp<cr>
 nnoremap <Esc>j :TmuxNavigateDown<cr>
 nnoremap <Esc>l :TmuxNavigateRight<cr>
 nnoremap <Esc>h :TmuxNavigateLeft<cr>
 
+""""""""""""""""""
+"  VIM MAPPINGS  "
+""""""""""""""""""
+
+" Select lines and git blame
+vmap <Leader>b :<C-U>!git blame <C-R>=expand("%:p") <CR> \| sed -n <C-R>=line("'<") <CR>,<C-R>=line("'>") <CR>p <CR>
+
+" Save and run last shell command
+nnoremap @! :w<CR>:!!<CR>
+
+" One less character to trigger save
 nnoremap <Leader>w :w<CR>
 
 " Preserves the cursor position when yanking in visual mode
@@ -211,19 +235,17 @@ nnoremap <silent> <Leader>df dV]M
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
 
-"""""""""""""""""""""""
-" OPEN FILE SHORTCUTS "
-"""""""""""""""""""""""
-
 " Edit files in the same directory
 map <Leader>e :e <C-R>=expand("%:p:h") . '/'<CR>
 map <Leader>s :split <C-R>=expand("%:p:h") . '/'<CR>
 map <Leader>v :vnew <C-R>=expand("%:p:h") . '/'<CR>
 map <Leader>f :!mv <C-R>=expand("%")  <CR>
 
-""""""""
-" TAGS "
-""""""""
+" Grep for word under cursor
+nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+
+" Open tag in vertical split
+map <C-w>[ :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
 
 " Open tag at cursor using ptselect
 nnoremap <C-w>{ <Esc>:exe "ptselect " . expand("<cword>")<Esc>
@@ -251,19 +273,27 @@ cab Stag stag
 """""""""""""""""
 
 if has("autocmd")
+  " Auto start Rails server when in a Rails project
+  autocmd User Startified
+    \ if filereadable(getcwd() . '/Gemfile') |
+    \   Rserver! |
+    \ endif
+
+  " Find ruby files with gf command
+  augroup rubypath
+    autocmd!
+    autocmd FileType ruby setlocal suffixesadd+=.rb
+  augroup END
+
   " Restore cursor position
   autocmd BufReadPost *
     \ if line("'\"") > 1 && line("'\"") <= line("$") |
     \   exe "normal! g`\"" |
     \ endif
 
-  augroup gitCommitEditMsg
-    autocmd!
-    autocmd BufReadPost *
-      \ if @% == '.git/COMMIT_EDITMSG' |
-      \   exe "normal gg" |
-      \ endif
-  augroup END
+  " When editing a git commit message start at the first line, and do not
+  " remember previous cursor position
+  au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
 
   " Strip whitespaces on certain filetypes
   autocmd BufWritePre *.py,*.rb,*.erb,*.xml,*.js,*.php,*.css,*.scss,*.haml :call <SID>StripTrailingWhitespaces()
@@ -276,14 +306,9 @@ if has("autocmd")
   " Syntax highlighting for json files
   autocmd BufRead,BufNewFile *.json set filetype=javascript
 
-  " Find ruby files with gf command
-  augroup rubypath
-    autocmd!
-    autocmd FileType ruby setlocal suffixesadd+=.rb
-  augroup END
+  " Settings for groovy file (use tabs)
+  autocmd Filetype groovy setlocal noexpandtab
 endif
-
-autocmd Filetype groovy setlocal noexpandtab
 
 """""""""""""
 " FUNCTIONS "
@@ -299,19 +324,9 @@ function! QuickfixFilenames()
   return join(map(values(buffer_numbers), 'fnameescape(v:val)'))
 endfunction
 
-" Reload snippets. Call with ":call ReloadSnips()".
+" Reload snippets
 function! ReloadSnips()
     py UltiSnips_Manager.reset()
-endfunction
-
-" Search Dash for word under cursor
-function! SearchDash()
-  let s:browser = "/usr/bin/open"
-  let s:wordUnderCursor = expand("<cword>")
-  let s:url = "dash://".s:wordUnderCursor
-  let s:cmd ="silent ! " . s:browser . " " . s:url
-  execute s:cmd
-  redraw!
 endfunction
 
 " Strip trailing whitespaces
@@ -322,6 +337,20 @@ function! <SID>StripTrailingWhitespaces()
     %s/\s\+$//e
     let @/=_s
     call cursor(l, c)
+endfunction
+
+" List all shortcuts mapped with leader keys
+function! ListLeaders()
+     silent! redir @a
+     silent! nmap <LEADER>
+     silent! redir END
+     silent! new
+     silent! put! a
+     silent! g/^s*$/d
+     silent! %s/^.*,//
+     silent! normal ggVg
+     silent! sort
+     silent! let lines = getline(1,"$")
 endfunction
 
 """""""""""""""""""""""""""""""""""""""
@@ -342,38 +371,3 @@ elseif os == "Darwin"
 else
     source ~/.vim/vimrc.windows
 endif
-
-" Change cursor shape to an underscore  when in insert mode
-let &t_SI = "\<Esc>]50;CursorShape=2\x7"
-
-" Change back to a block in normal mode
-let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-
-if executable('ag')
-    set grepprg=ag\ --nogroup\ --nocolor
-    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-    let g:ctrlp_use_caching = 0
-endif
-
-command! -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
-command! -bar -nargs=1 OpenURL :!open <args>
-
-nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
-
-let g:molokai_original = 1
-let g:rehash256 = 1
-
-function! ListLeaders()
-     silent! redir @a
-     silent! nmap <LEADER>
-     silent! redir END
-     silent! new
-     silent! put! a
-     silent! g/^s*$/d
-     silent! %s/^.*,//
-     silent! normal ggVg
-     silent! sort
-     silent! let lines = getline(1,"$")
-endfunction
-
-map <C-w>[ :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
