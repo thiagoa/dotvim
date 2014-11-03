@@ -29,12 +29,15 @@ do
     ls ~/.$file > /dev/null 2> /dev/null
 
     if [ $? -eq 0 ]; then
-        echo "** watch out, backing up current .$file to .$file.backup **";
+        echo "** Backing up current .$file to .$file.backup **";
         mv ~/.$file ~/.$file.backup
     fi
 
     ln -s "$DIR/$file" ~/.$file
 done
+
+echo ""
+echo "Please wait, configuring submodules..."
 
 cd $DIR
 git submodule update --init --quiet
