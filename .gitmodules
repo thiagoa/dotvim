@@ -22,9 +22,6 @@
 [submodule "bundle/nerdcommenter"]
 	path = bundle/nerdcommenter
 	url = https://github.com/scrooloose/nerdcommenter.git
-[submodule "bundle/tabular"]
-	path = bundle/tabular
-	url = https://github.com/godlygeek/tabular.git
 [submodule "bundle/delimitmate"]
 	path = bundle/delimitmate
 	url = https://github.com/Raimondi/delimitMate.git
@@ -91,15 +88,6 @@
 [submodule "bundle/vim-vinegar"]
 	path = bundle/vim-vinegar
 	url = git@github.com:tpope/vim-vinegar.git
-[submodule "bundle/vim-obsession"]
-	path = bundle/vim-obsession
-	url = git://github.com/tpope/vim-obsession.git
-[submodule "bundle/vim-rvm"]
-	path = bundle/vim-rvm
-	url = git@github.com:tpope/vim-rvm.git
-[submodule "bundle/vim-airline"]
-	path = bundle/vim-airline
-	url = git@github.com:bling/vim-airline.git
 [submodule "bundle/tagbar"]
 	path = bundle/tagbar
 	url = git@github.com:majutsushi/tagbar.git
@@ -145,3 +133,24 @@
 [submodule "bundle/vim-startify"]
 	path = bundle/vim-startify
 	url = git@github.com:mhinz/vim-startify.git
+[submodule "bundle/vim-sleuth"]
+	path = bundle/vim-sleuth
+	url = git@github.com:tpope/vim-sleuth.git
+[submodule "bundle/vim-rsi"]
+	path = bundle/vim-rsi
+	url = git@github.com:tpope/vim-rsi.git
+[submodule "bundle/vim-bufsurf"]
+	path = bundle/vim-bufsurf
+	url = git@github.com:ton/vim-bufsurf.git
+[submodule "bundle/vim-indentobject"]
+	path = bundle/vim-indentobject
+	url = git@github.com:austintaylor/vim-indentobject.git
+[submodule "bundle/argtextobj"]
+	path = bundle/argtextobj
+	url = git@github.com:vim-scripts/argtextobj.vim.git
+[submodule "bundle/YankRing.vim"]
+	path = bundle/YankRing.vim
+	url = git@github.com:vim-scripts/YankRing.vim.git
+[submodule "bundle/rename.vim"]
+	path = bundle/rename.vim
+	url = git@github.com:danro/rename.vim.git

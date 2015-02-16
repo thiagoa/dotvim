@@ -2,119 +2,82 @@
 " VIM CONFIGURATION "
 """""""""""""""""""""
 
-" Unset compatibility mode with original vi
 set nocompatible
 
-" Pathogen config - These lines must be on top
 call pathogen#incubate()
 call pathogen#helptags()
 execute pathogen#infect()
 
-" Config shell
-set shell=/bin/bash
-
-" Set syntax on
 syntax on
 
-" Enables plugins and indenting per-filetype
 filetype plugin on
 filetype plugin indent on
 
-" Disables autocomplete for files referenced inside the current buffer
-set complete-=i
-
-" Command history limit
+set hidden
 set history=1000
+set shell=/bin/bash
 
-" Encodings in preference order
 set fileencodings=utf-8,iso-8859-1
 
-" Turns off needless toolbar on gvim/mvim
-set guioptions-=T
-
-" Turns on line numbering
 set number
 
-" Consider numbers as decimal
+set guioptions-=T
+
 set nrformats=
 
-" Disable annoying beep and enable visual bell
 set visualbell
-
-" Lights up opposite brackets
 set showmatch matchtime=3
 
-" Long line indicator
-set showbreak=...  
+set complete-=i
 
-" Remove dashed lines from split window boundaries
 set fillchars+=vert:\ 
 
-" Line spacing
 set linespace=2
 
-" Tabs config
+set nowrap
+
 set expandtab
 set smarttab
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 
-" Indent config
 set smartindent
 set autoindent
 
-" Disables backups to prevent clutter
 set nobackup
-
-" Autocomplete config
-set wildmenu
-set wildmode=longest,full
-
-" Ignored files
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip
-
-" Search config
-set incsearch
-set hlsearch
-set ignorecase
-set smartcase
-
-" Faster Esc in insert mode
-set noesckeys
-
-" Mapping delays config
-set timeoutlen=1000 ttimeoutlen=0
-
-" Always show status bar
-set laststatus=2
-
-" Updates buffer when modified outside vim
-set autoread
-
-" Hide modified buffers when switching - doesn't warn for saving
-set hidden
-
-" Backspace key configuration in insert mode (makes it act as expected)
-set backspace=start,indent,eol
-
-" Sets directories for backups
 set backupdir=~/.vim/backup,~/.tmp,~/tmp,/var/tmp,/tmp
 set directory=~/.vim/backup,~/.tmp,~/tmp,/var/tmp,/tmp
 
-" Show non-visible characters (tabs, spaces, etc)
+set wildmenu
+set wildmode=longest,full
+set wildignore+=*/tmp/*,*/public/system/*,*.so,*.swp,*.zip,*.jpg,*.png,*.gif
+
+set incsearch
+set hlsearch
+
+set ignorecase
+set smartcase
+
+set noesckeys
+
+set timeoutlen=1000 ttimeoutlen=0
+set laststatus=2
+
+set autoread
+
+set backspace=start,indent,eol
 set listchars=tab:>-,trail:·,eol:$
 
-" Messages configuration
 set shortmess=atI
 
-" Do not wrap long lines
-set nowrap
+let mapleader = "\<Space>"
 
-" Where to look for tag files
-set tags=tags;/
+" Change cursor to an underscore while in insert mode
+let &t_SI = "\<Esc>]50;CursorShape=2\x7"
+let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 
-" Configure :grep command to use Ag (The Silver Searcher)
+" Configure :grep to use Ag (The Silver Searcher)
 if executable('ag')
     set grepprg=ag\ --nogroup\ --nocolor
 
@@ -122,31 +85,36 @@ if executable('ag')
     command! -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
 endif
 
-" Change cursor shape to an underscore  when in insert mode
-let &t_SI = "\<Esc>]50;CursorShape=2\x7"
+""""""""""""""""""""""""""""
+" PLUGINS CONFIG / MAPPING "
+""""""""""""""""""""""""""""
 
-" Change back to a block in normal mode
-let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+"""""" gitv """"""""
 
-"""""""""""""""""""""""""""""""
-" PLUGINS CONFIG AND MAPPINGS "
-"""""""""""""""""""""""""""""""
+let g:Gitv_WipeAllOnClose = 1
 
-" Configure CtrlP to use Ag (The Silver Searcher)
+""""""" CtrlP """"""""
+
 if executable('ag')
-    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-    let g:ctrlp_use_caching = 0
+  let g:ctrlp_use_caching = 1
+  let g:ctrlp_user_command = 'ag %s -l -g "(rb|erb|html|js|yml|php|py|ex|java|groovy|gsp|coffee|less|css|txt|md|markdown)$"'
 endif
 
-" Vroom (ruby test runner) and general ruby testing config
+let g:ctrlp_match_window_bottom = 0
+let g:ctrlp_match_window_reversed = 0
+
+" Ctrlp uses <C-l> (C-p is used for YankRing.vim)
+let g:ctrlp_map = '<C-l>'
+
+""""""" Vroom """"""""
+
 let g:vroom_test_unit_command="testrbl -Itest:lib -rminitest/autorun"
 let g:vroom_use_dispatch=1
 map <Leader>T :Dispatch rake test<CR>
+map <Leader>Ta :Dispatch rake test:all<CR>
 
-" Airline
-let g:airline#extensions#tabline#enabled = 1
+""""""" Tagbar """""""""
 
-" Tagbar
 nnoremap <Leader>t :TagbarToggle<CR>
 let Tlist_Use_Horiz_Window=0
 let Tlist_Compact_Format = 1
@@ -161,63 +129,60 @@ let Tlist_Sql_Settings = 'sql;P:package;t:table'
 let Tlist_Ant_Settings = 'ant;p:Project;r:Property;t:Target'
 let tlist_php_settings = 'php;c:class;d:constant;f:function'
 
-" Tabularize
-nmap <Leader>a :Tabularize /=<CR>
-nmap <Leader>a? :Tabularize /?<CR>
-vmap <Leader>a = :Tabularize /= <CR>
-nmap <Leader>a: :Tabularize /:<CR>
-nmap <Leader>a; :Tabularize /:\zs<CR>
-vmap <Leader>a; :Tabularize /:\zs<CR>
-nmap <Leader>a> :Tabularize /=><CR>
-vmap <Leader>a> :Tabularize /=><CR>
+"""""""" Vim bufsurf """""""""
 
-" UltiSnips
+nnoremap <silent> [v :BufSurfBack<CR>
+nnoremap <silent> ]v :BufSurfForward<CR>
+
+""""""""" UltiSnips """""""""""
+
 let g:UltiSnipsEditSplit='horizontal'
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:UltiSnipsListSnippets="<D-0>"
 
-" Startify settings
-" Don't change cwd when opening a file
+""""""""" Startify """"""""""
+
 let g:startify_change_to_dir=0
 
-" Molokai settings
-let g:molokai_original = 1
-let g:rehash256 = 1
+""""""""" Molokai """"""""""
 
-" tmux navigator
-" Override default mappings
+let g:molokai_original=1
+let g:rehash256=1
+
+""""""""" Tmux navigator """""""""""
+
 let g:tmux_navigator_no_mappings = 1
 nnoremap <Esc>k :TmuxNavigateUp<cr>
 nnoremap <Esc>j :TmuxNavigateDown<cr>
 nnoremap <Esc>l :TmuxNavigateRight<cr>
 nnoremap <Esc>h :TmuxNavigateLeft<cr>
 
-""""""""""""""""""
-"  VIM MAPPINGS  "
-""""""""""""""""""
+""""""""" Save and run files """""""""
 
-" Select lines and git blame
-vmap <Leader>b :<C-U>!git blame <C-R>=expand("%:p") <CR> \| sed -n <C-R>=line("'<") <CR>,<C-R>=line("'>") <CR>p <CR>
+nnoremap <Leader>w :w<CR>
+nnoremap <Leader>q :qall<CR>
 
 " Save and run last shell command
 nnoremap @! :w<CR>:!!<CR>
 
-" One less character to trigger save
-nnoremap <Leader>w :w<CR>
+""""""""""" Copy and paste """""""""""""
 
-" Preserves the cursor position when yanking in visual mode
-vnoremap gy ygv<Esc>
+vmap <Leader>y "+y
+vmap <Leader>d "+d
+nmap <Leader>p "+p
+nmap <Leader>P "+P
+vmap <Leader>p "+p
+vmap <Leader>P "+P
 
-" Disable hlsearch
-nnoremap <silent><Leader><Space> :nohlsearch<CR>
+""""""""" Shortcuts to edit files """""""""""
 
-" Auto close brackets
-inoremap {<CR> {<CR>}<Esc>O
+map <Leader>e :e <C-R>=expand("%:p:h") . '/'<CR>
+map <Leader>s :split <C-R>=expand("%:p:h") . '/'<CR>
+map <Leader>v :vnew <C-R>=expand("%:p:h") . '/'<CR>
 
-" Place cursor at the middle of a line
-nnoremap <expr> gM (strlen(getline('.')) / 2) . '<bar>'
+""""""""""" Tweaks """"""""""""""
 
 " Faster scrolling
 nnoremap <C-e> 3<C-e>
@@ -225,24 +190,55 @@ nnoremap <C-y> 3<C-y>
 vnoremap <C-e> 3<C-e>
 vnoremap <C-y> 3<C-y>
 
-" Show hidden characters
-nmap <silent> <Leader>c :set nolist!<CR>
+" Restore cursor position
+autocmd BufReadPost *
+\ if line("'\"") > 1 && line("'\"") <= line("$") |
+\   exe "normal! g`\"" |
+\ endif
+
+" Do not remember position of git commit buffer
+au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
+
+" Pandoc format with gq command
+let pandoc_pipeline  = "pandoc --from=html --to=markdown"
+let pandoc_pipeline .= " | pandoc --from=markdown --to=html"
+autocmd FileType html let &formatprg=pandoc_pipeline
+
+""""""""""" History navigation """""""""""""
+
+cnoremap <C-p> <Up>
+cnoremap <C-n> <Down>
+
+""""""""""" Grep """"""""""""""
+
+" Grep word under cursor
+nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+
+"""""""""" New commands """""""""""
+
+" Preserves the cursor position when yanking in visual mode
+vnoremap gy ygv<Esc>
 
 " Delete function (C, PHP, etc)
 nnoremap <silent> <Leader>df dV]M
 
-" History navigation with C-p and C-n
-cnoremap <C-p> <Up>
-cnoremap <C-n> <Down>
+" Show hidden characters
+nmap <silent> <Leader>c :set nolist!<CR>
 
-" Edit files in the same directory
-map <Leader>e :e <C-R>=expand("%:p:h") . '/'<CR>
-map <Leader>s :split <C-R>=expand("%:p:h") . '/'<CR>
-map <Leader>v :vnew <C-R>=expand("%:p:h") . '/'<CR>
-map <Leader>f :!mv <C-R>=expand("%")  <CR>
+" Disable hlsearch
+nnoremap <silent><Leader><Space> :nohlsearch<CR>
 
-" Grep for word under cursor
-nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+""""""""" New behavior """"""""""
+
+" Auto close brackets on return (essential)
+inoremap {<CR> {<CR>}<Esc>O
+
+" Disable auto commenting on all file types
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+
+""""""""""""" Tags """""""""""""""
+
+set tags=tags;/
 
 " Open tag in vertical split
 map <C-w>[ :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
@@ -253,11 +249,8 @@ nnoremap <C-w>{ <Esc>:exe "ptselect " . expand("<cword>")<Esc>
 " Open tag in new tab
 nnoremap <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
 
-"""""""""""""""""
-" ABBREVIATIONS "
-""""""""""""""""
+"""""""""" Abbreviations """""""""""
 
-" Avoid typos on ex command line
 cab W w
 cab WQ wq
 cab Cd cd
@@ -268,47 +261,34 @@ cab Sb sb
 cab Sp sp
 cab Stag stag
 
-"""""""""""""""""
-" AUTO COMMANDS "
-"""""""""""""""""
+"""""""""" Ruby """"""""""""
 
-if has("autocmd")
-  " Auto start Rails server when in a Rails project
-  autocmd User Startified
-    \ if filereadable(getcwd() . '/Gemfile') |
-    \   Rserver! |
-    \ endif
+" Auto start Rails server when on a Rails project
+autocmd User Startified
+\ if filereadable(getcwd() . '/Gemfile') |
+\   Rserver! |
+\ endif
 
-  " Find ruby files with gf command
-  augroup rubypath
-    autocmd!
-    autocmd FileType ruby setlocal suffixesadd+=.rb
-  augroup END
+" Find ruby files with gf command
+augroup rubypath
+autocmd!
+autocmd FileType ruby setlocal suffixesadd+=.rb
+augroup END
 
-  " Restore cursor position
-  autocmd BufReadPost *
-    \ if line("'\"") > 1 && line("'\"") <= line("$") |
-    \   exe "normal! g`\"" |
-    \ endif
+" Highlight in red when column width is more than 80 chars
+augroup highlight-code-char-max-width
+autocmd FileType ruby highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+autocmd FileType ruby match OverLength /\%81v.\+/
+augroup END
 
-  " When editing a git commit message start at the first line, and do not
-  " remember previous cursor position
-  au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
+""""""""" Groovy """"""""""""
 
-  " Strip whitespaces on certain filetypes
-  autocmd BufWritePre *.py,*.rb,*.erb,*.xml,*.js,*.php,*.css,*.scss,*.haml :call <SID>StripTrailingWhitespaces()
+autocmd Filetype groovy setlocal noexpandtab
 
-  " Pandoc format with gq command
-  let pandoc_pipeline  = "pandoc --from=html --to=markdown"
-  let pandoc_pipeline .= " | pandoc --from=markdown --to=html"
-  autocmd FileType html let &formatprg=pandoc_pipeline
-  
-  " Syntax highlighting for json files
-  autocmd BufRead,BufNewFile *.json set filetype=javascript
+"""""""""" JSON """"""""""""
 
-  " Settings for groovy file (use tabs)
-  autocmd Filetype groovy setlocal noexpandtab
-endif
+" Syntax highlighting for json files
+autocmd BufRead,BufNewFile *.json set filetype=javascript
 
 """""""""""""
 " FUNCTIONS "
@@ -327,16 +307,6 @@ endfunction
 " Reload snippets
 function! ReloadSnips()
     py UltiSnips_Manager.reset()
-endfunction
-
-" Strip trailing whitespaces
-function! <SID>StripTrailingWhitespaces()
-    let _s=@/
-    let l = line(".")
-    let c = col(".")
-    %s/\s\+$//e
-    let @/=_s
-    call cursor(l, c)
 endfunction
 
 " List all shortcuts mapped with leader keys
@@ -362,6 +332,7 @@ if filereadable(expand("~/.vimrc.local"))
     source ~/.vimrc.local
 endif
 
+" Load per OS configuration - detects the OS
 let os = substitute(system('uname'), "\n", "", "")
 
 if os == "Linux"
