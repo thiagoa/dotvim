@@ -77,10 +77,6 @@ set shortmess=atI
 
 let mapleader = "\<Space>"
 
-" Change cursor to an underscore while in insert mode
-let &t_SI = "\<Esc>]50;CursorShape=2\x7"
-let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-
 " Configure :grep to use Ag (The Silver Searcher)
 if executable('ag')
     set grepprg=ag\ --nogroup\ --nocolor\ -U
