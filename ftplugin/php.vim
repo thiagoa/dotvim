@@ -18,7 +18,6 @@ let g:PHP_outdentphpescape = 0
 nnoremap <Leader>o 2s<C-v>[<C-v>'<Esc>ea<C-v>'<C-v>]<Esc>
 
 " PHPDoc mappings
-inoremap <buffer> <Leader>z <Esc>:call PhpDocSingle()<CR>i
 nnoremap <buffer> <Leader>z :call PhpDocSingle()<CR>
 vnoremap <buffer> <Leader>z :call PhpDocRange()<CR>
 

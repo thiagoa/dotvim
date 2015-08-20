@@ -17,6 +17,10 @@ set hidden
 set history=1000
 set shell=/bin/bash
 
+set noshowmode
+set exrc
+set shiftround
+
 set fileencodings=utf-8,iso-8859-1
 
 set number
@@ -79,7 +83,7 @@ let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 
 " Configure :grep to use Ag (The Silver Searcher)
 if executable('ag')
-    set grepprg=ag\ --nogroup\ --nocolor
+    set grepprg=ag\ --nogroup\ --nocolor\ -U
 
     " Aso configure a custom Ag command using :grep
     command! -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
@@ -89,6 +93,13 @@ endif
 " PLUGINS CONFIG / MAPPING "
 """"""""""""""""""""""""""""
 
+"""""" python mode """""""
+
+let g:pymode_virtualenv = 1
+let g:pymode_folding = 0
+let g:pymode_run = 1
+let g:pymode_rope = 1
+
 """""" gitv """"""""
 
 let g:Gitv_WipeAllOnClose = 1
@@ -97,14 +108,25 @@ let g:Gitv_WipeAllOnClose = 1
 
 if executable('ag')
   let g:ctrlp_use_caching = 1
-  let g:ctrlp_user_command = 'ag %s -l -g "(rb|erb|html|js|yml|php|py|ex|java|groovy|gsp|coffee|less|css|txt|md|markdown)$"'
+  let g:ctrlp_user_command = 'ag %s -U -l -g "(rb|erb|html|js|yml|php|py|ex|java|groovy|gsp|coffee|less|css|txt|md|markdown)$"'
 endif
 
 let g:ctrlp_match_window_bottom = 0
 let g:ctrlp_match_window_reversed = 0
 
-" Ctrlp uses <C-l> (C-p is used for YankRing.vim)
-let g:ctrlp_map = '<C-l>'
+"remap ctrl left and right to resize the window
+nnoremap <C-h> <C-w>5>
+nnoremap <C-l> <C-w>5<
+nnoremap <C-j> <C-w>5+
+nnoremap <C-k> <C-w>5-
+
+" ['rlp'] uses <C-l> (C-p is used for YankRing.vim)
+let g:ctrlp_map = '<C-g>'
+nnoremap <Leader>b :CtrlPBuffer<CR>
+
+""""""" YankRing """""
+
+let g:yankring_history_dir = '/tmp'
 
 """"""" Vroom """"""""
 
@@ -204,7 +226,13 @@ let pandoc_pipeline  = "pandoc --from=html --to=markdown"
 let pandoc_pipeline .= " | pandoc --from=markdown --to=html"
 autocmd FileType html let &formatprg=pandoc_pipeline
 
+autocmd BufReadPost fugitive://* set bufhidden=delete
+
 """"""""""" History navigation """""""""""""
+
+let g:toggle_list_no_mappings = 1
+
+nnoremap <silent> <Leader>z :call ToggleQuickfixList()<CR>
 
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>

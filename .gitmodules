@@ -154,3 +154,18 @@
 [submodule "bundle/rename.vim"]
 	path = bundle/rename.vim
 	url = git@github.com:danro/rename.vim.git
+[submodule "bundle/bundle/ctrlp-funky"]
+	path = bundle/bundle/ctrlp-funky
+	url = git://github.com/tacahiroy/ctrlp-funky.git
+[submodule "bundle/python-syntax"]
+	path = bundle/python-syntax
+	url = git@github.com:hdima/python-syntax.git
+[submodule "bundle/python-mode"]
+	path = bundle/python-mode
+	url = git://github.com/klen/python-mode.git
+[submodule "bundle/ropevim"]
+	path = bundle/ropevim
+	url = git@github.com:python-rope/ropevim.git
+[submodule "bundle/charged-256"]
+	path = bundle/charged-256
+	url = git@github.com:vim-scripts/charged-256.vim.git
