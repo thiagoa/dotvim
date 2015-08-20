@@ -103,13 +103,13 @@ endif
 let g:ctrlp_match_window_bottom = 0
 let g:ctrlp_match_window_reversed = 0
 
-"remap ctrl left and right to resize the window
+" Reside window vertically
 nnoremap <C-h> <C-w>5>
 nnoremap <C-l> <C-w>5<
 nnoremap <C-j> <C-w>5+
 nnoremap <C-k> <C-w>5-
 
-" ['rlp'] uses <C-l> (C-p is used for YankRing.vim)
+" CtrlP mapping is C-g (C-p is used for YankRing.vim)
 let g:ctrlp_map = '<C-g>'
 nnoremap <Leader>b :CtrlPBuffer<CR>
 
