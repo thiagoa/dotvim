@@ -2,8 +2,6 @@
 " VIM CONFIGURATION "
 """""""""""""""""""""
 
-set nocompatible
-
 call pathogen#incubate()
 call pathogen#helptags()
 execute pathogen#infect()
@@ -62,8 +60,9 @@ set hlsearch
 
 set ignorecase
 set smartcase
-
 set noesckeys
+
+set nocompatible
 
 set timeoutlen=1000 ttimeoutlen=0
 set laststatus=2
