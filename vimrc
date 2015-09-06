@@ -109,7 +109,7 @@ nnoremap <C-j> <C-w>5+
 nnoremap <C-k> <C-w>5-
 
 " CtrlP mapping is C-g (C-p is used for YankRing.vim)
-let g:ctrlp_map = '<C-g>'
+let g:ctrlp_map = '<C-p>'
 nnoremap <Leader>b :CtrlPBuffer<CR>
 
 """"""" YankRing """""

@@ -148,9 +148,6 @@
 [submodule "bundle/argtextobj"]
 	path = bundle/argtextobj
 	url = git@github.com:vim-scripts/argtextobj.vim.git
-[submodule "bundle/YankRing.vim"]
-	path = bundle/YankRing.vim
-	url = git@github.com:vim-scripts/YankRing.vim.git
 [submodule "bundle/rename.vim"]
 	path = bundle/rename.vim
 	url = git@github.com:danro/rename.vim.git
