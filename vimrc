@@ -102,12 +102,6 @@ endif
 let g:ctrlp_match_window_bottom = 0
 let g:ctrlp_match_window_reversed = 0
 
-" Reside window vertically
-nnoremap <C-h> <C-w>5>
-nnoremap <C-l> <C-w>5<
-nnoremap <C-j> <C-w>5+
-nnoremap <C-k> <C-w>5-
-
 " CtrlP mapping is C-g (C-p is used for YankRing.vim)
 let g:ctrlp_map = '<C-p>'
 nnoremap <Leader>b :CtrlPBuffer<CR>
