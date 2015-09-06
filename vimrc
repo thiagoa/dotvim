@@ -280,10 +280,10 @@ cab Stag stag
 """""""""" Ruby """"""""""""
 
 " Auto start Rails server when on a Rails project
-autocmd User Startified
-\ if filereadable(getcwd() . '/Gemfile') |
-\   Rserver! |
-\ endif
+"autocmd User Startified
+"\ if filereadable(getcwd() . '/Gemfile') |
+"\   Rserver! |
+"\ endif
 
 " Find ruby files with gf command
 augroup rubypath
