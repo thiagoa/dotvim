@@ -260,6 +260,7 @@ nnoremap <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
 
 """""""""" Abbreviations """""""""""
 
+cab vsb vert sb
 cab W w
 cab WQ wq
 cab Cd cd
