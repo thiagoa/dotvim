@@ -97,6 +97,10 @@ let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 let g:syntastic_ignore_files = ['scss$']
 
+"""" Splitjoin """"
+
+let g:splitjoin_ruby_hanging_args=0
+
 """""" gitv """"""""
 
 let g:Gitv_WipeAllOnClose = 1
