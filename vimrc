@@ -252,8 +252,11 @@ nnoremap <silent><Leader><Space> :nohlsearch<CR>
 
 """"""""" New behavior """"""""""
 
-" Auto close brackets on return (essential)
+" Auto close curly braces on return (essential)
 inoremap {<CR> {<CR>}<Esc>O
+
+" Auto close brackets on return (essential)
+inoremap [<CR> [<CR>]<Esc>O
 
 " Disable auto commenting on all file types
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
