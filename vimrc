@@ -51,8 +51,8 @@ set nobackup
 set backupdir=~/.vim/backup,~/.tmp,~/tmp,/var/tmp,/tmp
 set directory=~/.vim/backup,~/.tmp,~/tmp,/var/tmp,/tmp
 
-set wildmenu
-set wildmode=longest,full
+set nowildmenu
+set wildmode=longest,list
 set wildignore+=*/tmp/*,*/public/system/*,*.so,*.swp,*.zip,*.jpg,*.png,*.gif
 
 set incsearch
