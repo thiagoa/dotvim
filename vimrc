@@ -88,6 +88,15 @@ endif
 " PLUGINS CONFIG / MAPPING "
 """"""""""""""""""""""""""""
 
+" Disable syntastic by default
+autocmd VimEnter * SyntasticToggleMode
+
+"""" Syntastic """"
+
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 0
+let g:syntastic_ignore_files = ['scss$']
+
 """""" gitv """"""""
 
 let g:Gitv_WipeAllOnClose = 1
