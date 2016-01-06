@@ -125,7 +125,7 @@ let g:yankring_history_dir = '/tmp'
 """"""" Vroom """"""""
 
 let g:vroom_test_unit_command="testrbl -Itest:lib -rminitest/autorun"
-let g:vroom_use_dispatch=1
+let g:vroom_use_dispatch=0
 map <Leader>T :Dispatch rake test<CR>
 map <Leader>Ta :Dispatch rake test:all<CR>
 
