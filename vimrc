@@ -15,6 +15,8 @@ set hidden
 set history=1000
 set shell=/bin/bash
 
+set nofoldenable
+
 set noshowmode
 set exrc
 set shiftround
