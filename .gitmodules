@@ -166,3 +166,6 @@
 [submodule "bundle/vim-reek"]
 	path = bundle/vim-reek
 	url = https://github.com/lad/vim-reek.git
+[submodule "bundle/vim-janah"]
+	path = bundle/vim-janah
+	url = git@github.com:mhinz/vim-janah.git
