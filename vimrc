@@ -324,6 +324,9 @@ autocmd Filetype groovy setlocal noexpandtab
 " Syntax highlighting for json files
 autocmd BufRead,BufNewFile *.json set filetype=javascript
 
+" Resize window (useful when resizing tmux panes)
+autocmd VimResized * :wincmd =
+
 """""""""""""
 " FUNCTIONS "
 """""""""""""
