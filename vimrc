@@ -379,3 +379,5 @@ elseif os == "Darwin"
 else
     source ~/.vim/vimrc.windows
 endif
+
+source ~/.vim/functions.vim
