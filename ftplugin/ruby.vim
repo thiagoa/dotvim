@@ -1,6 +1,10 @@
-setlocal makeprg=php\ -d\ display_errors=1\ -l\ %
-setlocal makeprg=ruby\ -c\ %
-
 set tabstop=2
 set softtabstop=2
 set shiftwidth=2
+set colorcolumn=80
+
+" Find Ruby files with gf command
+augroup rubypath
+autocmd!
+autocmd FileType ruby setlocal suffixesadd+=.rb
+augroup END
