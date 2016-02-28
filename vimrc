@@ -151,6 +151,10 @@ let Tlist_Sql_Settings = 'sql;P:package;t:table'
 let Tlist_Ant_Settings = 'ant;p:Project;r:Property;t:Target'
 let tlist_php_settings = 'php;c:class;d:constant;f:function'
 
+""""""""" Debug """"""""""
+
+nnoremap <leader>f oputs "#" * 90<c-m>puts caller<c-m>puts "#" * 90<esc>
+
 """""""" Vim bufsurf """""""""
 
 nnoremap <silent> [v :BufSurfBack<CR>
