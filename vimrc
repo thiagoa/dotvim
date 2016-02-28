@@ -131,6 +131,10 @@ let g:vroom_use_dispatch=0
 map <Leader>T :Dispatch rake test<CR>
 map <Leader>Ta :Dispatch rake test:all<CR>
 
+""""""" Vimux """"""""
+
+nnoremap <Leader>g :VimuxZoomRunner<CR>
+
 """"""" Tagbar """""""""
 
 nnoremap <Leader>t :TagbarToggle<CR>
