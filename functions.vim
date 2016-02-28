@@ -1,3 +1,4 @@
+" *****************************************************************
 " Returns a dictionary that maps open buffers to the current line
 " each one's at.
 "
@@ -21,6 +22,8 @@ function! s:GetBufferCurrentLines()
     return buffer_current_lines
 endfunction
 
+
+" *************************************************************************
 " Put current git branch files in the quickfix list. This function gets all
 " modified files from origin/master to HEAD.
 "
@@ -45,6 +48,8 @@ endfunction
 
 command! -nargs=0 BranchFilesToQuickFix :call s:BranchFilesToQuickFix()
 
+
+" ************************************************************
 " Put current git status files in the quickfix list
 "
 " If the file is already open in a buffer, the quickfix entry
@@ -69,3 +74,137 @@ function! s:StatusFilesToQuickFix()
 endfunction
 
 command! -nargs=0 StatusFilesToQuickFix :call s:StatusFilesToQuickFix()
+
+
+" *********************************************************************
+" Returns complete buffer list, including unlisted buffers
+"
+" http://vim.wikia.com/wiki/Toggle_to_open_or_close_the_quickfix_window
+function! s:GetCompleteBufferList()
+  redir =>buflist
+  silent! ls!
+  redir END
+  return buflist
+endfunction
+
+
+" *********************************************************************
+" Toggle quickfix or location list
+"
+" http://vim.wikia.com/wiki/Toggle_to_open_or_close_the_quickfix_window
+function! ToggleList(bufname, pfx)
+  let buflist = s:GetCompleteBufferList()
+  for bufnum in map(filter(split(buflist, '\n'), 'v:val =~ "'.a:bufname.'"'), 'str2nr(matchstr(v:val, "\\d\\+"))')
+    if bufwinnr(bufnum) != -1
+      exec(a:pfx.'close')
+      return
+    endif
+  endfor
+  if a:pfx == 'l' && len(getloclist(0)) == 0
+      echohl ErrorMsg
+      echo "Location List is Empty."
+      return
+  endif
+  let winnr = winnr()
+  exec(a:pfx.'open')
+  if winnr() != winnr
+    wincmd p
+  endif
+endfunction
+
+nmap <silent> <leader>l :call ToggleList("Location List", 'l')<CR>
+nmap <silent> <leader>z :call ToggleList("Quickfix List", 'c')<CR>
+
+
+" **************************
+" Reload UltiSnips snippets
+"
+" Author: Thiago A. Silva
+function! s:ReloadSnips()
+    py3 UltiSnips_Manager.reset()
+endfunction
+
+command! -nargs=0 ReloadSnips :call s:ReloadSnips()
+
+
+" ******************************************
+" List all shortcuts mapped with leader keys
+"
+" Source unknown
+function! ListLeaders()
+     silent! redir @a
+     silent! nmap <LEADER>
+     silent! redir END
+     silent! new
+     silent! put! a
+     silent! g/^s*$/d
+     silent! %s/^.*,//
+     silent! normal ggVg
+     silent! sort
+     silent! let lines = getline(1,"$")
+endfunction
+
+
+" *******************************************************
+" List buffers and recent files in a full screen buffer.
+" Supports going to the desired buffer by pressing Enter.
+" (Slightly modified)
+"
+" https://dl.dropboxusercontent.com/u/76595/blog/20160227.html?t=dot_errors_rspec_custom_formatter
+function! ListFiles()
+  if bufnr('==ListFiles') > 0
+    bwipeout! ==ListFiles
+  end
+
+  new | only
+  file ==ListFiles
+
+  setlocal buftype=nofile
+  setlocal bufhidden=hide
+  setlocal noswapfile
+  setlocal nobuflisted
+  setlocal filetype=ListFiles
+
+  let @z=""
+  redir @z
+  silent echo ""
+  silent echo "== recent"
+  silent bro ol
+  redir END
+  silent $put z
+
+  let @z=""
+  redir @z
+  silent echo "== buffers"
+  silent buffers
+  redir END
+  silent $put z
+
+  %s/^\s\+\d\+[^\"]\+"//
+  %s/"\s\+line /:/
+  g/^Type number and /d
+
+  g/COMMIT_EDITMSG/d
+  g/NetrwTreeListing/d
+  g/bash-fc-/d
+  g/==ListFiles/d
+  g/\/mutt-/d
+
+  silent %s/^[0-9]\+: //
+
+  %sno#^' . fnamemodify(expand("."), ":~:.") . '/##
+
+  g/^$/d
+  exe '%s/^==/
+==/'
+
+  call feedkeys('1Gjj')
+
+  setlocal syntax=listold
+
+  nmap <buffer> o gF
+  nmap <buffer> <space> gF
+  nmap <buffer> <CR> gF
+endfunction
+
+command! -nargs=0 ListFiles :call s:ListFiles()

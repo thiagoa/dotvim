@@ -169,3 +169,6 @@
 [submodule "bundle/vim-janah"]
 	path = bundle/vim-janah
 	url = git@github.com:mhinz/vim-janah.git
+[submodule "bundle/vim-snippets"]
+	path = bundle/vim-snippets
+	url = git@github.com:honza/vim-snippets.git
