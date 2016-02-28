@@ -1,4 +1,5 @@
-" Utility function to map open buffers to current line
+" Returns a dictionary that maps open buffers to the current line
+" each one's at.
 "
 " Author: Thiago A. Silva
 function! s:GetBufferCurrentLines()
@@ -20,7 +21,8 @@ function! s:GetBufferCurrentLines()
     return buffer_current_lines
 endfunction
 
-" Put current git branch files in the quickfix list
+" Put current git branch files in the quickfix list. This function gets all
+" modified files from origin/master to HEAD.
 "
 " If the file is already open in a buffer, the quickfix entry
 " will point at the same line
