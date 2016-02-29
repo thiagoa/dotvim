@@ -47,7 +47,7 @@ let g:yankring_history_dir = '/tmp'
 """"""" Vroom """"""""
 
 let g:vroom_test_unit_command="testrbl -Itest:lib -rminitest/autorun"
-let g:vroom_use_tmux_runner=1
+let g:vroom_use_vimux=1
 
 """"""" Vimux """"""""
 
