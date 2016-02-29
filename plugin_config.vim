@@ -77,9 +77,7 @@ nnoremap <silent> ]v :BufSurfForward<CR>
 
 """"""""" UltiSnips """""""""""
 
-let g:UltiSnipsUsePythonVersion = 3
 let g:UltiSnipsEditSplit="vertical"
-let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/UltiSnips']
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
