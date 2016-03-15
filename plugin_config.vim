@@ -29,7 +29,7 @@ let g:Gitv_WipeAllOnClose = 1
 
 if executable('ag')
   let g:ctrlp_use_caching = 1
-  let g:ctrlp_user_command = 'ag %s -U -l -g "(rb|erb|html|js|yml|php|py|handlebars|ex|java|groovy|gsp|coffee|less|css|txt|md|markdown|rake|sh|haml)$"'
+  let g:ctrlp_user_command = 'ag %s -U -l --ignore-dir=node_modules -g "(rb|erb|html|js|yml|php|py|handlebars|ex|java|groovy|gsp|coffee|less|css|txt|md|markdown|rake|sh|haml)$"'
 endif
 
 let g:ctrlp_match_window_bottom = 0
