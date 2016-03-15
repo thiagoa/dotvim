@@ -67,3 +67,4 @@ source ~/.vim/native_mappings.vim
 source ~/.vim/plugin_config.vim
 source ~/.vim/functions.vim
 source ~/.vim/autocommands.vim
+source ~/.vim/abbreviations.vim
