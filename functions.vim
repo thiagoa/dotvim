@@ -208,3 +208,44 @@ function! ListFiles()
 endfunction
 
 command! -nargs=0 ListFiles :call s:ListFiles()
+
+
+" ************************************************************
+" Grep in all open buffers.
+"
+" Taken from somewhere (can not remember where)
+"
+" Author: Thiago A. Silva
+function! s:GrepBuffers (expression)
+  exec 'vimgrep/'.a:expression.'/ '.join(s:BuffersList())
+endfunction
+
+function! s:BuffersList()
+  let all = range(0, bufnr('$'))
+  let res = []
+  for b in all
+    if buflisted(b)
+      call add(res, bufname(b))
+    endif
+  endfor
+  return res
+endfunction
+
+command! -nargs=+ GrepBufs call s:GrepBuffers(<q-args>)
+
+
+" ************************************************************
+" Delete buffer and file altogether
+"
+" Author: Thiago A. Silva
+function! s:Remove()
+	let l:curfile = expand("%:p")
+
+    if delete(l:curfile)
+        echoerr "Could not delete " . l:curfile
+    endif
+
+    silent exe "bwipe! " . fnameescape(l:curfile)
+endfunction
+
+command! -nargs=0 Remove :call s:Remove()
