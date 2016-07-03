@@ -4,7 +4,7 @@
 #
 # Non-destructive-do-everything install tool
 
-echo -e "setting up vim...\n"
+echo -e "Setting up vim...\n"
 
 # Get current script dir more or less reliably...
 pushd . > /dev/null

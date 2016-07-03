@@ -36,16 +36,16 @@
 	url = https://github.com/vim-scripts/DBGp-client.git
 [submodule "bundle/ultisnips"]
 	path = bundle/ultisnips
-	url = git://github.com/SirVer/ultisnips.git
+	url = https://github.com/SirVer/ultisnips.git
 [submodule "bundle/solarized"]
 	path = bundle/solarized
-	url = git://github.com/altercation/vim-colors-solarized.git
+	url = https://github.com/altercation/vim-colors-solarized.git
 [submodule "bundle/vim-rails"]
 	path = bundle/vim-rails
-	url = git://github.com/tpope/vim-rails.git
+	url = https://github.com/tpope/vim-rails.git
 [submodule "bundle/asynccommand"]
 	path = bundle/asynccommand
-	url = git@github.com:vim-scripts/AsyncCommand
+	url = https://github.com/vim-scripts/AsyncCommand
 [submodule "bundle/vim-visual-star-search"]
 	path = bundle/vim-visual-star-search
 	url = https://github.com/nelstrom/vim-visual-star-search
@@ -57,67 +57,67 @@
 	url = https://github.com/tpope/vim-unimpaired.git
 [submodule "bundle/vim-ruby-run"]
 	path = bundle/vim-ruby-run
-	url = git://github.com/stjernstrom/vim-ruby-run.git
+	url = https://github.com/stjernstrom/vim-ruby-run.git
 [submodule "bundle/vim-textobj-rubyblock"]
 	path = bundle/vim-textobj-rubyblock
-	url = git@github.com:nelstrom/vim-textobj-rubyblock
+	url = https://github.com/nelstrom/vim-textobj-rubyblock
 [submodule "bundle/vim-textobj-user"]
 	path = bundle/vim-textobj-user
-	url = git@github.com:kana/vim-textobj-user
+	url = https://github.com/kana/vim-textobj-user
 [submodule "bundle/vim-bundler"]
 	path = bundle/vim-bundler
-	url = git@github.com:tpope/vim-bundler
+	url = https://github.com/tpope/vim-bundler
 [submodule "bundle/vim-rake"]
 	path = bundle/vim-rake
-	url = git@github.com:tpope/vim-rake
+	url = https://github.com/tpope/vim-rake
 [submodule "bundle/funcoo"]
 	path = bundle/funcoo
-	url = git@github.com:rizzatti/funcoo.vim.git
+	url = https://github.com/rizzatti/funcoo.vim.git
 [submodule "bundle/dash"]
 	path = bundle/dash
-	url = git@github.com:rizzatti/dash.vim.git
+	url = https://github.com/rizzatti/dash.vim.git
 [submodule "bundle/gitv"]
 	path = bundle/gitv
-	url = git@github.com:gregsexton/gitv.git
+	url = https://github.com/gregsexton/gitv.git
 [submodule "bundle/vim-dispatch"]
 	path = bundle/vim-dispatch
-	url = git@github.com:tpope/vim-dispatch.git
+	url = https://github.com/tpope/vim-dispatch.git
 [submodule "bundle/syntastic"]
 	path = bundle/syntastic
 	url = https://github.com/scrooloose/syntastic.git
 [submodule "bundle/vim-vinegar"]
 	path = bundle/vim-vinegar
-	url = git@github.com:tpope/vim-vinegar.git
+	url = https://github.com/tpope/vim-vinegar.git
 [submodule "bundle/tagbar"]
 	path = bundle/tagbar
-	url = git@github.com:majutsushi/tagbar.git
+	url = https://github.com/majutsushi/tagbar.git
 [submodule "bundle/ctrlp"]
 	path = bundle/ctrlp
-	url = git@github.com:kien/ctrlp.vim.git
+	url = https://github.com/kien/ctrlp.vim.git
 [submodule "bundle/vimux"]
 	path = bundle/vimux
-	url = git@github.com:benmills/vimux.git
+	url = https://github.com/benmills/vimux.git
 [submodule "bundle/vim-endwise"]
 	path = bundle/vim-endwise
-	url = git@github.com:tpope/vim-endwise.git
+	url = https://github.com/tpope/vim-endwise.git
 [submodule "bundle/vim-tmux-navigator"]
 	path = bundle/vim-tmux-navigator
-	url = git@github.com:christoomey/vim-tmux-navigator.git
+	url = https://github.com/christoomey/vim-tmux-navigator.git
 [submodule "bundle/vim-go"]
 	path = bundle/vim-go
-	url = git@github.com:fatih/vim-go.git
+	url = https://github.com/fatih/vim-go.git
 [submodule "bundle/vim-ruby-minitest"]
 	path = bundle/vim-ruby-minitest
-	url = git@github.com:sunaku/vim-ruby-minitest.git
+	url = https://github.com/sunaku/vim-ruby-minitest.git
 [submodule "bundle/vim-vroom"]
 	path = bundle/vim-vroom
 	url = https://github.com/skalnik/vim-vroom.git
 [submodule "bundle/vim-exchange"]
 	path = bundle/vim-exchange
-	url = git://github.com/tommcdo/vim-exchange.git
+	url = https://github.com/tommcdo/vim-exchange.git
 [submodule "bundle/splitjoin"]
 	path = bundle/splitjoin
-	url = git@github.com:AndrewRadev/splitjoin.vim.git
+	url = https://github.com/AndrewRadev/splitjoin.vim.git
 [submodule "bundle/molokai"]
 	path = bundle/molokai
 	url = https://github.com/tomasr/molokai.git
@@ -126,52 +126,52 @@
 	url = https://github.com/sheerun/vim-polyglot.git
 [submodule "bundle/vim-startify"]
 	path = bundle/vim-startify
-	url = git@github.com:mhinz/vim-startify.git
+	url = https://github.com/mhinz/vim-startify.git
 [submodule "bundle/vim-sleuth"]
 	path = bundle/vim-sleuth
-	url = git@github.com:tpope/vim-sleuth.git
+	url = https://github.com/tpope/vim-sleuth.git
 [submodule "bundle/vim-rsi"]
 	path = bundle/vim-rsi
-	url = git@github.com:tpope/vim-rsi.git
+	url = https://github.com/tpope/vim-rsi.git
 [submodule "bundle/vim-bufsurf"]
 	path = bundle/vim-bufsurf
-	url = git@github.com:ton/vim-bufsurf.git
+	url = https://github.com/ton/vim-bufsurf.git
 [submodule "bundle/vim-indentobject"]
 	path = bundle/vim-indentobject
-	url = git@github.com:austintaylor/vim-indentobject.git
+	url = https://github.com/austintaylor/vim-indentobject.git
 [submodule "bundle/argtextobj"]
 	path = bundle/argtextobj
-	url = git@github.com:vim-scripts/argtextobj.vim.git
+	url = https://github.com/vim-scripts/argtextobj.vim.git
 [submodule "bundle/rename.vim"]
 	path = bundle/rename.vim
-	url = git@github.com:danro/rename.vim.git
+	url = https://github.com/danro/rename.vim.git
 [submodule "bundle/bundle/ctrlp-funky"]
 	path = bundle/bundle/ctrlp-funky
-	url = git://github.com/tacahiroy/ctrlp-funky.git
+	url = https://github.com/tacahiroy/ctrlp-funky.git
 [submodule "bundle/python-syntax"]
 	path = bundle/python-syntax
-	url = git@github.com:hdima/python-syntax.git
+	url = https://github.com/hdima/python-syntax.git
 [submodule "bundle/python-mode"]
 	path = bundle/python-mode
-	url = git://github.com/klen/python-mode.git
+	url = https://github.com/klen/python-mode.git
 [submodule "bundle/ropevim"]
 	path = bundle/ropevim
-	url = git@github.com:python-rope/ropevim.git
+	url = https://github.com/python-rope/ropevim.git
 [submodule "bundle/charged-256"]
 	path = bundle/charged-256
-	url = git@github.com:vim-scripts/charged-256.vim.git
+	url = https://github.com/vim-scripts/charged-256.vim.git
 [submodule "bundle/auto_mkdir"]
 	path = bundle/auto_mkdir
-	url = git@github.com:DataWraith/auto_mkdir.git
+	url = https://github.com/DataWraith/auto_mkdir.git
 [submodule "bundle/vim-reek"]
 	path = bundle/vim-reek
 	url = https://github.com/lad/vim-reek.git
 [submodule "bundle/vim-janah"]
 	path = bundle/vim-janah
-	url = git@github.com:mhinz/vim-janah.git
+	url = https://github.com/mhinz/vim-janah.git
 [submodule "bundle/vim-snippets"]
 	path = bundle/vim-snippets
-	url = git@github.com:honza/vim-snippets.git
+	url = https://github.com/honza/vim-snippets.git
 [submodule "bundle/targets.vim"]
 	path = bundle/targets.vim
-	url = git@github.com:wellle/targets.vim.git
+	url = https://github.com/wellle/targets.vim.git
