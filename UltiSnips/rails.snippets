@@ -3,3 +3,9 @@ puts '#' * 90
 puts $0
 puts '#' * 90
 endsnippet
+
+snippet wtfl "debug with rails"
+Rails.logger.debug "#DEBUGSTART"
+Rails.logger.debug $0
+Rails.logger.debug "#DEBUGEND"
+endsnippet
