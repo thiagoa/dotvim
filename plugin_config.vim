@@ -28,8 +28,40 @@ let g:Gitv_WipeAllOnClose = 1
 """"""" CtrlP """"""""
 
 if executable('ag')
+  " Extension whitelist to speed up CtrlP
+  " P.S.: Not a CtrlP core variable
+  let g:ctrlp_exts = [
+    \'rb',
+    \'erb',
+    \'html',
+    \'js',
+    \'yml',
+    \'php',
+    \'py',
+    \'handlebars',
+    \'ex',
+    \'java',
+    \'groovy',
+    \'gsp',
+    \'coffee',
+    \'less',
+    \'css',
+    \'txt',
+    \'md',
+    \'markdown',
+    \'rake',
+    \'sh',
+    \'es6',
+    \'haml'
+  \]
+
+  # P.S.: Not a CtrlP core variable
+  let g:ctrlp_ignored_dirs = ['node_modules', 'tmp', 'log']
+
   let g:ctrlp_use_caching = 1
-  let g:ctrlp_user_command = 'ag %s -U -l --ignore-dir=node_modules -g "(rb|erb|html|js|yml|php|py|handlebars|ex|java|groovy|gsp|coffee|less|css|txt|md|markdown|rake|sh|haml)$"'
+  let g:ctrlp_user_command = 'ag %s -U -l ' +
+    \ '--ignore-dir='+join(g:ctrlp_ignored_dirs, ' --ignore-dir=')+
+    \' -g "('+join(g:ctrlp_exts, '|')+')$"'
 endif
 
 let g:ctrlp_match_window_bottom = 0
