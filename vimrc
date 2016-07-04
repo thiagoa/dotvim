@@ -55,22 +55,10 @@ set backspace=start,indent,eol
 set listchars=tab:>-,trail:·,eol:$
 set shortmess=atI
 
-if filereadable(expand("~/.vimrc.local"))
-    source ~/.vimrc.local
-endif
-
-let os = substitute(system('uname'), "\n", "", "")
-
-if os == "Linux"
-    source ~/.vim/vimrc.linux
-elseif os == "Darwin"
-    source ~/.vim/vimrc.darwin
-else
-    source ~/.vim/vimrc.windows
-endif
-
+source ~/.vim/load_per_os_config.vim
 source ~/.vim/native_mappings.vim
 source ~/.vim/plugin_config.vim
 source ~/.vim/functions.vim
 source ~/.vim/autocommands.vim
 source ~/.vim/abbreviations.vim
+source ~/.vim/load_local_config.vim
