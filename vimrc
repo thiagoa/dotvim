@@ -1,3 +1,9 @@
+" ------------------------------
+" | Thiago's vim configuration |
+" ------------------------------
+"
+" No comments in every line. When in doubt Google.
+
 call pathogen#incubate()
 call pathogen#helptags()
 execute pathogen#infect()

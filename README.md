@@ -1,6 +1,6 @@
 # Thiago's Vim Setup
 
-My messy dotfiles.
+My messy vimfiles.
 
 ## Installation:
 
