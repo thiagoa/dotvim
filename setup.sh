@@ -36,7 +36,6 @@ do
     ln -s "$DIR/$file" ~/.$file
 done
 
-echo ""
 echo "Please wait, configuring submodules..."
 
 cd $DIR
@@ -45,5 +44,3 @@ git submodule update --init --quiet
 if [ $? -eq 1 ]; then
     die "!!! died with git error !!!"
 fi
-
-echo -e "\ndone"
