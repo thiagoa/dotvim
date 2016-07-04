@@ -55,7 +55,7 @@ if executable('ag')
     \'haml'
   \]
 
-  # P.S.: Not a CtrlP core variable
+  " P.S.: Not a CtrlP core variable
   let g:ctrlp_ignored_dirs = ['node_modules', 'tmp', 'log']
 
   let g:ctrlp_use_caching = 1
