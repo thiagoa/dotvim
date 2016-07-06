@@ -1,3 +1,7 @@
+"""" Syntax highlighting for markdown languages """"
+
+let g:markdown_fenced_languages = ['html', 'vim', 'ruby', 'python', 'bash=sh']
+
 """" Fugitive """"
 
 autocmd BufReadPost fugitive://* set bufhidden=delete
