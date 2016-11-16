@@ -55,10 +55,10 @@ set backspace=start,indent,eol
 set listchars=tab:>-,trail:·,eol:$
 set shortmess=atI
 
-source ~/.vim/load_per_os_config.vim
 source ~/.vim/native_mappings.vim
 source ~/.vim/plugin_config.vim
 source ~/.vim/functions.vim
 source ~/.vim/autocommands.vim
 source ~/.vim/abbreviations.vim
 source ~/.vim/load_local_config.vim
+source ~/.vim/load_per_os_config.vim

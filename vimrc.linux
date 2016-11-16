@@ -1,0 +1,3 @@
+vmap <Leader>y ygv:!xclip -selection c<CR>P
+nmap <Leader>p :read !xclip -out -selection c<CR>
+

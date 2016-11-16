@@ -175,3 +175,6 @@
 [submodule "bundle/targets.vim"]
 	path = bundle/targets.vim
 	url = https://github.com/wellle/targets.vim.git
+[submodule "bundle/tender.vim"]
+	path = bundle/tender.vim
+	url = git@github.com:jacoborus/tender.vim.git
