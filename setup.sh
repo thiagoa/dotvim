@@ -44,3 +44,6 @@ git submodule update --init --quiet
 if [ $? -eq 1 ]; then
     die "!!! died with git error !!!"
 fi
+
+mkdir -p $HOME/.config 2> /dev/null
+ln -s ~/.vim $HOME/.config 2> /dev/null
