@@ -4,46 +4,83 @@
 #
 # Non-destructive-do-everything install tool
 
-echo -e "Setting up vim...\n"
+function install_plugins {
+    local cmd
 
-# Get current script dir more or less reliably...
-pushd . > /dev/null
-DIR="${BASH_SOURCE[0]}";
-while([ -h "${DIR}" ]) do 
-    cd "`dirname "${DIR}"`"
-    DIR="$(readlink "`basename "${DIR}"`")"; 
-done
-cd "`dirname "${DIR}"`" > /dev/null
-DIR="`pwd`";
-popd  > /dev/null
-
-die() { echo "$@" 1>&2 ; exit 1; }
-
-# Check if git repo is in ~/.vim
-if [ $DIR/.git != ~/.vim/.git ]; then
-    die "error: repo dir must be ~/.vim, or not a git repo"
-fi
-
-for file in vimrc gvimrc
-do
-    ls ~/.$file > /dev/null 2> /dev/null
-
-    if [ $? -eq 0 ]; then
-        echo "** Backing up current .$file to .$file.backup **";
-        mv ~/.$file ~/.$file.backup
+    if [[ -x $(which nvim 2> /dev/null) ]]; then
+        cmd="nvim"
+    elif [[ -x $(which vim 2> /dev/null) ]]; then
+        cmd="vim"
+    else
+        die "ERROR: Vim not installed!"
     fi
 
-    ln -s "$DIR/$file" ~/.$file
-done
+    $cmd +PlugInstall +qall
+}
 
-echo "Please wait, configuring submodules..."
+function die {
+    local message="$@"
 
-cd $DIR
-git submodule update --init --quiet
+    echo $message 1>&2 && exit 1
+}
 
-if [ $? -eq 1 ]; then
-    die "!!! died with git error !!!"
-fi
+function ensure_directory_correct {
+    if [[ ! -d $HOME/.vim ]]; then
+        die "Please clone this in $HOME/.vim"
+    fi
+}
 
-mkdir -p $HOME/.config 2> /dev/null
-ln -s ~/.vim $HOME/.config 2> /dev/null
+function symlink_config_files {
+    local path;
+
+    for file in vimrc gvimrc; do
+        dest_path="$HOME/.$file"
+
+        if [[ -f $dest_path ]] || [[ -L $dest_path ]]; then
+            echo "** Backing up current .$file to .${file}.backup **";
+
+            mv $dest_path "${dest_path}.backup" 2> /dev/null
+        fi
+
+        ln -s "$HOME/.vim/$file" $dest_path 2> /dev/null
+    done
+}
+
+function share_config_with_neovim {
+    mkdir -p $HOME/.config 2> /dev/null
+    ln -s $HOME/.vim $HOME/.config 2> /dev/null
+}
+
+function ask_install_dependencies {
+    ask "Install UltiSnips deps (needs pip)" "sudo pip install neovim"
+}
+
+function ask {
+    local question="${1}? (Y/n) "
+    local cmd=$2
+
+    while true; do
+        read -p "${question}" answer
+
+        case $answer in
+            [Yy]*|"") eval $cmd; break;;
+            [Nn]*) break;;
+            *) echo "Please answer y or n.";;
+        esac
+    done
+}
+
+function ask_install_plugins {
+    ask "Install plugins" "install_plugins"
+}
+
+echo "Setting up vim and neovim..."
+
+ensure_directory_correct
+symlink_config_files
+
+echo ""
+
+share_config_with_neovim
+ask_install_dependencies
+ask_install_plugins

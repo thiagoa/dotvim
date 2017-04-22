@@ -2,13 +2,12 @@
 " | Thiago's vim configuration |
 " ------------------------------
 "
-" No comments in every line. When in doubt Google.
+" No comments, let's make this clean. When in doubt, Google!
 
-call pathogen#incubate()
-call pathogen#helptags()
-execute pathogen#infect()
+source ~/.vim/plug.vim
 
 syntax on
+
 filetype plugin on
 filetype plugin indent on
 
