@@ -80,10 +80,6 @@ let g:ctrlp_map = '<C-p>'
 nnoremap <Leader>b :CtrlPBuffer<CR>
 nnoremap <Leader>n :CtrlPMRU<CR>
 
-""""""" YankRing """""
-
-let g:yankring_history_dir = '/tmp'
-
 """"""" Vroom """"""""
 
 let g:vroom_test_unit_command="testrbl -Itest:lib -rminitest/autorun"
