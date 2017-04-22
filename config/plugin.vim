@@ -4,7 +4,7 @@ let g:markdown_fenced_languages = ['html', 'vim', 'ruby', 'python', 'bash=sh']
 
 """" Alchemist """"
 
-let g:alchemist#elixir_erlang_src = expand("$HOME/Code/elixir/src")
+let g:alchemist#elixir_erlang_src = "~/Code/elixir/src"
 
 """" Fugitive """"
 
