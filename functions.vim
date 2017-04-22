@@ -1,6 +1,5 @@
-" *****************************************************************
-" Returns a dictionary that maps open buffers to the current line
-" each one's at.
+" ******************************************************************
+" Returns a dictionary that maps open buffers to their current lines
 "
 " Author: Thiago A. Silva
 function! s:GetBufferCurrentLines()
@@ -24,14 +23,10 @@ endfunction
 
 
 " *************************************************************************
-" Put current git branch files in the quickfix list. This function gets all
-" modified files from origin/master to HEAD.
-"
-" If the file is already open in a buffer, the quickfix entry
-" will point at the same line
+" List all files that your current branch has changed on the quickfix list.
 "
 " Author: Thiago A. Silva
-function! s:BranchFilesToQuickFix()
+function! s:GitBranchFiles()
     let buffer_current_lines = s:GetBufferCurrentLines()
 
     let git_output = system('git show --pretty="" --name-only origin/master..HEAD | sort | uniq')
@@ -46,17 +41,14 @@ function! s:BranchFilesToQuickFix()
     cwindow
 endfunction
 
-command! -nargs=0 BranchFilesToQuickFix :call s:BranchFilesToQuickFix()
+command! -nargs=0 GitBranchFiles :call s:GitBranchFiles()
 
 
 " ************************************************************
-" Put current git status files in the quickfix list
-"
-" If the file is already open in a buffer, the quickfix entry
-" will point at the same line
+" Put current git status files on the quickfix list
 "
 " Author: Thiago A. Silva
-function! s:StatusFilesToQuickFix()
+function! s:GitStatus()
     let buffer_current_lines = s:GetBufferCurrentLines()
 
     let git_output = system('git status -s')
@@ -73,7 +65,7 @@ function! s:StatusFilesToQuickFix()
     cwindow
 endfunction
 
-command! -nargs=0 StatusFilesToQuickFix :call s:StatusFilesToQuickFix()
+command! -nargs=0 GitStatus :call s:GitStatus()
 
 
 " *********************************************************************
@@ -143,71 +135,6 @@ function! ListLeaders()
      silent! sort
      silent! let lines = getline(1,"$")
 endfunction
-
-
-" *******************************************************
-" List buffers and recent files in a full screen buffer.
-" Supports going to the desired buffer by pressing Enter.
-" (Slightly modified)
-"
-" https://dl.dropboxusercontent.com/u/76595/blog/20160227.html?t=dot_errors_rspec_custom_formatter
-function! ListFiles()
-  if bufnr('==ListFiles') > 0
-    bwipeout! ==ListFiles
-  end
-
-  new | only
-  file ==ListFiles
-
-  setlocal buftype=nofile
-  setlocal bufhidden=hide
-  setlocal noswapfile
-  setlocal nobuflisted
-  setlocal filetype=ListFiles
-
-  let @z=""
-  redir @z
-  silent echo ""
-  silent echo "== recent"
-  silent bro ol
-  redir END
-  silent $put z
-
-  let @z=""
-  redir @z
-  silent echo "== buffers"
-  silent buffers
-  redir END
-  silent $put z
-
-  %s/^\s\+\d\+[^\"]\+"//
-  %s/"\s\+line /:/
-  g/^Type number and /d
-
-  g/COMMIT_EDITMSG/d
-  g/NetrwTreeListing/d
-  g/bash-fc-/d
-  g/==ListFiles/d
-  g/\/mutt-/d
-
-  silent %s/^[0-9]\+: //
-
-  %sno#^' . fnamemodify(expand("."), ":~:.") . '/##
-
-  g/^$/d
-  exe '%s/^==/
-==/'
-
-  call feedkeys('1Gjj')
-
-  setlocal syntax=listold
-
-  nmap <buffer> o gF
-  nmap <buffer> <space> gF
-  nmap <buffer> <CR> gF
-endfunction
-
-command! -nargs=0 ListFiles :call s:ListFiles()
 
 
 " ************************************************************
