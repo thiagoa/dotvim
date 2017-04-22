@@ -123,7 +123,7 @@ command! -nargs=0 ReloadSnips :call s:ReloadSnips()
 " List all shortcuts mapped with leader keys
 "
 " Source unknown
-function! ListLeaders()
+function! Leaders()
      silent! redir @a
      silent! nmap <LEADER>
      silent! redir END
