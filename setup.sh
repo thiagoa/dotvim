@@ -31,13 +31,13 @@ function ensure_directory_correct {
 }
 
 function symlink_config_files {
-    local path;
+    local path
 
     for file in vimrc gvimrc; do
         dest_path="$HOME/.$file"
 
         if [[ -f $dest_path ]] || [[ -L $dest_path ]]; then
-            echo "** Backing up current .$file to .${file}.backup **";
+            echo "** Backing up current .$file to .${file}.backup **"
 
             mv $dest_path "${dest_path}.backup" 2> /dev/null
         fi
