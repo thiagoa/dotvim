@@ -2,6 +2,10 @@
 
 let g:markdown_fenced_languages = ['html', 'vim', 'ruby', 'python', 'bash=sh']
 
+"""" Alchemist """"
+
+let g:alchemist#elixir_erlang_src = '/home/thiago/Code/elixir/src'
+
 """" Fugitive """"
 
 autocmd BufReadPost fugitive://* set bufhidden=delete

@@ -163,3 +163,6 @@
 [submodule "bundle/tender.vim"]
 	path = bundle/tender.vim
 	url = git@github.com:jacoborus/tender.vim.git
+[submodule "bundle/alchemist"]
+	path = bundle/alchemist
+	url = git@github.com:slashmili/alchemist.vim.git
