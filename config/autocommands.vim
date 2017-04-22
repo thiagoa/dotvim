@@ -12,3 +12,14 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 " Balance windows automatically in resize event
 autocmd VimResized * :wincmd =
+
+" Protect large files (> 10 MB) from slowness by disabling filetype plugin.
+if !exists("large_file_autocmd_is_loaded")
+  let large_file_autocmd_is_loaded = 1
+
+  let g:LargeFile = 1024 * 1024 * 10
+
+  augroup LargeFile
+    autocmd BufReadPre * let f=expand("<afile>") | if getfsize(f) > g:LargeFile | set eventignore+=FileType | setlocal noswapfile | else | set eventignore-=FileType | endif
+  augroup END
+endif
