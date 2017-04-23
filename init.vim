@@ -36,8 +36,8 @@ set shiftwidth=4
 set smartindent
 set autoindent
 set nobackup
-set backupdir=~/.vim/backup,~/.tmp,~/tmp,/var/tmp,/tmp
-set directory=~/.vim/backup,~/.tmp,~/tmp,/var/tmp,/tmp
+set nowritebackup
+set noswapfile
 set nowildmenu
 set wildmode=longest,full
 set wildignore+=*/tmp/*,*/public/system/*,*.so,*.swp,*.zip,*.jpg,*.png,*.gif
@@ -53,6 +53,7 @@ set autoread
 set backspace=start,indent,eol
 set listchars=tab:>-,trail:·,eol:$
 set shortmess=atI
+set splitbelow
 
 source ~/.vim/config/mappings.vim
 source ~/.vim/config/plugin.vim

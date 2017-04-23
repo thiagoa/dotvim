@@ -4,52 +4,49 @@ call plug#begin('~/.vim/plugged')
 " NAVIGATION *
 "*************
 
-" Useful home screen / last modified files
+" Useful 'home screen' & last modified files
 Plug 'mhinz/vim-startify'
 
 " Fuzzy file finder
 Plug 'kien/ctrlp.vim'
 
-" Use * to search for visual mode selections
+" Search for visual mode selection using * command
 Plug 'nelstrom/vim-visual-star-search'
 
-" Easy buffer navigation (like a web browser)
+" Navigate buffers like in a web browser
 Plug 'ton/vim-bufsurf'
 
-" Powerful % matching
+" Extends % command to HTML and other languages
 Plug 'vim-scripts/matchit.zip'
 
-" Shortcuts to navigate between buffers, quick fix window, etc
+" Shortcuts to navigate between buffers, quick fix entries, etc
 Plug 'tpope/vim-unimpaired'
 
-" Readline mappings for insert mode! (emacs-like)
+" Readline mappings for insert mode (emacs-like)
 Plug 'tpope/vim-rsi'
 
 "********************
 " TEXT MANIPULATION *
 "********************
 
-" Smoothly exchange pieces of text
+" Exchange pieces of text
 Plug 'tommcdo/vim-exchange'
 
-" Syntax checking (I do not enable this by default. Pretty heavy...)
-Plug 'scrooloose/syntastic'
-
-" Surround text with any pair of characters
+" Surround text with pairs of characters or HTML tags
 Plug 'tpope/vim-surround'
 
-" A more powerful dot command. Repeat 'surround' and 'unimpaired' commands.
+" Extends the '.' command to repeat 'vim-surround' and 'vim-unimpaired' commands
 Plug 'tpope/vim-repeat'
 
 "*****************
 " FILE UTILITIES *
 "*****************
 
-" Rename a buffer and its corresponding file at the same time I also have a
-" custom function to do the 'delete' counterpart in functions.vim
+" Rename a buffer and its file at the same time (treats both operations as a
+" cohesive unit). The 'delete' counterpart is in 'config/functions.vim'
 Plug 'danro/rename.vim'
 
-" Automatic 'mkdir -p' upon saving
+" Recursively and automatically create directories upon saving (mkdir -p)
 Plug 'DataWraith/auto_mkdir'
 
 " I use this instead of NERDTree for file navigation
@@ -59,16 +56,16 @@ Plug 'tpope/vim-vinegar'
 " TEXT OBJECTS *
 "***************
 
-" Indentation-based text-object
-Plug 'austintaylor/vim-indentobject'
-
-" Extend default text objects and add new ones
+" Extend default text objects (and add new ones)
 Plug 'wellle/targets.vim'
 
-" For manipulating function arguments
+" Indentation-based text object
+Plug 'austintaylor/vim-indentobject'
+
+" Text objects for function arguments
 Plug 'vim-scripts/argtextobj.vim'
 
-" Allows creating custom text objects. A dependency for other plugins
+" User-defined text objects. A dependency for other plugins
 Plug 'kana/vim-textobj-user'
 
 "*********
@@ -89,28 +86,33 @@ Plug 'benmills/vimux'
 " CVS *
 "******
 
+" The one vim plugin you might want to have
 Plug 'tpope/vim-fugitive'
 
 "***********
 " SNIPPETS *
 "***********
 
+" The best snippets plugin
 Plug 'SirVer/ultisnips'
 
-" Some default snippets
+" Default snippets for many languages
 Plug 'honza/vim-snippets'
 
 "**************
 " PROGRAMMING *
 "**************
 
-" Automatic indentation (adjusts shiftwidth and expandtab based on curfile)
+" Automatic indentation (adjusts shiftwidth and expandtab based on current file)
 Plug 'tpope/vim-sleuth'
+
+" Syntax checking for many languages
+Plug 'scrooloose/syntastic'
 
 " Code commenter
 Plug 'scrooloose/nerdcommenter'
 
-" Fold and unfold some programming constructs, especially Ruby's
+" Fold and unfold programming constructs (especially Ruby's)
 Plug 'AndrewRadev/splitjoin.vim'
 
 " Template helpers (HTML, erb, etc)

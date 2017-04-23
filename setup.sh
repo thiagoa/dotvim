@@ -48,11 +48,11 @@ function symlink_config_files {
 
 function share_config_with_neovim {
     mkdir -p $HOME/.config 2> /dev/null
-    ln -s $HOME/.vim $HOME/.config 2> /dev/null
+    ln -s $HOME/.vim $HOME/.config/nvim 2> /dev/null
 }
 
 function ask_install_dependencies {
-    ask "Install UltiSnips deps (needs pip)" "sudo pip install neovim"
+    ask "Install UltiSnips deps for neovim (needs pip and requires root)" "sudo pip install neovim"
 }
 
 function ask {
@@ -71,7 +71,7 @@ function ask {
 }
 
 function ask_install_plugins {
-    ask "Install plugins" "install_plugins"
+    ask "Install vim plugins" "install_plugins"
 }
 
 echo "Setting up vim and neovim..."
