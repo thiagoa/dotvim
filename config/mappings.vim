@@ -8,18 +8,19 @@ nnoremap <Leader>q :qall<CR>
 nnoremap @! :w<CR>:!!<CR>
 
 " OS clipboard integration
-nmap <Leader>p "+p
-nmap <Leader>P "+P
+nnoremap <Leader>p "+p
+nnoremap <Leader>P "+P
+nnoremap <Leader>yy "+yy
 
-vmap <Leader>y "+y
-vmap <Leader>d "+d
-vmap <Leader>p "+p
-vmap <Leader>P "+P
+vnoremap <Leader>y "+y
+vnoremap <Leader>d "+d
+vnoremap <Leader>p "+p
+vnoremap <Leader>P "+P
 
 " Quickly open files in same directory
-map <Leader>e :e <C-R>=expand("%:p:h") . '/'<CR>
-map <Leader>s :split <C-R>=expand("%:p:h") . '/'<CR>
-map <Leader>v :vnew <C-R>=expand("%:p:h") . '/'<CR>
+noremap <Leader>e :e <C-R>=expand("%:p:h") . '/'<CR>
+noremap <Leader>s :split <C-R>=expand("%:p:h") . '/'<CR>
+noremap <Leader>v :vnew <C-R>=expand("%:p:h") . '/'<CR>
 
 " Faster scrolling
 nnoremap <C-e> 3<C-e>
