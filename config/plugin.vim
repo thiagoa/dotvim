@@ -69,7 +69,6 @@ endif
 
 let g:ctrlp_match_window_bottom = 0
 let g:ctrlp_match_window_reversed = 0
-
 let g:ctrlp_map = '<C-p>'
 
 nnoremap <Leader>b :CtrlPBuffer<CR>

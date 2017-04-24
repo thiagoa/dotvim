@@ -1,5 +1,5 @@
 " ******************************************************************
-" Returns a dictionary that maps open buffers to their current lines
+" Returns a dictionary which maps open buffers to their current lines
 "
 " Author: Thiago A. Silva
 function! s:GetBufferCurrentLines()
@@ -23,7 +23,7 @@ endfunction
 
 
 " *************************************************************************
-" List all files that your current branch has changed on the quickfix list.
+" List all changed files of your current branch on the quickfix list.
 "
 " Author: Thiago A. Silva
 function! s:GitBranchFiles()
@@ -69,7 +69,7 @@ command! -nargs=0 GitStatus :call s:GitStatus()
 
 
 " *********************************************************************
-" Returns complete buffer list, including unlisted buffers
+" Returns complete buffer list (including unlisted buffers)
 "
 " http://vim.wikia.com/wiki/Toggle_to_open_or_close_the_quickfix_window
 function! s:GetCompleteBufferList()

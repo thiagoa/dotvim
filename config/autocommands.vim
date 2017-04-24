@@ -1,4 +1,4 @@
-" Restore cursor position
+" Restore cursor position in all files
 autocmd BufReadPost *
 \ if line("'\"") > 1 && line("'\"") <= line("$") |
 \   exe "normal! g`\"" |
@@ -10,7 +10,7 @@ au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
 " Disable auto commenting on all file types
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
-" Balance windows automatically in resize event
+" Balance windows automatically during resize event
 autocmd VimResized * :wincmd =
 
 " Protect large files (> 10 MB) from slowness by disabling filetype plugin.
