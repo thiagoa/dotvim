@@ -13,7 +13,7 @@ filetype plugin indent on
 
 set hidden
 set history=1000
-set shell=/bin/bash
+set shell=/bin/zsh
 set nofoldenable
 set noshowmode
 set exrc
