@@ -22,6 +22,9 @@ noremap <Leader>e :e <C-R>=expand("%:p:h") . '/'<CR>
 noremap <Leader>s :split <C-R>=expand("%:p:h") . '/'<CR>
 noremap <Leader>v :vnew <C-R>=expand("%:p:h") . '/'<CR>
 
+" Substitute word under cursor
+noremap <Leader>S :%s/<C-R>=escape(expand("<cword>"), '/') . '//g'<CR><Left><Left>
+
 " Faster scrolling
 nnoremap <C-e> 3<C-e>
 nnoremap <C-y> 3<C-y>
