@@ -45,7 +45,6 @@ set incsearch
 set hlsearch
 set ignorecase
 set smartcase
-set noesckeys
 set nocompatible
 set timeoutlen=1000 ttimeoutlen=0
 set laststatus=2
