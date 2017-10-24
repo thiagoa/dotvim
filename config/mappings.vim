@@ -1,9 +1,9 @@
 let mapleader = "\<Space>"
 
 " fzf.vim
-nmap <C-p> :Files<CR>
-nmap <C-;> :Buffers<CR>
-nmap <C-'> :Tags<CR>
+nnoremap <C-p> :Files<CR>
+nnoremap <C-;> :Buffers<CR>
+nnoremap <C-'> :Tags<CR>
 
 " Faster save and quit
 nnoremap <Leader>w :w<CR>
