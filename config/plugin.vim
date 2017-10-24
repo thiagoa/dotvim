@@ -74,10 +74,13 @@ let g:ctrlp_map = '<C-p>'
 nnoremap <Leader>b :CtrlPBuffer<CR>
 nnoremap <Leader>n :CtrlPMRU<CR>
 
-""""""" Vroom """"""""
+""""""" vim-test """"""""
 
-let g:vroom_test_unit_command="testrbl -Itest:lib -rminitest/autorun"
-let g:vroom_use_vimux=1
+nmap <silent> <leader>R :TestNearest<CR>
+nmap <silent> <leader>r :TestFile<CR>
+nmap <silent> <leader>a :TestSuite<CR>
+nmap <silent> <leader>l :TestLast<CR>
+nmap <silent> <leader>G :TestVisit<CR>
 
 """"""" Vimux """"""""
 

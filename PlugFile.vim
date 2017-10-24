@@ -135,7 +135,7 @@ Plug 'slashmili/alchemist.vim'
 "***************
 
 " Test runner
-Plug 'skalnik/vim-vroom'
+Plug 'janko-m/vim-test'
 
 " Rails turbo integration (file navigation, commands, etc)
 Plug 'tpope/vim-rails'
