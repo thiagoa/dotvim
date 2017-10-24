@@ -22,6 +22,10 @@ vnoremap <Leader>d "+d
 vnoremap <Leader>p "+p
 vnoremap <Leader>P "+P
 
+" Navigate tabs
+nnoremap <C-TAB> :tabnext<CR>
+nnoremap <C-S-TAB> :tabprevious<CR>
+
 " Quickly open files in same directory
 noremap <Leader>e :e <C-R>=expand("%:p:h") . '/'<CR>
 noremap <Leader>s :split <C-R>=expand("%:p:h") . '/'<CR>

@@ -53,6 +53,7 @@ set backspace=start,indent,eol
 set listchars=tab:>-,trail:·,eol:$
 set shortmess=atI
 set splitbelow
+set splitright
 
 source ~/.vim/config/mappings.vim
 source ~/.vim/config/plugin.vim
