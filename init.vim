@@ -61,3 +61,7 @@ source ~/.vim/config/functions.vim
 source ~/.vim/config/autocommands.vim
 source ~/.vim/config/abbreviations.vim
 source ~/.vim/config/local.vim
+
+if has('nvim')
+  source ~/.vim/config/neovim.vim
+endif
