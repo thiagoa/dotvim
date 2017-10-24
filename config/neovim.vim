@@ -62,6 +62,13 @@ for dir in ["h", "j", "l", "k"]
   call s:mapMoveToWindow(dir)
 endfor
 
+" ------------
+" | Mappings |
+" ------------
+
+tmap <C-TAB> <C-\><C-n> :tabnext<CR>
+tmap <C-S-TAB> <C-\><C-n> :tabprevious<CR>
+
 " --------------
 " | Workspaces |
 " --------------
