@@ -16,6 +16,14 @@ endfunction
 " | vim-test strategy |
 " ---------------------
 
+function! s:TestJobHandler(job_id, data, event) dict
+  if a:data == 0
+    call jobstart('bash -c -l "echo Tests 👍 | terminal-notifier -sound Hero"')
+  else
+    call jobstart('bash -c -l "echo Tests 👎 | terminal-notifier -sound Basso"')
+  endif
+endfunction
+
 function! TestStrategyStackDocker(test_cmd)
   if s:isStackProject()
     let a:cmd = "../bin/background-shell-run " . s:currentProject() . " " . a:test_cmd
@@ -26,7 +34,8 @@ function! TestStrategyStackDocker(test_cmd)
     endif
 
     botright new
-    call termopen(a:cmd)
+    call termopen(a:cmd, {'on_exit': function('s:TestJobHandler')})
+
     file tests
     au BufDelete <buffer> wincmd p
     wincmd p

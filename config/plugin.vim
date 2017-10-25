@@ -76,11 +76,11 @@ nnoremap <Leader>n :CtrlPMRU<CR>
 
 """"""" vim-test """"""""
 
-nmap <silent> <leader>R :TestNearest<CR>
-nmap <silent> <leader>r :TestFile<CR>
-nmap <silent> <leader>a :TestSuite<CR>
-nmap <silent> <leader>l :TestLast<CR>
-nmap <silent> <leader>G :TestVisit<CR>
+nmap <silent> <Leader>R :TestNearest<CR>
+nmap <silent> <Leader>r :TestFile<CR>
+nmap <silent> <Leader>a :TestSuite<CR>
+nmap <silent> <Leader>L :TestLast<CR>
+nmap <silent> <Leader>G :TestVisit<CR>
 
 """"""" Vimux """"""""
 
