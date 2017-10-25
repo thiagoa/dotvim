@@ -16,7 +16,11 @@ endfunction
 " | vim-test strategy |
 " ---------------------
 
-function! s:TestJobHandler(job_id, data, event) dict
+function! TestFailedExamples()
+  call TestStrategyStackDocker('bundle exec rspec --only-failures')
+endfunction
+
+function! s:TestJobCallback(job_id, data, event) dict
   if a:data == 0
     call jobstart('bash -c -l "echo Tests 👍 | terminal-notifier -sound Hero"')
   else
@@ -34,7 +38,7 @@ function! TestStrategyStackDocker(test_cmd)
     endif
 
     botright new
-    call termopen(a:cmd, {'on_exit': function('s:TestJobHandler')})
+    call termopen(a:cmd, {'on_exit': function('s:TestJobCallback')})
 
     file tests
     au BufDelete <buffer> wincmd p
@@ -60,17 +64,27 @@ highlight TermCursor ctermfg=red guifg=red
 
 au BufEnter * if &buftype == 'terminal' | :startinsert | endif
 
-function! s:moveToWindow(direction)
+function! s:moveToWindow(direction, current_mode)
+  let a:current_buffer = bufname('%')
+
   stopinsert
   execute "wincmd" a:direction
+
+  let a:wincmd_failed = (bufname('%') == a:current_buffer)
+
+  if a:wincmd_failed && a:current_mode == 't'
+    echo "Out of bounds..."
+    normal 0
+    startinsert
+  endif
 endfunc
 
 function! s:mapMoveToWindow(direction)
   execute "tnoremap" "<silent>" "<C-" . a:direction . ">"
         \ "<C-\\><C-n>"
-        \ ":call <SID>moveToWindow(\"" . a:direction . "\")<CR>"
+        \ ":call <SID>moveToWindow(\"" . a:direction . "\", \"t\")<CR>"
   execute "nnoremap" "<silent>" "<C-" . a:direction . ">"
-        \ ":call <SID>moveToWindow(\"" . a:direction . "\")<CR>"
+        \ ":call <SID>moveToWindow(\"" . a:direction . "\", \"n\")<CR>"
 endfunc
 
 for dir in ["h", "j", "l", "k"]
