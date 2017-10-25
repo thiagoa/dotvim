@@ -19,9 +19,15 @@ endfunction
 function! TestStrategyStackDocker(test_cmd)
   if s:isStackProject()
     let a:cmd = "../bin/background-shell-run " . s:currentProject() . " " . a:test_cmd
+    let bnr = bufwinnr('tests')
+
+    if bnr > 0
+      silent bw! tests
+    endif
 
     botright new
     call termopen(a:cmd)
+    file tests
     au BufDelete <buffer> wincmd p
     wincmd p
     stopinsert
