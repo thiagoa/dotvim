@@ -16,7 +16,7 @@ endfunction
 " | vim-test strategy |
 " ---------------------
 
-function! TestFailedExamples()
+function! s:testFailedExamples()
   call TestStrategyStackDocker('bundle exec rspec --only-failures')
 endfunction
 
@@ -27,6 +27,8 @@ function! s:TestJobCallback(job_id, data, event) dict
     call jobstart('bash -c -l "echo Tests 👎 | terminal-notifier -sound Basso"')
   endif
 endfunction
+
+command! -nargs=0 TestFailedExamples call s:testFailedExamples()
 
 function! TestStrategyStackDocker(test_cmd)
   if s:isStackProject()
@@ -45,7 +47,7 @@ function! TestStrategyStackDocker(test_cmd)
     wincmd p
     stopinsert
   else
-    call test_strategy#neovim(a:test_cmd)
+    call test#strategy#neovim(a:test_cmd)
   endif
 endfunction
 
@@ -102,7 +104,7 @@ tmap <C-S-TAB> <C-\><C-n> :tabprevious<CR>
 " | Workspaces |
 " --------------
 
-function! DefaultWorkspace()
+function! s:defaultWorkspace()
   tabnew term://zsh
   silent file 1-devterm
 
@@ -119,3 +121,5 @@ function! DefaultWorkspace()
   tabprevious
   stopinsert
 endfunction
+
+command! -nargs=0 DefaultWorkspace call s:defaultWorkspace()
