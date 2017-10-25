@@ -21,8 +21,6 @@ let g:syntastic_ignore_files = ['scss$']
 
 if executable('ag')
     set grepprg=ag\ --nogroup\ --nocolor\ -U
-
-    command! -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
 endif
 
 """" Splitjoin """"

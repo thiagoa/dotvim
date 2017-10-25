@@ -1,3 +1,13 @@
+" Use only local functions and export commands
+" Commands are defined here at the top, and functions come right after
+
+command! -nargs=0 Remove :call s:Remove()
+command! -nargs=+ GrepBufs normal mO | :call s:GrepBuffers(<q-args>)<CR> | :cwindow<CR> | :redraw<CR>
+command! -nargs=0 GitStatus :call s:GitStatus()
+command! -nargs=0 GitBranchFiles :call s:GitBranchFiles()
+command! -nargs=+ -complete=file -bar Ag normal mO | :grep! <q-args><CR> | :cwindow<CR> | :redraw<CR>
+
+
 " ******************************************************************
 " Returns a dictionary which maps open buffers to their current lines
 "
@@ -41,7 +51,6 @@ function! s:GitBranchFiles()
   cwindow
 endfunction
 
-command! -nargs=0 GitBranchFiles :call s:GitBranchFiles()
 
 
 " ************************************************************
@@ -65,7 +74,6 @@ function! s:GitStatus()
   cwindow
 endfunction
 
-command! -nargs=0 GitStatus :call s:GitStatus()
 
 
 " *********************************************************************
@@ -113,17 +121,6 @@ nmap <silent> <leader>l :call ToggleList("Location List", 'l')<CR>
 nmap <silent> <leader>z :call ToggleList("Quickfix List", 'c')<CR>
 
 
-" **************************
-" Reload UltiSnips snippets
-"
-" Author: Thiago A. Silva
-function! s:ReloadSnips()
-  py3 UltiSnips_Manager.reset()
-endfunction
-
-command! -nargs=0 ReloadSnips :call s:ReloadSnips()
-
-
 " ******************************************
 " List all shortcuts mapped with leader keys
 "
@@ -165,7 +162,6 @@ function! s:BuffersList()
   return res
 endfunction
 
-command! -nargs=+ GrepBufs call s:GrepBuffers(<q-args>)
 
 
 " ************************************************************
@@ -182,4 +178,3 @@ function! s:Remove()
   silent exe "bwipe! " . fnameescape(l:curfile)
 endfunction
 
-command! -nargs=0 Remove :call s:Remove()
