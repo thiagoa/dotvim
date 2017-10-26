@@ -90,6 +90,9 @@ Plug 'benmills/vimux'
 " The one vim plugin you might want to have
 Plug 'tpope/vim-fugitive'
 
+" Fugitive's github functionality
+Plug 'tpope/vim-rhubarb'
+
 "***********
 " SNIPPETS *
 "***********
