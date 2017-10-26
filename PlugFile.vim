@@ -72,6 +72,7 @@ Plug 'kana/vim-textobj-user'
 " THEMES *
 "*********
 
+Plug 'dracula/vim'
 Plug 'jacoborus/tender.vim'
 Plug 'mhinz/vim-janah'
 
