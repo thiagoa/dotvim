@@ -79,7 +79,7 @@ nmap <silent> <Leader>r :TestFile<CR>
 nmap <silent> <Leader>a :TestSuite<CR>
 nmap <silent> <Leader>L :TestLast<CR>
 nmap <silent> <Leader>G :TestVisit<CR>
-nmap <silent> <Leader>F :call TestFailedExamples()<CR>
+nmap <silent> <Leader>F :TestFailedExamples<CR>
 
 """"""" Vimux """"""""
 
