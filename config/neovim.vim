@@ -33,19 +33,17 @@ command! -nargs=0 TestFailedExamples call s:testFailedExamples()
 function! TestStrategyStackDocker(test_cmd)
   if s:isStackProject()
     let a:cmd = "../bin/background-shell-run " . s:currentProject() . " " . a:test_cmd
-    let bnr = bufwinnr('tests')
 
-    if bnr > 0
-      silent bw! tests
-    endif
+    silent! bd! _test-runner_
 
     botright new
     call termopen(a:cmd, {'on_exit': function('s:TestJobCallback')})
 
-    file tests
+    file _test-runner_
     au BufDelete <buffer> wincmd p
     wincmd p
     stopinsert
+
   else
     call test#strategy#neovim(a:test_cmd)
   endif
