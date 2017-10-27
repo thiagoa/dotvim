@@ -20,7 +20,7 @@ function! s:testFailedExamples()
   call TestStrategyStackDocker('bundle exec rspec --only-failures')
 endfunction
 
-function! s:TestJobCallback(job_id, data, event) dict
+function! s:testJobCallback(job_id, data, event) dict
   if a:data == 0
     call jobstart('bash -c -l "echo Tests 👍 | terminal-notifier -sound Hero"')
   else
@@ -37,7 +37,7 @@ function! TestStrategyStackDocker(test_cmd)
     silent! bd! _test-runner_
 
     botright new
-    call termopen(a:cmd, {'on_exit': function('s:TestJobCallback')})
+    call termopen(a:cmd, {'on_exit': function('s:testJobCallback')})
 
     file _test-runner_
     au BufDelete <buffer> wincmd p
@@ -62,21 +62,39 @@ highlight TermCursor ctermfg=red guifg=red
 " | Move between windows with C-h,j,k,l |
 " ---------------------------------------
 
-au BufEnter * if &buftype == 'terminal' | :startinsert | endif
+let g:_buffer_modes = {}
 
-function! s:moveToWindow(direction, current_mode)
-  let a:current_buffer = bufname('%')
+function! s:registerBufferMode(mode)
+  let g:_buffer_modes[bufname('%')] = a:mode
+endfunction
+
+function! s:recoverBufferMode()
+  if get(g:_buffer_modes, bufname('%'), "") == "t"
+    normal 0
+    startinsert
+  endif
+endfunction
+
+function! s:registeringMode(cmd, mode)
+  call s:registerBufferMode(a:mode)
+
+  execute a:cmd
+
+  call s:recoverBufferMode()
+endfunction
+
+function! s:moveToWindow(direction, mode)
+  let a:source_buffer = bufname('%')
+  call s:registerBufferMode(a:mode)
 
   stopinsert
   execute "wincmd" a:direction
 
-  let a:wincmd_failed = (bufname('%') == a:current_buffer)
-
-  if a:wincmd_failed && a:current_mode == 't'
+  if bufname('%') == a:source_buffer
     echo "Out of bounds..."
-    normal 0
-    startinsert
   endif
+
+  call s:recoverBufferMode()
 endfunc
 
 function! s:mapMoveToWindow(direction)
@@ -95,8 +113,10 @@ endfor
 " | Mappings |
 " ------------
 
-tmap <C-TAB> <C-\><C-n> :tabnext<CR>
-tmap <C-S-TAB> <C-\><C-n> :tabprevious<CR>
+nnoremap <C-TAB> :call <SID>registeringMode("tabnext", "n")<CR>
+nnoremap <C-S-TAB> :call <SID>registeringMode("tabprevious", "n")<CR>
+tnoremap <C-TAB> <C-\><C-n> :call <SID>registeringMode("tabnext", "t")<CR>
+tnoremap <C-S-TAB> <C-\><C-n> :call <SID>registeringMode("tabprevious", "t")<CR>
 
 " --------------
 " | Workspaces |
