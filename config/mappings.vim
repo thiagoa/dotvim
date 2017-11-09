@@ -2,7 +2,7 @@ let mapleader = "\<Space>"
 
 " fzf.vim
 nnoremap <C-p> :Files<CR>
-nnoremap <C-;> :Buffers<CR>
+nnoremap <C-i> :Buffers<CR>
 nnoremap <C-'> :Tags<CR>
 
 " Faster save and quit
