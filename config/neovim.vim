@@ -145,8 +145,7 @@ endfunc
 
 function! s:mapMoveToWindow(direction)
   execute "tnoremap" "<silent>" "<C-" . a:direction . ">"
-        \ "<C-\\><C-n>"
-        \ ":call <SID>moveToWindow(\"" . a:direction . "\", \"t\")<CR>"
+        \ "<C-\\><C-n>:call <SID>moveToWindow(\"" . a:direction . "\", \"t\")<CR>"
   execute "nnoremap" "<silent>" "<C-" . a:direction . ">"
         \ ":call <SID>moveToWindow(\"" . a:direction . "\", \"n\")<CR>"
 endfunc
@@ -162,30 +161,31 @@ endfor
 tnoremap <Esc> <C-\><C-n>
 nnoremap <M-+> :tabnew<CR>
 
-nnoremap <M-l> :call <SID>execRegisteringMode("tabnext", "n")<CR>
-nnoremap <M-h> :call <SID>execRegisteringMode("tabprevious", "n")<CR>
-tnoremap <M-l> <C-\><C-n> :call <SID>execRegisteringMode("tabnext", "t")<CR>
-tnoremap <M-h> <C-\><C-n> :call <SID>execRegisteringMode("tabprevious", "t")<CR>
+nnoremap <silent> <M-l> :call <SID>execRegisteringMode("tabnext", "n")<CR>
+nnoremap <silent> <M-h> :call <SID>execRegisteringMode("tabprevious", "n")<CR>
+tnoremap <silent> <M-l> <C-\><C-n>:call <SID>execRegisteringMode("tabnext", "t")<CR>
+tnoremap <silent> <M-h> <C-\><C-n>:call <SID>execRegisteringMode("tabprevious", "t")<CR>
+tnoremap <silent> <M-c> a<BS> <C-\><C-n>:call <SID>execRegisteringMode("tabprevious", "t")<CR>
 
-nnoremap <M-1> :call <SID>normalRegisteringMode("1gt", "n")<CR>
-nnoremap <M-2> :call <SID>normalRegisteringMode("2gt", "n")<CR>
-nnoremap <M-3> :call <SID>normalRegisteringMode("3gt", "n")<CR>
-nnoremap <M-4> :call <SID>normalRegisteringMode("4gt", "n")<CR>
-nnoremap <M-5> :call <SID>normalRegisteringMode("5gt", "n")<CR>
-nnoremap <M-6> :call <SID>normalRegisteringMode("6gt", "n")<CR>
-nnoremap <M-7> :call <SID>normalRegisteringMode("7gt", "n")<CR>
-nnoremap <M-8> :call <SID>normalRegisteringMode("8gt", "n")<CR>
-nnoremap <C-9> :call <SID>normalRegisteringMode("9gt", "n")<CR>
+nnoremap <silent> <M-1> :call <SID>normalRegisteringMode("1gt", "n")<CR>
+nnoremap <silent> <M-2> :call <SID>normalRegisteringMode("2gt", "n")<CR>
+nnoremap <silent> <M-3> :call <SID>normalRegisteringMode("3gt", "n")<CR>
+nnoremap <silent> <M-4> :call <SID>normalRegisteringMode("4gt", "n")<CR>
+nnoremap <silent> <M-5> :call <SID>normalRegisteringMode("5gt", "n")<CR>
+nnoremap <silent> <M-6> :call <SID>normalRegisteringMode("6gt", "n")<CR>
+nnoremap <silent> <M-7> :call <SID>normalRegisteringMode("7gt", "n")<CR>
+nnoremap <silent> <M-8> :call <SID>normalRegisteringMode("8gt", "n")<CR>
+nnoremap <silent> <C-9> :call <SID>normalRegisteringMode("9gt", "n")<CR>
 
-tnoremap <M-1> <C-\><C-n> :call <SID>normalRegisteringMode("1gt", "t")<CR>
-tnoremap <M-2> <C-\><C-n> :call <SID>normalRegisteringMode("2gt", "t")<CR>
-tnoremap <M-3> <C-\><C-n> :call <SID>normalRegisteringMode("3gt", "t")<CR>
-tnoremap <M-4> <C-\><C-n> :call <SID>normalRegisteringMode("4gt", "t")<CR>
-tnoremap <M-5> <C-\><C-n> :call <SID>normalRegisteringMode("5gt", "t")<CR>
-tnoremap <M-6> <C-\><C-n> :call <SID>normalRegisteringMode("6gt", "t")<CR>
-tnoremap <M-7> <C-\><C-n> :call <SID>normalRegisteringMode("7gt", "t")<CR>
-tnoremap <M-8> <C-\><C-n> :call <SID>normalRegisteringMode("8gt", "t")<CR>
-tnoremap <M-9> <C-\><C-n> :call <SID>normalRegisteringMode("9gt", "t")<CR>
+tnoremap <silent> <M-1> <C-\><C-n>:call <SID>normalRegisteringMode("1gt", "t")<CR>
+tnoremap <silent> <M-2> <C-\><C-n>:call <SID>normalRegisteringMode("2gt", "t")<CR>
+tnoremap <silent> <M-3> <C-\><C-n>:call <SID>normalRegisteringMode("3gt", "t")<CR>
+tnoremap <silent> <M-4> <C-\><C-n>:call <SID>normalRegisteringMode("4gt", "t")<CR>
+tnoremap <silent> <M-5> <C-\><C-n>:call <SID>normalRegisteringMode("5gt", "t")<CR>
+tnoremap <silent> <M-6> <C-\><C-n>:call <SID>normalRegisteringMode("6gt", "t")<CR>
+tnoremap <silent> <M-7> <C-\><C-n>:call <SID>normalRegisteringMode("7gt", "t")<CR>
+tnoremap <silent> <M-8> <C-\><C-n>:call <SID>normalRegisteringMode("8gt", "t")<CR>
+tnoremap <silent> <M-9> <C-\><C-n>:call <SID>normalRegisteringMode("9gt", "t")<CR>
 
 " --------------
 " | Workspaces |
