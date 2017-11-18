@@ -14,3 +14,6 @@ cab B b
 cab Sb sb
 cab Sp sp
 cab Stag stag
+cab tt TTerm
+cab ht Term
+cab vt VTerm
