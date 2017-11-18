@@ -67,10 +67,34 @@ fun! s:openBuffer(count, cmd)
   exe cmd
 endf
 
+fun! s:gitDirOrCurrent()
+  let buffer_dir = expand('%:h')
+  let current_dir = buffer_dir
+
+  while current_dir != '/'
+    if isdirectory(current_dir . '/.git')
+      return current_dir
+    endif
+
+    let current_dir = fnamemodify(current_dir, ':h')
+  endwhile
+
+  return buffer_dir
+endfun
+
 fun! s:openTerm(args, count, type)
   let params = split(a:args)
+  let buffer_dir = expand('%:h')
+  let git_dir = s:gitDirOrCurrent()
+
   call s:openBuffer(a:count, a:type)
-  exe 'terminal' a:args
+  if a:args == '.'
+    call termopen(&shell, {'cwd': buffer_dir})
+  elseif a:args == '*'
+    call termopen(&shell, {'cwd': git_dir})
+  else
+    exe 'terminal' a:args
+  endif
   exe 'startinsert'
 endf
 
