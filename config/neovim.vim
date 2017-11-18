@@ -14,6 +14,21 @@ function! s:currentProject()
   return fnamemodify(getcwd(), ":t")
 endfunction
 
+fun! s:gitDirOrCurrent()
+  let buffer_dir = expand('%:p:h')
+  let current_dir = buffer_dir
+
+  while current_dir != '/'
+    if isdirectory(current_dir . '/.git')
+      return current_dir
+    endif
+
+    let current_dir = fnamemodify(current_dir, ':h')
+  endwhile
+
+  return buffer_dir
+endfun
+
 " ---------------------
 " | vim-test strategy |
 " ---------------------
@@ -66,21 +81,6 @@ fun! s:openBuffer(count, cmd)
   let cmd = a:count ? a:count . a:cmd : a:cmd
   exe cmd
 endf
-
-fun! s:gitDirOrCurrent()
-  let buffer_dir = expand('%:p:h')
-  let current_dir = buffer_dir
-
-  while current_dir != '/'
-    if isdirectory(current_dir . '/.git')
-      return current_dir
-    endif
-
-    let current_dir = fnamemodify(current_dir, ':h')
-  endwhile
-
-  return buffer_dir
-endfun
 
 fun! s:openTerm(args, count, type)
   let params = split(a:args)
