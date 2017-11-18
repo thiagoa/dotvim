@@ -68,7 +68,7 @@ fun! s:openBuffer(count, cmd)
 endf
 
 fun! s:gitDirOrCurrent()
-  let buffer_dir = expand('%:h')
+  let buffer_dir = expand('%:p:h')
   let current_dir = buffer_dir
 
   while current_dir != '/'
