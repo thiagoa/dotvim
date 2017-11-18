@@ -137,9 +137,7 @@ function! s:moveToWindow(direction, mode)
   call s:registerBufferMode(a:mode)
   stopinsert
   execute "wincmd" a:direction
-  if bufname('%') == a:source_buffer
-    echo "Out of bounds..."
-  endif
+
   call s:recoverBufferMode()
 endfunc
 
