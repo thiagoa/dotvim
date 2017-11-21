@@ -1,5 +1,13 @@
+" ------------------
+" | General config |
+" ------------------
+
 " Enable OS cute-n-paste
 set clipboard=unnamed
+set inccommand=split
+
+nnoremap [b :BufSurfBack<CR>
+nnoremap ]b :BufSurfForward<CR>
 
 " ---------------------
 " | General functions |
