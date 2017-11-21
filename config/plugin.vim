@@ -1,3 +1,12 @@
+"""" fzf """"
+
+let g:fzf_buffers_jump = 1
+
+"""" Asynchronous Lint Engine """"
+
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_enter = 0
+
 """" Syntax highlighting for markdown languages """"
 
 let g:markdown_fenced_languages = ['html', 'vim', 'ruby', 'python', 'bash=sh']
