@@ -5,8 +5,6 @@ command! -nargs=0 Remove :call s:Remove()
 command! -nargs=+ GrepBufs normal mO | :call s:GrepBuffers(<q-args>)<CR> | :cwindow<CR> | :redraw<CR>
 command! -nargs=0 GitStatus :call s:GitStatus()
 command! -nargs=0 GitBranchFiles :call s:GitBranchFiles()
-command! -nargs=+ -complete=file -bar Ag normal mO | :grep! <q-args><CR> | :cwindow<CR> | :redraw<CR>
-
 
 " ******************************************************************
 " Returns a dictionary which maps open buffers to their current lines
