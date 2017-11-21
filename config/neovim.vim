@@ -22,9 +22,8 @@ function! s:currentProject()
   return fnamemodify(getcwd(), ":t")
 endfunction
 
-fun! s:gitDirOrCurrent()
-  let buffer_dir = expand('%:p:h')
-  let current_dir = buffer_dir
+fun! s:gitDirOrCurrent(buffer_dir)
+  let current_dir = a:buffer_dir
 
   while current_dir != '/'
     if isdirectory(current_dir . '/.git')
@@ -34,7 +33,7 @@ fun! s:gitDirOrCurrent()
     let current_dir = fnamemodify(current_dir, ':h')
   endwhile
 
-  return buffer_dir
+  return a:buffer_dir
 endfun
 
 " ---------------------
@@ -92,8 +91,13 @@ endf
 
 fun! s:openTerm(args, count, type)
   let params = split(a:args)
-  let buffer_dir = expand('%:h')
-  let git_dir = s:gitDirOrCurrent()
+  let buffer_dir = expand('%:p:h')
+
+  if !isdirectory(buffer_dir)
+    let buffer_dir = getcwd()
+  endif
+
+  let git_dir = s:gitDirOrCurrent(buffer_dir)
 
   call s:openBuffer(a:count, a:type)
   if a:args == '.'
