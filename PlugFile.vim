@@ -112,7 +112,10 @@ Plug 'honza/vim-snippets'
 Plug 'tpope/vim-sleuth'
 
 " Syntax checking for many languages
-Plug 'scrooloose/syntastic'
+Plug 'w0rp/ale'
+
+" Auto complete
+Plug 'roxma/nvim-completion-manager'
 
 " Code commenter
 Plug 'scrooloose/nerdcommenter'
