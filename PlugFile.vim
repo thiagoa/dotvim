@@ -84,13 +84,6 @@ Plug 'MaxSt/FlatColor'
 Plug 'jacoborus/tender.vim'
 Plug 'mhinz/vim-janah'
 
-"*******
-" TMUX *
-"*******
-
-" Interact with Tmux
-Plug 'benmills/vimux'
-
 "******
 " CVS *
 "******
