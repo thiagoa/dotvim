@@ -1,5 +1,11 @@
 call plug#begin('~/.vim/plugged')
 
+"*******
+" MISC *
+"*******
+
+Plug 'machakann/vim-highlightedyank'
+
 "*************
 " NAVIGATION *
 "*************
