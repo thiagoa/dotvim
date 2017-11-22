@@ -5,6 +5,7 @@ command! -nargs=0 Remove :call s:Remove()
 command! -nargs=+ GrepBufs normal mO | :call s:GrepBuffers(<q-args>)<CR> | :cwindow<CR> | :redraw<CR>
 command! -nargs=0 GitStatus :call s:GitStatus()
 command! -nargs=0 GitBranchFiles :call s:GitBranchFiles()
+command! -nargs=+ Z :call s:Z(<q-args>)
 
 " ******************************************************************
 " Returns a dictionary which maps open buffers to their current lines
@@ -176,3 +177,29 @@ function! s:Remove()
   silent exe "bwipe! " . fnameescape(l:curfile)
 endfunction
 
+
+" ************************************************************
+" Quickly change to directory using z.sh
+"
+" Use g:z_sh_path to customize the path to z.sh
+"
+" Author: Thiago A. Silva
+function! s:Z(dest)
+  let z_sh_path = get(g:, 'z_sh_path', $HOME . "/bin/z.sh")
+  let cmd = 'source ' . z_sh_path . ' && _z ' . a:dest . ' && pwd'
+  let result = system(cmd)
+
+  if result == ''
+    call EchoWarning('Not found')
+  else
+    execute('cd ' . result)
+    echo '👍'
+  endif
+endfunction
+
+function! s:echoWarning(msg)
+  echohl WarningMsg
+  echo "WARNING"
+  echohl None
+  echon ' ' . a:msg
+endfunction
