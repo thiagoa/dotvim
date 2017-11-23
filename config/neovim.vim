@@ -56,11 +56,12 @@ command! -nargs=0 TestFailedExamples call s:testFailedExamples()
 
 function! TestStrategyStackDocker(test_cmd)
   if s:isStackProject()
-    let a:cmd = "../bin/bundle " . a:test_cmd
-    silent! bd! _test-runner_
+    let a:cmd = "../bin/bundle " . s:currentProject() . ' ' . a:test_cmd
+    silent! bw! stack_test_runner_buffer
     botright new
+    set bufhidden=wipe
     call termopen(a:cmd, {'on_exit': function('s:testJobCallback')})
-    file _test-runner_
+    file stack_test_runner_buffer
     au BufDelete <buffer> wincmd p
     wincmd p
     stopinsert
