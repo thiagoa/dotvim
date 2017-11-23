@@ -1,5 +1,9 @@
 let mapleader = "\<Space>"
 
+" Overwrite some unimpaired mappings
+nnoremap [b :BufSurfBack<CR>
+nnoremap ]b :BufSurfForward<CR>
+
 " fzf.vim
 nnoremap <C-p> :Files<CR>
 nnoremap \ :Buffers<CR>

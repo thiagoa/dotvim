@@ -1,26 +1,17 @@
+source ~/.vim/config/stack.vim
+
 " ------------------
 " | General config |
 " ------------------
 
-" Enable OS cute-n-paste
-set clipboard=unnamed
 set inccommand=split
 
-nnoremap [b :BufSurfBack<CR>
-nnoremap ]b :BufSurfForward<CR>
+" Enable OS cute-n-paste
+set clipboard=unnamed
 
 " ---------------------
 " | General functions |
 " ---------------------
-
-function! s:isStackProject()
-  let a:parent_dir = fnamemodify(getcwd(), ":h:t")
-  return (a:parent_dir == "stack-development")
-endfunction
-
-function! s:currentProject()
-  return fnamemodify(getcwd(), ":t")
-endfunction
 
 fun! s:gitDirOrCurrent(buffer_dir)
   let current_dir = a:buffer_dir
@@ -41,8 +32,10 @@ endfun
 " ---------------------
 
 function! s:testFailedExamples()
-  call TestStrategyStackDocker('bundle exec rspec --only-failures')
+  call neovim#default_test_strategy('bundle exec rspec --only-failures')
 endfunction
+
+command! -nargs=0 TestFailedExamples call s:testFailedExamples()
 
 function! s:testJobCallback(job_id, data, event) dict
   if a:data == 0
@@ -52,37 +45,40 @@ function! s:testJobCallback(job_id, data, event) dict
   endif
 endfunction
 
-command! -nargs=0 TestFailedExamples call s:testFailedExamples()
+function! neovim#default_test_strategy(test_cmd)
+  silent! bw! test_runner_buffer
+  botright new
+  set bufhidden=wipe
+  call termopen(a:test_cmd, {'on_exit': function('s:testJobCallback')})
+  file test_runner_buffer
+  au BufDelete <buffer> wincmd p
+  wincmd p
+  stopinsert
+endfunction
 
-function! TestStrategyStackDocker(test_cmd)
-  if s:isStackProject()
-    let a:cmd = "../bin/bundle " . s:currentProject() . ' ' . a:test_cmd
-    silent! bw! stack_test_runner_buffer
-    botright new
-    set bufhidden=wipe
-    call termopen(a:cmd, {'on_exit': function('s:testJobCallback')})
-    file stack_test_runner_buffer
-    au BufDelete <buffer> wincmd p
-    wincmd p
-    stopinsert
+function! neovim#pick_test_strategy(test_cmd)
+  if stack#is_stack_project()
+    call stack#test_strategy(a:test_cmd)
   else
-    call test#strategy#neovim(a:test_cmd)
+    call neovim#default_test_strategy(a:test_cmd)
   endif
 endfunction
 
-let g:test#custom_strategies = {'stack_docker': function('TestStrategyStackDocker')}
-let g:test#strategy = 'stack_docker'
+let g:test#custom_strategies = {'custom_test_strategy': function('neovim#pick_test_strategy')}
+let g:test#strategy = 'custom_test_strategy'
 
 " ---------------------
 " | Terminal settings |
 " ---------------------
+
+tnoremap <Esc> <C-\><C-n>
 
 highlight TermCursor ctermfg=red guifg=red
 au TermOpen * setlocal nonumber norelativenumber
 let g:terminal_scrollback_buffer_size = 100000
 
 " -------------------------------
-" | Shortcuts to open terminals |
+" | Easily open terminal splits |
 " -------------------------------
 
 fun! s:openBuffer(count, cmd)
@@ -116,42 +112,40 @@ command! -count -nargs=* T call s:openTerm(<q-args>, <count>, 'new')
 command! -count -nargs=* TTerm call s:openTerm(<q-args>, <count>, 'tabnew')
 command! -count -nargs=* VTerm call s:openTerm(<q-args>, <count>, 'vnew')
 
-" ---------------------------------------
-" | Move between windows with C-h,j,k,l |
-" ---------------------------------------
+" ------------------------------------
+" | Window navigation with C-h,j,k,l |
+" ------------------------------------
 
 let g:_buffer_modes = {}
 
-function! s:registerBufferMode(mode)
+function! s:register(mode)
   let g:_buffer_modes[bufname('%')] = a:mode
 endfunction
 
-function! s:recoverBufferMode()
+function! s:recoverMode()
   if get(g:_buffer_modes, bufname('%'), "") == "t"
     normal 0
     startinsert
   endif
 endfunction
 
-function! s:execRegisteringMode(cmd, mode)
-  call s:registerBufferMode(a:mode)
+function! s:exec(cmd, mode)
+  call s:register(a:mode)
   execute a:cmd
-  call s:recoverBufferMode()
+  call s:recoverMode()
 endfunction
 
-function! s:normalRegisteringMode(cmd, mode)
-  call s:registerBufferMode(a:mode)
-  execute "normal! ". a:cmd
-  call s:recoverBufferMode()
+function! s:execNormal(cmd, mode)
+  call s:exec("normal! ". a:cmd, a:mode)
 endfunction
 
 function! s:moveToWindow(direction, mode)
   let a:source_buffer = bufname('%')
-  call s:registerBufferMode(a:mode)
+  call s:register(a:mode)
   stopinsert
   execute "wincmd" a:direction
 
-  call s:recoverBufferMode()
+  call s:recoverMode()
 endfunc
 
 function! s:mapMoveToWindow(direction)
@@ -165,56 +159,34 @@ for dir in ["h", "j", "l", "k"]
   call s:mapMoveToWindow(dir)
 endfor
 
-" ------------
-" | Mappings |
-" ------------
+" ----------------------------------
+" | Tab navigation with opt-1 to 9 |
+" ----------------------------------
 
-tnoremap <Esc> <C-\><C-n>
 nnoremap <M-+> :tabnew<CR>
 
-nnoremap <silent> <M-l> :call <SID>execRegisteringMode("tabnext", "n")<CR>
-nnoremap <silent> <M-h> :call <SID>execRegisteringMode("tabprevious", "n")<CR>
-tnoremap <silent> <M-l> <C-\><C-n>:call <SID>execRegisteringMode("tabnext", "t")<CR>
-tnoremap <silent> <M-h> <C-\><C-n>:call <SID>execRegisteringMode("tabprevious", "t")<CR>
-tnoremap <silent> <M-c> a<BS> <C-\><C-n>:call <SID>execRegisteringMode("tabprevious", "t")<CR>
+nnoremap <silent> <M-l> :call <SID>exec("tabnext", "n")<CR>
+nnoremap <silent> <M-h> :call <SID>exec("tabprevious", "n")<CR>
+tnoremap <silent> <M-l> <C-\><C-n>:call <SID>exec("tabnext", "t")<CR>
+tnoremap <silent> <M-h> <C-\><C-n>:call <SID>exec("tabprevious", "t")<CR>
+tnoremap <silent> <M-c> a<BS> <C-\><C-n>:call <SID>exec("tabprevious", "t")<CR>
 
-nnoremap <silent> <M-1> :call <SID>normalRegisteringMode("1gt", "n")<CR>
-nnoremap <silent> <M-2> :call <SID>normalRegisteringMode("2gt", "n")<CR>
-nnoremap <silent> <M-3> :call <SID>normalRegisteringMode("3gt", "n")<CR>
-nnoremap <silent> <M-4> :call <SID>normalRegisteringMode("4gt", "n")<CR>
-nnoremap <silent> <M-5> :call <SID>normalRegisteringMode("5gt", "n")<CR>
-nnoremap <silent> <M-6> :call <SID>normalRegisteringMode("6gt", "n")<CR>
-nnoremap <silent> <M-7> :call <SID>normalRegisteringMode("7gt", "n")<CR>
-nnoremap <silent> <M-8> :call <SID>normalRegisteringMode("8gt", "n")<CR>
-nnoremap <silent> <C-9> :call <SID>normalRegisteringMode("9gt", "n")<CR>
+nnoremap <silent> <M-1> :call <SID>execNormal("1gt", "n")<CR>
+nnoremap <silent> <M-2> :call <SID>execNormal("2gt", "n")<CR>
+nnoremap <silent> <M-3> :call <SID>execNormal("3gt", "n")<CR>
+nnoremap <silent> <M-4> :call <SID>execNormal("4gt", "n")<CR>
+nnoremap <silent> <M-5> :call <SID>execNormal("5gt", "n")<CR>
+nnoremap <silent> <M-6> :call <SID>execNormal("6gt", "n")<CR>
+nnoremap <silent> <M-7> :call <SID>execNormal("7gt", "n")<CR>
+nnoremap <silent> <M-8> :call <SID>execNormal("8gt", "n")<CR>
+nnoremap <silent> <C-9> :call <SID>execNormal("9gt", "n")<CR>
 
-tnoremap <silent> <M-1> <C-\><C-n>:call <SID>normalRegisteringMode("1gt", "t")<CR>
-tnoremap <silent> <M-2> <C-\><C-n>:call <SID>normalRegisteringMode("2gt", "t")<CR>
-tnoremap <silent> <M-3> <C-\><C-n>:call <SID>normalRegisteringMode("3gt", "t")<CR>
-tnoremap <silent> <M-4> <C-\><C-n>:call <SID>normalRegisteringMode("4gt", "t")<CR>
-tnoremap <silent> <M-5> <C-\><C-n>:call <SID>normalRegisteringMode("5gt", "t")<CR>
-tnoremap <silent> <M-6> <C-\><C-n>:call <SID>normalRegisteringMode("6gt", "t")<CR>
-tnoremap <silent> <M-7> <C-\><C-n>:call <SID>normalRegisteringMode("7gt", "t")<CR>
-tnoremap <silent> <M-8> <C-\><C-n>:call <SID>normalRegisteringMode("8gt", "t")<CR>
-tnoremap <silent> <M-9> <C-\><C-n>:call <SID>normalRegisteringMode("9gt", "t")<CR>
-
-" --------------
-" | Workspaces |
-" --------------
-
-function! s:defaultWorkspace()
-  tabnew term://zsh
-  silent file 1-devterm
-  if s:isStackProject()
-    vnew
-    call termopen("source ../.envrc && ../bin/shell " . s:currentProject())
-  else
-    vsplit term://zsh
-  endif
-  silent file 2-devterm
-  wincmd h
-  tabprevious
-  stopinsert
-endfunction
-
-command! -nargs=0 DefaultWorkspace call s:defaultWorkspace()
+tnoremap <silent> <M-1> <C-\><C-n>:call <SID>execNormal("1gt", "t")<CR>
+tnoremap <silent> <M-2> <C-\><C-n>:call <SID>execNormal("2gt", "t")<CR>
+tnoremap <silent> <M-3> <C-\><C-n>:call <SID>execNormal("3gt", "t")<CR>
+tnoremap <silent> <M-4> <C-\><C-n>:call <SID>execNormal("4gt", "t")<CR>
+tnoremap <silent> <M-5> <C-\><C-n>:call <SID>execNormal("5gt", "t")<CR>
+tnoremap <silent> <M-6> <C-\><C-n>:call <SID>execNormal("6gt", "t")<CR>
+tnoremap <silent> <M-7> <C-\><C-n>:call <SID>execNormal("7gt", "t")<CR>
+tnoremap <silent> <M-8> <C-\><C-n>:call <SID>execNormal("8gt", "t")<CR>
+tnoremap <silent> <M-9> <C-\><C-n>:call <SID>execNormal("9gt", "t")<CR>
