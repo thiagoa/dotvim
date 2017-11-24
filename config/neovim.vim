@@ -50,10 +50,9 @@ function! neovim#default_test_strategy(test_cmd)
     execute 'silent! bw! ' . s:current_test_buffer
   endif
   botright new
-  set bufhidden=wipe
   call termopen(a:test_cmd, {'on_exit': function('s:onTestFinish')})
+  set bufhidden=wipe
   let s:current_test_buffer = bufnr('%')
-  au BufDelete <buffer> wincmd p
   wincmd p
   stopinsert
 endfunction
