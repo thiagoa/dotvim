@@ -1,5 +1,3 @@
-source ~/.vim/config/stack.vim
-
 " ------------------
 " | General config |
 " ------------------
@@ -37,7 +35,7 @@ endfunction
 
 command! -nargs=0 TestFailedExamples call s:testFailedExamples()
 
-function! s:testJobCallback(job_id, data, event) dict
+function! s:onTestFinish(job_id, data, event) dict
   if a:data == 0
     call jobstart('bash -c -l "echo Tests 👍 | terminal-notifier -sound Hero"')
   else
@@ -45,26 +43,40 @@ function! s:testJobCallback(job_id, data, event) dict
   endif
 endfunction
 
+let s:current_test_buffer = 0
+
 function! neovim#default_test_strategy(test_cmd)
-  silent! bw! test_runner_buffer
+  if s:current_test_buffer > 0
+    execute 'silent! bw! ' . s:current_test_buffer
+  endif
   botright new
   set bufhidden=wipe
-  call termopen(a:test_cmd, {'on_exit': function('s:testJobCallback')})
-  file test_runner_buffer
+  call termopen(a:test_cmd, {'on_exit': function('s:onTestFinish')})
+  let s:current_test_buffer = bufnr('%')
   au BufDelete <buffer> wincmd p
   wincmd p
   stopinsert
 endfunction
 
-function! neovim#pick_test_strategy(test_cmd)
-  if stack#is_stack_project()
-    call stack#test_strategy(a:test_cmd)
-  else
-    call neovim#default_test_strategy(a:test_cmd)
-  endif
+let s:custom_test_strategies = []
+
+function! neovim#register_test_strategy(name, condition, function)
+  let strategy = { 'condition': a:condition, 'function': function(a:function) }
+  call add(s:custom_test_strategies, strategy)
 endfunction
 
-let g:test#custom_strategies = {'custom_test_strategy': function('neovim#pick_test_strategy')}
+function! s:pickTestStrategy(test_cmd)
+  for strategy in s:custom_test_strategies
+    if strategy['condition']()
+      call strategy['function'](a:test_cmd)
+      return
+    end
+  endfor
+
+  call neovim#default_test_strategy(a:test_cmd)
+endfunction
+
+let g:test#custom_strategies = {'custom_test_strategy': function('s:pickTestStrategy')}
 let g:test#strategy = 'custom_test_strategy'
 
 " ---------------------
@@ -94,16 +106,16 @@ fun! s:openTerm(args, count, type)
     let buffer_dir = getcwd()
   endif
 
-  let git_dir = s:gitDirOrCurrent(buffer_dir)
-
   call s:openBuffer(a:count, a:type)
+
   if a:args == '.'
     call termopen(&shell, {'cwd': buffer_dir})
   elseif a:args == '*'
-    call termopen(&shell, {'cwd': git_dir})
+    call termopen(&shell, {'cwd': s:gitDirOrCurrent(buffer_dir)})
   else
     exe 'terminal' a:args
   endif
+
   exe 'startinsert'
 endf
 
@@ -116,14 +128,14 @@ command! -count -nargs=* VTerm call s:openTerm(<q-args>, <count>, 'vnew')
 " | Window navigation with C-h,j,k,l |
 " ------------------------------------
 
-let g:_buffer_modes = {}
+let s:buffer_modes = {}
 
 function! s:register(mode)
-  let g:_buffer_modes[bufname('%')] = a:mode
+  let s:buffer_modes[bufname('%')] = a:mode
 endfunction
 
 function! s:recoverMode()
-  if get(g:_buffer_modes, bufname('%'), "") == "t"
+  if get(s:buffer_modes, bufname('%'), "") == "t"
     normal 0
     startinsert
   endif
@@ -190,3 +202,5 @@ tnoremap <silent> <M-6> <C-\><C-n>:call <SID>execNormal("6gt", "t")<CR>
 tnoremap <silent> <M-7> <C-\><C-n>:call <SID>execNormal("7gt", "t")<CR>
 tnoremap <silent> <M-8> <C-\><C-n>:call <SID>execNormal("8gt", "t")<CR>
 tnoremap <silent> <M-9> <C-\><C-n>:call <SID>execNormal("9gt", "t")<CR>
+
+source ~/.vim/config/stack.vim
