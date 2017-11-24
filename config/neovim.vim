@@ -11,7 +11,7 @@ set clipboard=unnamed
 " | General functions |
 " ---------------------
 
-fun! s:gitDirOrCurrent(buffer_dir)
+fun! s:nearestGitDir(buffer_dir)
   let current_dir = a:buffer_dir
 
   while current_dir != '/'
@@ -110,7 +110,7 @@ fun! s:openTerm(args, count, type)
   if a:args == '.'
     call termopen(&shell, {'cwd': buffer_dir})
   elseif a:args == '*'
-    call termopen(&shell, {'cwd': s:gitDirOrCurrent(buffer_dir)})
+    call termopen(&shell, {'cwd': s:nearestGitDir(buffer_dir)})
   else
     exe 'terminal' a:args
   endif
