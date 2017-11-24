@@ -54,6 +54,7 @@ function! neovim#default_test_strategy(test_cmd)
   call termopen(a:test_cmd, {'on_exit': function('s:onTestFinish')})
   set bufhidden=wipe
   let s:current_test_buffer = bufnr('%')
+  normal G
   wincmd p
   stopinsert
 endfunction
