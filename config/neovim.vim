@@ -125,6 +125,10 @@ command! -count -nargs=* T call s:openTerm(<q-args>, <count>, 'new')
 command! -count -nargs=* TTerm call s:openTerm(<q-args>, <count>, 'tabnew')
 command! -count -nargs=* VTerm call s:openTerm(<q-args>, <count>, 'vnew')
 
+cab tt TTerm
+cab ht Term
+cab vt VTerm
+
 " ------------------------------------
 " | Window navigation with C-h,j,k,l |
 " ------------------------------------
