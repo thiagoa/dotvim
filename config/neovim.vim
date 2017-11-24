@@ -49,6 +49,7 @@ function! neovim#default_test_strategy(test_cmd)
   if s:current_test_buffer > 0
     execute 'silent! bw! ' . s:current_test_buffer
   endif
+
   botright new
   call termopen(a:test_cmd, {'on_exit': function('s:onTestFinish')})
   set bufhidden=wipe
@@ -202,4 +203,10 @@ tnoremap <silent> <M-7> <C-\><C-n>:call <SID>execNormal("7gt", "t")<CR>
 tnoremap <silent> <M-8> <C-\><C-n>:call <SID>execNormal("8gt", "t")<CR>
 tnoremap <silent> <M-9> <C-\><C-n>:call <SID>execNormal("9gt", "t")<CR>
 
-source ~/.vim/config/stack.vim
+" ---------------------------------
+" | Source project-specific setup |
+" ---------------------------------
+
+for file in globpath('~/.vim/config/projects', '*', 0, 1)
+  execute('source ' . file)
+endfor
