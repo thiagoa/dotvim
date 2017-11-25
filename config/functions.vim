@@ -5,9 +5,6 @@ command! -nargs=0 GitBranchFiles :call s:git_branch_files()
 command! -nargs=+ Z :call s:z(<q-args>)
 command! -nargs=0 Leaders :call s:leaders()
 
-nnoremap <silent> <Leader>l :call s:toggle_list("Location List", 'l')<CR>
-nnoremap <silent> <Leader>z :call s:toggle_list("Quickfix List", 'c')<CR>
-
 " ******************************************************************
 " cabbrev *only* when command is at the beginning of the ex prompt
 "
@@ -135,7 +132,7 @@ endfunction
 " Toggle quickfix or location list
 "
 " http://vim.wikia.com/wiki/Toggle_to_open_or_close_the_quickfix_window
-function! s:toggle_list(bufname, pfx)
+function! functions#toggle_list(bufname, pfx)
   let buflist = s:get_complete_buffer_list()
 
   for bufnum in map(filter(split(buflist, '\n'), 'v:val =~ "'.a:bufname.'"'), 'str2nr(matchstr(v:val, "\\d\\+"))')

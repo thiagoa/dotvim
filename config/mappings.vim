@@ -1,5 +1,8 @@
 let mapleader = "\<Space>"
 
+nnoremap <Leader>l :call functions#toggle_list("Location List", 'l')<CR>
+nnoremap <Leader>z :call functions#toggle_list("Quickfix List", 'c')<CR>
+
 " Expand word under cursor on ex mode
 cnoremap <M-.> <C-R>=expand('<cword>')<CR>
 
