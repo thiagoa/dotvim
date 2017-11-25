@@ -4,7 +4,10 @@
 "
 " No comments, let's make this clean! When in doubt :help or Google!
 
-source ~/.vim/PlugFile.vim
+let $VIM_HOME = expand('<sfile>:h:p')
+let $CONFIG_HOME = $VIM_HOME.'/config'
+
+source $VIM_HOME/PlugFile.vim
 
 syntax on
 
@@ -27,9 +30,9 @@ set linespace=2
 set nowrap
 set expandtab
 set smarttab
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2
 set smartindent
 set autoindent
 set nobackup
@@ -51,13 +54,22 @@ set shortmess=atI
 set splitbelow
 set splitright
 
-source ~/.vim/config/functions.vim
-source ~/.vim/config/mappings.vim
-source ~/.vim/config/plugin.vim
-source ~/.vim/config/autocommands.vim
-source ~/.vim/config/abbreviations.vim
-source ~/.vim/config/local.vim
+source $CONFIG_HOME/functions.vim
+source $CONFIG_HOME/mappings.vim
+source $CONFIG_HOME/plugin.vim
+source $CONFIG_HOME/autocommands.vim
+source $CONFIG_HOME/abbreviations.vim
+source $CONFIG_HOME/local.vim
 
 if has('nvim')
-  source ~/.vim/config/neovim.vim
+  set inccommand=split
+  set clipboard=unnamed " Enables OS-wide-cut-&-paste
+
+  source $CONFIG_HOME/neovim/terminal.vim
+  source $CONFIG_HOME/neovim/navigation.vim
+  source $CONFIG_HOME/neovim/test.vim
+
+  for file in globpath($CONFIG_HOME.'/neovim/projects', '*', 0, 1)
+    execute 'source '.file
+  endfor
 endif
