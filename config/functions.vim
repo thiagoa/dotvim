@@ -1,17 +1,63 @@
-" Use only local functions and export commands
-" Commands are defined here at the top, and functions come right after
+command! -nargs=0 Remove :call s:remove()
+command! -nargs=+ GrepBufs normal mO | :call s:grep_buffers(<q-args>)<CR> | :cwindow<CR> | :redraw<CR>
+command! -nargs=0 GitStatus :call s:git_status()
+command! -nargs=0 GitBranchFiles :call s:git_branch_files()
+command! -nargs=+ Z :call s:z(<q-args>)
+command! -nargs=0 Leaders :call s:leaders()
 
-command! -nargs=0 Remove :call s:Remove()
-command! -nargs=+ GrepBufs normal mO | :call s:GrepBuffers(<q-args>)<CR> | :cwindow<CR> | :redraw<CR>
-command! -nargs=0 GitStatus :call s:GitStatus()
-command! -nargs=0 GitBranchFiles :call s:GitBranchFiles()
-command! -nargs=+ Z :call s:Z(<q-args>)
+nnoremap <silent> <Leader>l :call s:toggle_list("Location List", 'l')<CR>
+nnoremap <silent> <Leader>z :call s:toggle_list("Quickfix List", 'c')<CR>
+
+" ******************************************************************
+" cabbrev *only* when command is at the beginning of the ex prompt
+"
+" Source: Modern Vim book
+function! functions#cabbrev(input, output)
+  exec 'cabbrev <expr> '.a:input
+        \ .' ((getcmdtype() is# ":" && getcmdline() is# "'.a:input.'")'
+        \ .'? ("'.a:output.'") : ("'.a:input.'"))'
+endfunction
+
+
+" ******************************************************************
+" Returns the nearest git directory
+"
+" Author: Thiago A. Silva
+function! functions#git_dir(buffer_dir)
+  let current_dir = a:buffer_dir
+
+  while current_dir != '/'
+    if isdirectory(current_dir . '/.git')
+      return current_dir
+    endif
+
+    let current_dir = fnamemodify(current_dir, ':h')
+  endwhile
+
+  return a:buffer_dir
+endfunction
+
+
+" ******************************************************************
+" Returns the buffer dirname. If it is a terminal, return the
+" current directory.
+"
+" Author: Thiago A. Silva
+function! functions#buffer_dir()
+  let buffer_dir = expand('%:p:h')
+  if !isdirectory(buffer_dir)
+    let buffer_dir = getcwd()
+  endif
+
+  return buffer_dir
+endfunction
+
 
 " ******************************************************************
 " Returns a dictionary which maps open buffers to their current lines
 "
 " Author: Thiago A. Silva
-function! s:GetBufferCurrentLines()
+function! s:get_buffer_current_lines()
   let @z = ''
   redir @z
   silent buffers
@@ -35,8 +81,8 @@ endfunction
 " List all changed files of your current branch on the quickfix list.
 "
 " Author: Thiago A. Silva
-function! s:GitBranchFiles()
-  let buffer_current_lines = s:GetBufferCurrentLines()
+function! s:git_branch_files()
+  let buffer_current_lines = s:get_buffer_current_lines()
 
   let git_output = system('git show --pretty="" --name-only origin/master..HEAD | sort | uniq')
   let branch_files = []
@@ -51,13 +97,12 @@ function! s:GitBranchFiles()
 endfunction
 
 
-
 " ************************************************************
 " Put current git status files on the quickfix list
 "
 " Author: Thiago A. Silva
-function! s:GitStatus()
-  let buffer_current_lines = s:GetBufferCurrentLines()
+function! s:git_status()
+  let buffer_current_lines = s:get_buffer_current_lines()
 
   let git_output = system('git status -s')
   let git_status_files = []
@@ -74,12 +119,11 @@ function! s:GitStatus()
 endfunction
 
 
-
 " *********************************************************************
 " Returns complete buffer list (including unlisted buffers)
 "
 " http://vim.wikia.com/wiki/Toggle_to_open_or_close_the_quickfix_window
-function! s:GetCompleteBufferList()
+function! s:get_complete_buffer_list()
   redir =>buflist
   silent! ls!
   redir END
@@ -91,8 +135,8 @@ endfunction
 " Toggle quickfix or location list
 "
 " http://vim.wikia.com/wiki/Toggle_to_open_or_close_the_quickfix_window
-function! ToggleList(bufname, pfx)
-  let buflist = s:GetCompleteBufferList()
+function! s:toggle_list(bufname, pfx)
+  let buflist = s:get_complete_buffer_list()
 
   for bufnum in map(filter(split(buflist, '\n'), 'v:val =~ "'.a:bufname.'"'), 'str2nr(matchstr(v:val, "\\d\\+"))')
     if bufwinnr(bufnum) != -1
@@ -116,15 +160,12 @@ function! ToggleList(bufname, pfx)
   endif
 endfunction
 
-nmap <silent> <leader>l :call ToggleList("Location List", 'l')<CR>
-nmap <silent> <leader>z :call ToggleList("Quickfix List", 'c')<CR>
-
 
 " ******************************************
 " List all shortcuts mapped with leader keys
 "
 " Source unknown
-function! Leaders()
+function! s:leaders()
   silent! redir @a
   silent! nmap <LEADER>
   silent! redir END
@@ -144,11 +185,11 @@ endfunction
 " Taken from somewhere (can not remember where)
 "
 " Author: Thiago A. Silva
-function! s:GrepBuffers (expression)
-  exec 'vimgrep/'.a:expression.'/ '.join(s:BuffersList())
+function! s:grep_buffers (expression)
+  exec 'vimgrep/'.a:expression.'/ '.join(s:buffers_list())
 endfunction
 
-function! s:BuffersList()
+function! s:buffers_list()
   let all = range(0, bufnr('$'))
   let res = []
 
@@ -162,12 +203,11 @@ function! s:BuffersList()
 endfunction
 
 
-
 " ************************************************************
 " Delete buffer and file altogether
 "
 " Author: Thiago A. Silva
-function! s:Remove()
+function! s:remove()
   let l:curfile = expand("%:p")
 
   if delete(l:curfile)
@@ -184,7 +224,7 @@ endfunction
 " Use g:z_sh_path to customize the path to z.sh
 "
 " Author: Thiago A. Silva
-function! s:Z(dest)
+function! s:z(dest)
   let z_sh_path = get(g:, 'z_sh_path', $HOME . "/bin/z.sh")
   let cmd = 'source ' . z_sh_path . ' && _z ' . a:dest . ' && pwd'
   let result = system(cmd)

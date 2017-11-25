@@ -1,5 +1,8 @@
 let mapleader = "\<Space>"
 
+" Expand word under cursor on ex mode
+cnoremap <M-.> <C-R>=expand('<cword>')<CR>
+
 " Overwrite some unimpaired mappings
 nnoremap [b :BufSurfBack<CR>
 nnoremap ]b :BufSurfForward<CR>

@@ -2,7 +2,7 @@
 " | Thiago's vim configuration |
 " ------------------------------
 "
-" No comments, let's make this clean. When in doubt, :help or Google!
+" No comments, let's make this clean! When in doubt :help or Google!
 
 source ~/.vim/PlugFile.vim
 
@@ -55,9 +55,9 @@ set shortmess=atI
 set splitbelow
 set splitright
 
+source ~/.vim/config/functions.vim
 source ~/.vim/config/mappings.vim
 source ~/.vim/config/plugin.vim
-source ~/.vim/config/functions.vim
 source ~/.vim/config/autocommands.vim
 source ~/.vim/config/abbreviations.vim
 source ~/.vim/config/local.vim
