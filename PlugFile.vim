@@ -19,6 +19,8 @@ Plug 'ton/vim-bufsurf'
 Plug 'vim-scripts/matchit.zip'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-rsi'
+Plug 'mhinz/vim-grepper'
+Plug 'tpope/vim-projectionist'
 
 "********************
 " TEXT MANIPULATION *
@@ -81,6 +83,7 @@ Plug 'AndrewRadev/splitjoin.vim'
 Plug 'tpope/vim-ragtag'
 Plug 'tpope/vim-endwise'
 Plug 'rizzatti/funcoo.vim'
+Plug 'janko-m/vim-test'
 
 "*********
 " ELIXIR *
@@ -92,7 +95,6 @@ Plug 'slashmili/alchemist.vim'
 " RUBY / RAILS *
 "***************
 
-Plug 'janko-m/vim-test'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-rake'
 Plug 'tpope/vim-bundler'

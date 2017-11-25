@@ -1,3 +1,12 @@
+"""" Grepper """"
+
+let g:grepper = {}
+let g:grepper.tools = ['rg', 'git', 'grep']
+
+nnoremap <Leader>* :Grepper -cword -noprompt<CR>
+nmap gs <plug>(GrepperOperator)
+xmap gs <plug>(GrepperOperator)
+
 """" fzf """"
 
 let g:fzf_buffers_jump = 1
@@ -25,12 +34,6 @@ let g:syntastic_mode_map = { "mode": "passive" }
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 let g:syntastic_ignore_files = ['scss$']
-
-"""" Ag (not really a plugin) """"
-
-if executable('ag')
-    set grepprg=ag\ --nogroup\ --nocolor\ -U
-endif
 
 """" Splitjoin """"
 
