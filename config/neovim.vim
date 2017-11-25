@@ -11,7 +11,7 @@ set clipboard=unnamed
 " | General functions |
 " ---------------------
 
-fun! s:nearestGitDir(buffer_dir)
+fun! s:gitDir(buffer_dir)
   let current_dir = a:buffer_dir
 
   while current_dir != '/'
@@ -24,6 +24,15 @@ fun! s:nearestGitDir(buffer_dir)
 
   return a:buffer_dir
 endfun
+
+function! s:bufferDir()
+  let buffer_dir = expand('%:p:h')
+  if !isdirectory(buffer_dir)
+    let buffer_dir = getcwd()
+  endif
+
+  return buffer_dir
+endfunction
 
 " ---------------------
 " | vim-test strategy |
@@ -94,43 +103,48 @@ let g:terminal_scrollback_buffer_size = 100000
 " | Easily open terminal splits |
 " -------------------------------
 
-fun! s:openBuffer(count, cmd)
+function! s:openBuffer(count, cmd)
   let cmd = a:count ? a:count . a:cmd : a:cmd
-  exe cmd
+  execute cmd
 endf
 
-fun! s:openTerm(args, count, type)
-  let params = split(a:args)
-  let buffer_dir = expand('%:p:h')
-
-  if !isdirectory(buffer_dir)
-    let buffer_dir = getcwd()
+function! s:parse(args)
+  let cmd = strpart(a:args, 1)
+  if cmd == ''
+    let cmd = &shell
   endif
+
+  return cmd
+endfunction
+
+function! s:openTerm(cmd, count, type)
+  let buffer_dir = s:bufferDir()
 
   call s:openBuffer(a:count, a:type)
 
-  if a:args == '.'
-    call termopen(&shell, {'cwd': buffer_dir})
-  elseif a:args == '*'
-    call termopen(&shell, {'cwd': s:nearestGitDir(buffer_dir)})
+  if a:cmd =~ '\.' || a:cmd =~ '\*'
+    let buffer_dir = (a:cmd =~ '\.') ? buffer_dir : s:gitDir(buffer_dir)
+    let args = [s:parse(a:cmd), {'cwd': buffer_dir}]
+  elseif a:cmd != ''
+    let args = [a:cmd]
   else
-    exe 'terminal' a:args
+    let args = [&shell]
   endif
 
-  exe 'startinsert'
+  call call('termopen', args)
+  execute 'startinsert'
 endf
 
 command! -count -nargs=* Term call s:openTerm(<q-args>, <count>, 'new')
-command! -count -nargs=* T call s:openTerm(<q-args>, <count>, 'new')
 command! -count -nargs=* TTerm call s:openTerm(<q-args>, <count>, 'tabnew')
 command! -count -nargs=* VTerm call s:openTerm(<q-args>, <count>, 'vnew')
 
-cab tt TTerm
-cab ht Term
-cab vt VTerm
+call SetupCommandAlias('tt', 'TTerm')
+call SetupCommandAlias('ht', 'Term')
+call SetupCommandAlias('vt', 'VTerm')
 
 " ------------------------------------
-" | Window navigation with C-h,j,k,l |
+" | Window navigation with M-h,j,k,l |
 " ------------------------------------
 
 let s:buffer_modes = {}
@@ -166,9 +180,9 @@ function! s:moveToWindow(direction, mode)
 endfunc
 
 function! s:mapMoveToWindow(direction)
-  execute "tnoremap" "<silent>" "<C-" . a:direction . ">"
+  execute "tnoremap" "<silent>" "<M-" . a:direction . ">"
         \ "<C-\\><C-n>:call <SID>moveToWindow(\"" . a:direction . "\", \"t\")<CR>"
-  execute "nnoremap" "<silent>" "<C-" . a:direction . ">"
+  execute "nnoremap" "<silent>" "<M-" . a:direction . ">"
         \ ":call <SID>moveToWindow(\"" . a:direction . "\", \"n\")<CR>"
 endfunc
 
@@ -176,42 +190,25 @@ for dir in ["h", "j", "l", "k"]
   call s:mapMoveToWindow(dir)
 endfor
 
-" ----------------------------------
-" | Tab navigation with opt-1 to 9 |
-" ----------------------------------
+" -----------------------------------------
+" | Tab navigation with M-1 to 9 & others |
+" -----------------------------------------
 
-nnoremap <M-+> :tabnew<CR>
+nnoremap <silent> <M-+> :tabnew<CR>
+nnoremap <silent> <M-=> :call <SID>exec("tabnext", "n")<CR>
+nnoremap <silent> <M--> :call <SID>exec("tabprevious", "n")<CR>
+tnoremap <silent> <M-=> <C-\><C-n>:call <SID>exec("tabnext", "t")<CR>
+tnoremap <silent> <M--> <C-\><C-n>:call <SID>exec("tabprevious", "t")<CR>
 
-nnoremap <silent> <M-l> :call <SID>exec("tabnext", "n")<CR>
-nnoremap <silent> <M-h> :call <SID>exec("tabprevious", "n")<CR>
-tnoremap <silent> <M-l> <C-\><C-n>:call <SID>exec("tabnext", "t")<CR>
-tnoremap <silent> <M-h> <C-\><C-n>:call <SID>exec("tabprevious", "t")<CR>
-tnoremap <silent> <M-c> a<BS> <C-\><C-n>:call <SID>exec("tabprevious", "t")<CR>
-
-nnoremap <silent> <M-1> :call <SID>execNormal("1gt", "n")<CR>
-nnoremap <silent> <M-2> :call <SID>execNormal("2gt", "n")<CR>
-nnoremap <silent> <M-3> :call <SID>execNormal("3gt", "n")<CR>
-nnoremap <silent> <M-4> :call <SID>execNormal("4gt", "n")<CR>
-nnoremap <silent> <M-5> :call <SID>execNormal("5gt", "n")<CR>
-nnoremap <silent> <M-6> :call <SID>execNormal("6gt", "n")<CR>
-nnoremap <silent> <M-7> :call <SID>execNormal("7gt", "n")<CR>
-nnoremap <silent> <M-8> :call <SID>execNormal("8gt", "n")<CR>
-nnoremap <silent> <C-9> :call <SID>execNormal("9gt", "n")<CR>
-
-tnoremap <silent> <M-1> <C-\><C-n>:call <SID>execNormal("1gt", "t")<CR>
-tnoremap <silent> <M-2> <C-\><C-n>:call <SID>execNormal("2gt", "t")<CR>
-tnoremap <silent> <M-3> <C-\><C-n>:call <SID>execNormal("3gt", "t")<CR>
-tnoremap <silent> <M-4> <C-\><C-n>:call <SID>execNormal("4gt", "t")<CR>
-tnoremap <silent> <M-5> <C-\><C-n>:call <SID>execNormal("5gt", "t")<CR>
-tnoremap <silent> <M-6> <C-\><C-n>:call <SID>execNormal("6gt", "t")<CR>
-tnoremap <silent> <M-7> <C-\><C-n>:call <SID>execNormal("7gt", "t")<CR>
-tnoremap <silent> <M-8> <C-\><C-n>:call <SID>execNormal("8gt", "t")<CR>
-tnoremap <silent> <M-9> <C-\><C-n>:call <SID>execNormal("9gt", "t")<CR>
+for n in range(1, 9)
+  execute 'nnoremap <silent> <M-' . n . '> :call <SID>execNormal("' . n . 'gt", "n")<CR>'
+  execute 'tnoremap <silent> <M-' . n . '> <C-\><C-n>:call <SID>execNormal("' . n . 'gt", "t")<CR>'
+endfor
 
 " ---------------------------------
 " | Source project-specific setup |
 " ---------------------------------
 
 for file in globpath('~/.vim/config/projects', '*', 0, 1)
-  execute('source ' . file)
+  execute 'source ' . file
 endfor
