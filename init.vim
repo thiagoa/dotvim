@@ -8,9 +8,6 @@ source ~/.vim/PlugFile.vim
 
 syntax on
 
-filetype plugin on
-filetype plugin indent on
-
 set hidden
 set history=1000
 set shell=/bin/zsh
@@ -45,7 +42,6 @@ set incsearch
 set hlsearch
 set ignorecase
 set smartcase
-set nocompatible
 set timeoutlen=1000 ttimeoutlen=0
 set laststatus=2
 set autoread
