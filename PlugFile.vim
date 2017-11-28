@@ -105,8 +105,8 @@ Plug 'nelstrom/vim-textobj-rubyblock'
 " PYTHON *
 "*********
 
-Plug 'hdima/python-syntax', { 'for': 'python' }
-Plug 'klen/python-mode', { 'for': 'python' }
+Plug 'hdima/python-syntax'
+Plug 'klen/python-mode'
 
 "******************
 " OTHER LANGUAGES *
