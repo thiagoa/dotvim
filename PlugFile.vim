@@ -20,7 +20,6 @@ Plug 'vim-scripts/matchit.zip'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-rsi'
 Plug 'mhinz/vim-grepper'
-Plug 'tpope/vim-projectionist'
 
 "********************
 " TEXT MANIPULATION *
@@ -105,8 +104,8 @@ Plug 'nelstrom/vim-textobj-rubyblock'
 " PYTHON *
 "*********
 
-Plug 'hdima/python-syntax'
-Plug 'klen/python-mode'
+Plug 'hdima/python-syntax', { 'for': 'python' }
+Plug 'klen/python-mode', { 'for': 'python' }
 
 "******************
 " OTHER LANGUAGES *
