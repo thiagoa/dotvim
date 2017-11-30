@@ -69,6 +69,13 @@ if has('nvim')
   source $CONFIG_HOME/neovim/navigation.vim
   source $CONFIG_HOME/neovim/test.vim
 
+  " The command below avoids a bug on zsh's edit-command-line. If a parameter
+  " (such as +'set buffhiden=wipe') has spaces in between, zsh will escape the
+  " single quotes and make nvr think there are two parameters. Defining a
+  " command is hack to eliminate the problematic space characters.
+  let $VISUAL="nvr -cc split --remote-wait +SetWipeBuffer"
+  command! SetWipeBuffer set bufhidden=wipe
+
   for file in globpath($CONFIG_HOME.'/neovim/projects', '*', 0, 1)
     execute 'source '.file
   endfor

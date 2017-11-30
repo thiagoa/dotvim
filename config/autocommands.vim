@@ -6,8 +6,6 @@ autocmd BufReadPost *
 
 " Git configuration
 autocmd FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
-autocmd FileType gitcommit au! BufEnter COMMIT_EDITMSG set bufhidden=wipe
-command! Ci write | buffer # | startinsert
 
 " Disable auto commenting on all file types
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
