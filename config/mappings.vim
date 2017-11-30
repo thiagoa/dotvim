@@ -11,9 +11,9 @@ nnoremap [b :BufSurfBack<CR>
 nnoremap ]b :BufSurfForward<CR>
 
 " fzf.vim
-nnoremap <C-p> :Files<CR>
 nnoremap \ :Buffers<CR>
-nnoremap <C-'> :Tags<CR>
+nnoremap <C-p> :Files<CR>
+nnoremap <C-h> :History<CR>
 
 " Faster save and quit
 nnoremap <Leader>w :w<CR>
