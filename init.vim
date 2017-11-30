@@ -72,7 +72,7 @@ if has('nvim')
   " The command below avoids a bug on zsh's edit-command-line. If a parameter
   " (such as +'set buffhiden=wipe') has spaces in between, zsh will escape the
   " single quotes and make nvr think there are two parameters. Defining a
-  " command is hack to eliminate the problematic space characters.
+  " command is hack to eliminate the problematic space character.
   let $VISUAL="nvr -cc split --remote-wait +SetWipeBuffer"
   command! SetWipeBuffer set bufhidden=wipe
 
