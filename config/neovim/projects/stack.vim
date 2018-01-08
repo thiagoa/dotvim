@@ -8,7 +8,7 @@ function! s:current_project()
 endfunction
 
 function! s:test_strategy(test_cmd)
-  let a:cmd = "../bin/bundle " . s:current_project() . ' ' . a:test_cmd
+  let a:cmd = "../bin/bundle " . a:test_cmd
   call neovim#test#default_strategy(a:cmd)
 endfunction
 

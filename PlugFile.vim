@@ -113,6 +113,12 @@ Plug 'klen/python-mode', { 'for': 'python' }
 
 Plug 'sheerun/vim-polyglot'
 
+"***************
+" INTEGRATIONS *
+"***************
+
+Plug 'rizzatti/dash.vim'
+
 "--------------
 
 call plug#end()

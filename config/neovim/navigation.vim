@@ -9,8 +9,12 @@ function! s:register_mode(mode)
 endfunction
 
 function! s:recover_mode()
-  if get(s:buffer_modes, bufname('%'), "") == "t"
+  let mode = get(s:buffer_modes, bufname('%'), "")
+
+  if mode == "t"
     normal 0
+    startinsert
+  elseif mode == 'i'
     startinsert
   endif
 endfunction
@@ -58,4 +62,5 @@ tnoremap <silent> <M--> <C-\><C-n>:call <SID>exec("tabprevious", "t")<CR>
 for n in range(1, 9)
   execute 'nnoremap <silent> <M-' . n . '> :call <SID>exec_normal("' . n . 'gt", "n")<CR>'
   execute 'tnoremap <silent> <M-' . n . '> <C-\><C-n>:call <SID>exec_normal("' . n . 'gt", "t")<CR>'
+  execute 'inoremap <silent> <M-' . n . '> <C-\><C-n>:call <SID>exec_normal("' . n . 'gt", "i")<CR>'
 endfor

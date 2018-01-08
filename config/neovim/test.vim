@@ -25,7 +25,6 @@ function! neovim#test#default_strategy(test_cmd)
 
   botright new
   call termopen(a:test_cmd, {'on_exit': function('s:on_test_finish')})
-  set bufhidden=wipe
   let s:current_test_buffer = bufnr('%')
   normal G
   wincmd p

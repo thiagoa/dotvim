@@ -3,6 +3,9 @@ let mapleader = "\<Space>"
 nnoremap <Leader>l :call functions#toggle_list("Location List", 'l')<CR>
 nnoremap <Leader>z :call functions#toggle_list("Quickfix List", 'c')<CR>
 
+" Dash
+nmap <silent> <Leader>o <Plug>DashSearch
+
 " Expand word under cursor on ex mode
 cnoremap <M-.> <C-R>=expand('<cword>')<CR>
 
@@ -51,7 +54,7 @@ cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
 
 " Grep word under cursor
-nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+nnoremap K :GrepperRg "\b<C-R><C-W>\b"<CR>:cw<CR>
 
 " Preserve cursor position when yanking in visual mode
 vnoremap gy ygv<Esc>
