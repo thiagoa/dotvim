@@ -76,7 +76,6 @@ Plug 'honza/vim-snippets'
 
 Plug 'tpope/vim-sleuth'
 Plug 'w0rp/ale'
-Plug 'roxma/nvim-completion-manager'
 Plug 'scrooloose/nerdcommenter'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'tpope/vim-ragtag'
