@@ -1,4 +1,5 @@
 let g:pymode_lint = 0
+let g:dispatch_neovim_window_command = 'botright split | enew | resize 10'
 
 """" Grepper """"
 

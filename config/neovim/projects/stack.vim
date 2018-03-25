@@ -8,25 +8,15 @@ function! s:current_project()
 endfunction
 
 function! s:test_strategy(test_cmd)
-  let a:cmd = "../bin/bundle " . a:test_cmd
+  if s:current_project() == 'stack-api' || s:current_project() == 'stack-admin'
+    let test_cmd = substitute(a:test_cmd, getcwd() . '/', '', '')
+    let a:cmd = "../bin/" . test_cmd
+  else
+    let file = substitute(a:test_cmd, './bin/rspec ', '', '')
+    let a:cmd = "../bin/bundle exec rspec " . file
+  endif
+
   call neovim#test#default_strategy(a:cmd)
 endfunction
 
 call neovim#test#register_strategy('stack', function('s:is_stack_project'), function('s:test_strategy'))
-
-function! s:workspace()
-  tabnew term://zsh
-  silent file 1-devterm
-  if s:is_stack_project()
-    vnew
-    call termopen("source ../.envrc && ../bin/shell " . s:current_project())
-  else
-    vsplit term://zsh
-  endif
-  silent file 2-devterm
-  wincmd h
-  tabprevious
-  stopinsert
-endfunction
-
-command! -nargs=0 StackWorkspace call s:workspace()

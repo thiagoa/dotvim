@@ -99,6 +99,21 @@ Plug 'tpope/vim-bundler'
 Plug 'sunaku/vim-ruby-minitest'
 Plug 'nelstrom/vim-textobj-rubyblock'
 
+"**********
+" CLOJURE *
+"**********
+
+Plug 'tpope/vim-fireplace'
+Plug 'tpope/vim-salve'
+Plug 'tpope/vim-dispatch'
+Plug 'radenling/vim-dispatch-neovim'
+Plug 'guns/vim-clojure-static'
+Plug 'guns/vim-clojure-highlight'
+Plug 'guns/vim-sexp'
+Plug 'tpope/vim-sexp-mappings-for-regular-people'
+Plug 'neovim/node-host'
+Plug 'luochen1990/rainbow'
+
 "*********
 " PYTHON *
 "*********
