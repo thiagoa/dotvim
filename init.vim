@@ -49,7 +49,7 @@ set timeoutlen=1000 ttimeoutlen=0
 set laststatus=2
 set autoread
 set backspace=start,indent,eol
-set listchars=tab:>-,trail:·,eol:$
+set listchars="tab:>-,trail:·,eol:$"
 set shortmess=atI
 set splitbelow
 set splitright
