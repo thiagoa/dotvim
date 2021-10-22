@@ -13,7 +13,8 @@ Plug 'machakann/vim-highlightedyank'
 "*************
 
 Plug 'mhinz/vim-startify'
-Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 Plug 'nelstrom/vim-visual-star-search'
 Plug 'ton/vim-bufsurf'
 Plug 'vim-scripts/matchit.zip'
