@@ -83,6 +83,7 @@ Plug 'tpope/vim-ragtag'
 Plug 'tpope/vim-endwise'
 Plug 'rizzatti/funcoo.vim'
 Plug 'janko-m/vim-test'
+Plug 'Clavelito/indent-sh.vim'
 
 "*********
 " ELIXIR *
