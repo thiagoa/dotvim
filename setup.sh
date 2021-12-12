@@ -52,7 +52,7 @@ function share_config_with_neovim {
 }
 
 function ask_install_dependencies {
-    ask "Install UltiSnips deps for neovim (needs pip and requires root)" "sudo pip install neovim"
+    ask "Install UltiSnips deps for neovim (needs pip and requires root)" "sudo pip3 install neovim"
 }
 
 function ask {
