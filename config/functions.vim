@@ -4,6 +4,7 @@ command! -nargs=0 GitStatus :call s:git_status()
 command! -nargs=0 GitBranchFiles :call s:git_branch_files()
 command! -nargs=+ Z :call s:z(<q-args>)
 command! -nargs=0 Leaders :call s:leaders()
+command! -nargs=1 SetIndent call s:set_indent(<f-args>)
 
 " ******************************************************************
 " cabbrev *only* when command is at the beginning of the ex prompt
@@ -239,4 +240,10 @@ function! s:echoWarning(msg)
   echo "WARNING"
   echohl None
   echon ' ' . a:msg
+endfunction
+
+function! s:set_indent(n)
+  execute "setlocal shiftwidth=".a:n
+  execute "setlocal tabstop=".a:n
+  execute "set softtabstop=".a:n
 endfunction
