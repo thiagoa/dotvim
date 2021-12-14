@@ -54,6 +54,8 @@ set shortmess=atI
 set splitbelow
 set splitright
 
+color dracula
+
 source $CONFIG_HOME/functions.vim
 source $CONFIG_HOME/mappings.vim
 source $CONFIG_HOME/plugin.vim
