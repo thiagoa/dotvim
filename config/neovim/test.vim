@@ -5,7 +5,7 @@ command! -nargs=0 TestFailedExamples call s:test_failed_examples()
 " ---------------------
 
 function! s:test_failed_examples()
-  call neovim#test#default_test_strategy('bundle exec rspec --only-failures')
+  call neovim#test#default_strategy('bundle exec rspec --only-failures')
 endfunction
 
 function! s:on_test_finish(job_id, data, event) dict
