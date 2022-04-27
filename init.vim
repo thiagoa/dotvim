@@ -56,6 +56,33 @@ set splitright
 
 color dracula
 
+let g:ale_linters = {
+\   'ruby': ['standardrb'],
+\}
+
+let g:rails_projections = {
+      \  "app/controllers/*_controller.rb": {
+      \      "test": [
+      \        "spec/requests/{}_spec.rb",
+      \        "spec/controllers/{}_controller_spec.rb",
+      \        "test/controllers/{}_controller_test.rb"
+      \      ],
+      \      "alternate": [
+      \        "spec/requests/{}_controller_spec.rb",
+      \        "spec/controllers/{}_controller_spec.rb",
+      \        "test/controllers/{}_controller_test.rb"
+      \      ],
+      \   },
+      \   "spec/requests/*_spec.rb": {
+      \      "command": "request",
+      \      "alternate": "app/controllers/{}.rb",
+      \      "template": "require 'rails_helper'\n\n" .
+      \        "RSpec.describe '{}' do\nend",
+      \   },
+      \ }
+
+command Eroute Einitializer
+
 source $CONFIG_HOME/functions.vim
 source $CONFIG_HOME/mappings.vim
 source $CONFIG_HOME/plugin.vim

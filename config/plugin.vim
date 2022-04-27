@@ -1,15 +1,6 @@
 let g:pymode_lint = 0
 let g:dispatch_neovim_window_command = 'botright split | enew | resize 10'
 
-"""" Grepper """"
-
-let g:grepper = {}
-let g:grepper.tools = ['rg', 'git', 'grep']
-
-nnoremap <Leader>* :Grepper -cword -noprompt<CR>
-nmap gs <plug>(GrepperOperator)
-xmap gs <plug>(GrepperOperator)
-
 """" fzf """"
 
 let g:fzf_buffers_jump = 1
@@ -67,3 +58,13 @@ let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 """"""""" Startify """"""""""
 
 let g:startify_change_to_dir=0
+
+"""" Grepper """"
+
+let g:grepper = {}
+let g:grepper.tools = ['rg', 'ag', 'git', 'grep']
+
+nnoremap <Leader>* :Grepper -cword -noprompt<CR>
+nmap gs <plug>(GrepperOperator)
+xmap gs <plug>(GrepperOperator)
+

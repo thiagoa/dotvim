@@ -51,3 +51,4 @@ endfunction
 
 let g:test#custom_strategies = {'custom_test_strategy': function('s:pick_test_strategy')}
 let g:test#strategy = 'custom_test_strategy'
+let g:test#strategy = 'dispatch'

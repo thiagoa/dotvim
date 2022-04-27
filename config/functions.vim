@@ -5,6 +5,29 @@ command! -nargs=0 GitBranchFiles :call s:git_branch_files()
 command! -nargs=+ Z :call s:z(<q-args>)
 command! -nargs=0 Leaders :call s:leaders()
 command! -nargs=1 SetIndent call s:set_indent(<f-args>)
+command! -nargs=1 SetIndent call s:set_indent(<f-args>)
+command! -nargs=0 CdRoot call functions#cd_git_dir()
+
+" ******************************************************************
+" Detect and cd to git dir based on current buffer
+"
+" Author: Thiago A. Silva
+function! functions#cd_git_dir()
+  let git_dir = functions#current_git_dir()
+
+  exec 'cd ' . git_dir
+endfunction
+
+function! functions#current_git_dir()
+  let current_dir = expand('%:h')
+  let git_dir = system('git -C ' . current_dir . ' rev-parse --show-toplevel')
+
+  if v:shell_error == 0
+    return git_dir
+  else
+    return "."
+  endif
+endfunction
 
 " ******************************************************************
 " cabbrev *only* when command is at the beginning of the ex prompt

@@ -13,6 +13,10 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 " Balance windows automatically during resize event
 autocmd VimResized * :wincmd =
 
+autocmd BufEnter * :CdRoot
+
+command! -nargs=+ -complete=file GrepperAg Grepper -noprompt -tool ag -query <args>
+
 " Protect large files (> 10 MB) from slowness by disabling filetype plugin.
 if !exists("large_file_autocmd_is_loaded")
   let large_file_autocmd_is_loaded = 1
@@ -23,3 +27,6 @@ if !exists("large_file_autocmd_is_loaded")
     autocmd BufReadPre * let f=expand("<afile>") | if getfsize(f) > g:LargeFile | set eventignore+=FileType | setlocal noswapfile | else | set eventignore-=FileType | endif
   augroup END
 endif
+
+nnoremap <leader>g :Grepper -tool rg -buffers<cr>
+
